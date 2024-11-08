@@ -1,0 +1,139 @@
+
+/* Footer container */
+.footer {
+  width: 100%;
+  background-color: rgba(26, 26, 26, 0.27);
+  color: #e0e0e0;
+  padding: 40px 20px;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  border-radius: 2%;
+  position: relative;
+  bottom: 0;
+}
+
+/* Main container for footer content */
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  gap: 20px;
+  padding: 0 10px;
+}
+
+/* Sections styling */
+.logoSection,
+.linksSection,
+.socialSection {
+  text-align: center;
+  margin: 10px 0;
+}
+
+/* Logo and tagline */
+.logo {
+  font-size: 2em;
+  color: #ffdd57;
+  margin: 0;
+}
+
+.tagline {
+  font-size: 0.9em;
+  color: #c0c0c0;
+  margin-top: 5px;
+}
+
+/* Quick Links */
+.linksSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.sectionTitle {
+  font-size: 1.1em;
+  color: #ffdd57;
+  margin-bottom: 10px;
+}
+
+.linksList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.linksList li {
+  margin: 5px 0;
+}
+
+.linksList a {
+  color: #c0c0c0;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.linksList a:hover {
+  color: #ffdd57;
+}
+
+/* Social Icons */
+.socialIcons {
+  display: flex;
+  gap: 15px;
+  font-size: 1.5em;
+  color: #c0c0c0;
+  justify-content: center;
+}
+
+.socialIcons a {
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+.socialIcons a:hover {
+  color: #ffdd57;
+}
+
+/* Copyright */
+.footer .copyright {
+  margin-top: 20px;
+  font-size: 0.9em;
+  color: #808080;
+}
+
+/* Media Queries */
+
+/* Mobile view */
+@media (max-width: 767px) {
+  .container {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .logoSection, .linksSection, .socialSection {
+    margin-bottom: 20px;
+  }
+
+  .socialIcons {
+    font-size: 1.3em;
+  }
+}
+
+/* Desktop view */
+@media (min-width: 768px) {
+  .container {
+    grid-template-columns: repeat(3, 1fr);
+    align-items: flex-start;
+    gap: 20px;
+    justify-items: center;
+    text-align: left;
+  }
+
+  .logoSection, .linksSection, .socialSection {
+    flex: 1;
+    max-width: 300px;
+    margin: 10px 0;
+  }
+
+  .socialIcons {
+    justify-content: flex-start;
+  }
+}

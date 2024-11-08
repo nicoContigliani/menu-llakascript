@@ -1,13 +1,28 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
+import styles from './index.module.css'
+import Image from "next/image";
+import flamaSvg from '../icons/flama.svg';
+
+
 
 const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">About</Link>
-    </p>
-  </Layout>
+  <div className={styles.container}>
+    <div className={styles.image}>
+      <Image src={flamaSvg} width={300} height={200} alt="Logo" />
+    </div>
+
+    <div className={styles.textContainer}>
+      <div className={styles.title}>LlakaScript</div>
+      <div className={styles.titleApp}>Menu</div>
+    </div>
+    <div className={styles.button} >
+      <div>Ver Menú</div>
+      <div>Nueva Empresa</div>
+
+    </div>
+
+  </div>
 );
 
 export default IndexPage;
