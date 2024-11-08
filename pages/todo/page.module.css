@@ -1,0 +1,16 @@
+.container{
+    display: grid;
+    /* grid-template-columns: 1fr; */
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding: 20px;
+    /* height: 100vh; */
+    /* Hace que el contenedor ocupe toda la pantalla */
+  /* Efecto vidrio */
+  background: rgba(255, 255, 255, 0.01); /* Fondo semi-transparente */
+  backdrop-filter: blur(10px); /* Aplica el desenfoque detrás del contenedor */
+  border: 10px inset rgba(120, 120, 120, 0.364); /* Marco sutil */
+  border-radius: 2%;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Sombra sutil */
+}

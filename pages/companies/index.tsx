@@ -1,32 +1,25 @@
-"use client";
-// src/app/companies/page.tsx
-import React, { useEffect, useState } from 'react';
-import { fetchFileList } from '../../services/fileService';
+import Link from 'next/link'
 
-const Page = () => {
-  const [files, setFiles] = useState<any[]>([]);
+// Simulamos una lista de empresas
+const empresas = [
+  { id: 1, nombre: 'LlakaScript' },
+  { id: 2, nombre: 'Empresa B' },
+  { id: 3, nombre: 'Empresa C' },
+]
 
-  useEffect(() => {
-    const loadFiles = async () => {
-      const filesData = await fetchFileList();
-      setFiles(filesData);
-    };
-
-    loadFiles();
-  }, []);
-
+export default function EmpresasPage() {
   return (
     <div>
-      <h1>Lista de Archivos</h1>
-      <ul>
-        {files.map((file, index) => (
-          <li key={index}>
-            {file.name} - {file.size}
+      <h2 className="text-xl font-semibold mb-4">Lista de Empresas</h2>
+      <ul className="space-y-2">
+        {empresas.map((empresa) => (
+          <li key={empresa.id}>
+            <Link href={`/companies/${empresa.nombre}`} className="text-blue-600 hover:underline">
+              {empresa.nombre}
+            </Link>
           </li>
         ))}
       </ul>
     </div>
-  );
-};
-
-export default Page;
+  )
+}
