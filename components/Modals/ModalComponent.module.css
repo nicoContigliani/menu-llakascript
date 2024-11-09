@@ -1,0 +1,105 @@
+/* Modal overlay */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(26, 26, 26, 0.8); /* Fondo oscuro */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999; /* Asegura que quede encima de todo */
+    font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+  }
+  
+  /* Contenedor principal */
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+    max-width: 800px;
+    padding: 30px;
+    background-color: rgba(26, 26, 26, 0.95);
+    color: #e0e0e0;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    border-radius: 8px;
+    position: relative;
+    z-index: 10000;
+    text-align: center;
+    font-family: 'Orbitron', sans-serif; /* Fuente futurista */
+  }
+  
+  /* Botón de cierre */
+  .closeButton {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #fff;
+    cursor: pointer;
+    z-index: 10001;
+  }
+  
+  .textContainer {
+    margin-bottom: 20px;
+  }
+  
+  /* Estilo del título principal */
+  .title {
+    font-size: 3rem;
+    font-weight: 700;
+    color: #e0e0e0;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  
+  /* Estilo del subtítulo */
+  .titleApp {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: #c0c0c0;
+    margin: 8px 0;
+    letter-spacing: 1.5px;
+  }
+  
+  .image {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+  }
+  
+  .image img {
+    max-width: 90%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Botón de acción */
+  .actionButton {
+    width: 50%;
+    padding: 10px;
+    font-size: 1.1rem;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 1px;
+  }
+  
+  .actionButton:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.05);
+  }
+  
+  .actionButton:active {
+    transform: scale(0.98);
+  }
+  

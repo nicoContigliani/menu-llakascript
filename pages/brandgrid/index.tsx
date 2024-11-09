@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import BrandGrid from '../../components/BrandGrid/ElegantGrid';
 import styles from './page.module.css';
 import ElegantGrid from '../../components/BrandGrid/ElegantGrid';
+import ModalComponent from '../../components/Modals/Modals';
 
 const carouselItems = [
   { id: 1, imageUrl: '/resto/beer.png?height=200&width=300', title: 'Slide 1' },
@@ -37,10 +38,16 @@ const carouselItems = [
 ];
 
 const Index: React.FC = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOpenModal = () => setIsModalOpen(true);
+  const handleCloseModal = () => setIsModalOpen(false);
+
   return (
     <div className={styles.container}>
       <div className={styles.button} >
-        <div>Agregar</div>
+        <button onClick={handleOpenModal}>Abrir Modal</button>
+        <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />
 
 
       </div>
