@@ -7,9 +7,18 @@
     "type-check": "tsc"
   },
   "dependencies": {
+    "@ant-design/icons": "^5.5.1",
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/icons-material": "^6.1.6",
+    "@mui/material": "^6.1.6",
+    "@mui/styled-engine-sc": "^6.1.6",
     "@radix-ui/react-slot": "^1.1.0",
+    "antd": "^5.22.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dayjs": "^1.11.13",
     "embla-carousel-autoplay": "^8.3.1",
     "embla-carousel-react": "^8.3.1",
     "lucide-react": "^0.456.0",
@@ -20,12 +29,13 @@
     "react-multi-carousel": "^2.8.5",
     "react-slick": "^0.30.2",
     "slick-carousel": "^1.8.1",
+    "styled-components": "^6.1.13",
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
-    "@types/node": "^12.12.21",
-    "@types/react": "^17.0.2",
+    "@types/node": "12.20.55",
+    "@types/react": "17.0.83",
     "@types/react-dom": "^17.0.1",
-    "typescript": "^4.8.3"
+    "typescript": "4.9.5"
   }
 }

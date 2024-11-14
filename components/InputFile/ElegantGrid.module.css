@@ -1,6 +1,6 @@
 .gridContainer {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(1, 1fr);
     gap: 20px;
     padding: 30px;
     max-width: 1200px;
@@ -9,6 +9,7 @@
     /* Marco sutil */
     border-radius: 5%;
     background-color: rgba(41, 41, 41, 0.296);
+    margin-bottom: 1%;
 }
 
 .gridItem {

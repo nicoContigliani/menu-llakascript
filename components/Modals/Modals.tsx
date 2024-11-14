@@ -1,32 +1,58 @@
-import React from 'react';
-import styles from './ModalComponent.module.css';
+"use client"
 
-const ModalComponent = ({ isOpen, onClose }) => {
-  if (!isOpen) return null;
+import React, { useState } from 'react'
+import { Modal, Button } from 'antd'
+import styles from './ModalComponent.module.css'
+
+export default function Modals(props) {
+  const [isModalVisible, setIsModalVisible] = useState(false)
+
+  const showModal = () => {
+    setIsModalVisible(true)
+  }
+
+  const handleOk = () => {
+    setIsModalVisible(false)
+  }
+
+  const handleCancel = () => {
+    setIsModalVisible(false)
+  }
 
   return (
-    <div className={styles.overlay} onClick={onClose}>
-      <div className={styles.container} onClick={(e) => e.stopPropagation()}>
-        {/* Botón de cierre en la esquina superior derecha */}
-        <div className={styles.closeButton} onClick={onClose}>
-          &times; cerrar
-        </div>
-        
-        <div className={styles.textContainer}>
-          <h1 className={styles.title}>Título Principal</h1>
-          <h2 className={styles.titleApp}>Título de la App</h2>
-        </div>
-        
-        <div className={styles.image}>
-          <img src="/path/to/image.jpg" alt="Imagen" className={styles.img} />
-        </div>
-        
-        <button className={styles.actionButton} onClick={onClose}>
-          Cerrar
-        </button>
-      </div>
-    </div>
-  );
-};
+    <div>
+      <div onClick={showModal}>Abrir Modal</div>
+      <Modal
+        visible={isModalVisible}
+        onOk={handleOk}
+        onCancel={handleCancel}
+        footer={null}
+        centered
+        closable={false}
+        wrapClassName={styles.customModalWrap}
+        modalRender={(modal) => (
+          <div className={styles.overlay}>
+            <div className={styles.container}>
+              <button className={styles.closeButton} onClick={handleCancel}>
+                ×
+              </button>
+              <div className={styles.textContainer}>
+                <h1 className={styles.title}>Título del Modal</h1>
+                <p className={styles.titleApp}>Subtítulo del Modal</p>
+              </div>
+              {props?.children}
+              {/* <div className={styles.image}>
+                <img src="/placeholder.svg?height=150&width=150" alt="Imagen" />
+              </div> */}
 
-export default ModalComponent;
+              {/* <button className={styles.actionButton} onClick={handleOk}>
+                Acción
+              </button> */}
+              
+            </div>
+          </div>
+        )}
+      />
+    </div>
+  )
+}

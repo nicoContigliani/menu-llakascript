@@ -1,8 +1,21 @@
-import React, { useState } from 'react';
-import BrandGrid from '../../components/BrandGrid/ElegantGrid';
-import styles from './page.module.css';
-import ElegantGrid from '../../components/BrandGrid/ElegantGrid';
-import ModalComponent from '../../components/Modals/Modals';
+'use client'
+
+import React, { useState } from 'react'
+import dynamic from 'next/dynamic'
+import styles from './page.module.css'
+import InputsFile from '../../components/InputFile/InputsFile'
+import UpLoadElements from '../../components/upLoadElement/UpLoadElements'
+// import UpLoadElements from '../../components/updateElement/UpLoadElements'
+
+const ElegantGrid = dynamic(() => import('../../components/BrandGrid/ElegantGrid'), {
+  ssr: false,
+})
+
+const Modals = dynamic(() => import('../../components/Modals/Modals'), {
+  ssr: false,
+})
+
+
 
 const carouselItems = [
   { id: 1, imageUrl: '/resto/beer.png?height=200&width=300', title: 'Slide 1' },
@@ -37,20 +50,51 @@ const carouselItems = [
   { id: 30, imageUrl: '/resto/estacionpalero.png?height=200&width=300', title: 'Slide 30' },
 ];
 
-const Index: React.FC = () => {
+const Index = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleOk = () => {
+    console.log('Click en el botón "Acción"');
+  };
 
   const handleOpenModal = () => setIsModalOpen(true);
   const handleCloseModal = () => setIsModalOpen(false);
 
   return (
     <div className={styles.container}>
-      <div className={styles.button} >
-        <button onClick={handleOpenModal}>Abrir Modal</button>
-        <ModalComponent isOpen={isModalOpen} onClose={handleCloseModal} />
+      <UpLoadElements>
+        <div className={styles.textContainer}>
+
+          <div className={styles.title}>
+            <h2>
+              nueva empresa
+            </h2>
+          </div>
+        </div>
+        <div className={styles.gridItem}>
+        <h5>
+          Ingrese XLSM
+          <InputsFile />
+        </h5>
+        <h5>
+          Ingrese Imagen de la Marca
+          <InputsFile />
+        </h5>
+        <h5>
+          Ingrese Imagen de la Marca
+          <InputsFile />
+        </h5>
+
+        </div>
+
+      </UpLoadElements>
 
 
-      </div>
+
+      {/* <div className={styles.button} >
+
+
+      </div> */}
       <div className={styles.images}>
         <ElegantGrid items={carouselItems} />
       </div>
