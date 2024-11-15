@@ -3,23 +3,26 @@ import multer from "multer";
 import fs from "fs";
 import path from "path";
 
-// Multer configuration
-const upload = multer({
-  storage: multer.diskStorage({
-    destination: (req, file, cb) => {
-      const publicDir = path.join(process.cwd(), "public", "foldercompanies");
-      if (!fs.existsSync(publicDir)) {
-        fs.mkdirSync(publicDir, { recursive: true }); // Ensure the folder exists
-      }
-      cb(null, publicDir);
-    },
-    filename: (req, file, cb) => {
-      cb(null, file.originalname); // Save the file with its original name
-    },
-  }),
+// Configure Multer
+const storage = multer.diskStorage({
+  destination: (req, file, cb) => {
+    const publicDir = path.join(process.cwd(), "public", "foldercompanies");
+    if (!fs.existsSync(publicDir)) {
+      fs.mkdirSync(publicDir, { recursive: true });
+    }
+    cb(null, publicDir);
+  },
+  filename: (req, file, cb) => {
+    cb(null, file.originalname);
+  },
 });
 
-const uploadMiddleware = upload.single("file");
+const upload = multer({ storage });
+
+const uploadMiddleware = upload.fields([
+  { name: "file", maxCount: 1 }, // File field
+  { name: "picture", maxCount: 1 }, // Picture field
+]);
 
 function runMiddleware(req: NextApiRequest, res: NextApiResponse, fn: Function) {
   return new Promise((resolve, reject) => {
@@ -38,32 +41,40 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
   }
 
   try {
-    // Run the multer middleware
+    // Use multer middleware
     await runMiddleware(req, res, uploadMiddleware);
 
-    const file = (req as any).file;
+    const files = (req as any).files;
 
-    if (!file) {
-      return res.status(400).json({ message: "No file uploaded" });
+    if (!files || !files.file || !files.picture) {
+      return res.status(400).json({ message: "File and picture are required" });
     }
 
-    // Create a folder inside "public/foldercompanies" with the file name (excluding extension)
-    const folderName = file.originalname.split(".")[0];
+    const uploadedFile = files.file[0];
+    const uploadedPicture = files.picture[0];
+
+    // Create a folder named after the uploaded file (excluding extension)
+    const folderName = uploadedFile.originalname.split(".")[0];
     const folderPath = path.join(process.cwd(), "public", "foldercompanies", folderName);
 
     if (!fs.existsSync(folderPath)) {
       fs.mkdirSync(folderPath, { recursive: true });
     }
 
-    // Move the uploaded file into the new folder
-    const oldPath = path.join(process.cwd(), "public", "foldercompanies", file.originalname);
-    const newPath = path.join(folderPath, file.originalname);
+    // Move the file and picture into the folder
+    const fileNewPath = path.join(folderPath, uploadedFile.originalname);
+    const pictureNewPath = path.join(folderPath, uploadedPicture.originalname);
 
-    fs.renameSync(oldPath, newPath);
+    fs.renameSync(uploadedFile.path, fileNewPath);
+    fs.renameSync(uploadedPicture.path, pictureNewPath);
 
     res.status(200).json({
-      message: "File uploaded and saved successfully",
-      folderPath: `/foldercompanies/${folderName}/${file.originalname}`,
+      message: "Files uploaded and saved successfully",
+      folderPath: `/foldercompanies/${folderName}`,
+      files: {
+        file: `/foldercompanies/${folderName}/${uploadedFile.originalname}`,
+        picture: `/foldercompanies/${folderName}/${uploadedPicture.originalname}`,
+      },
     });
   } catch (error) {
     console.error(error);
@@ -73,6 +84,6 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
 export const config = {
   api: {
-    bodyParser: false, // Disables the default body parser so Multer can handle the request
+    bodyParser: false, // Disable body parsing to use multer
   },
 };
