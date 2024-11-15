@@ -5,6 +5,7 @@ import dynamic from 'next/dynamic'
 import styles from './page.module.css'
 import InputsFile from '../../components/InputFile/InputsFile'
 import UpLoadElements from '../../components/upLoadElement/UpLoadElements'
+import FileUpload from '../../components/FileUpload/FileUpload'
 // import UpLoadElements from '../../components/updateElement/UpLoadElements'
 
 const ElegantGrid = dynamic(() => import('../../components/BrandGrid/ElegantGrid'), {
@@ -51,18 +52,20 @@ const carouselItems = [
 ];
 
 const Index = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOk = () => {
-    console.log('Click en el botón "Acción"');
-  };
 
-  const handleOpenModal = () => setIsModalOpen(true);
-  const handleCloseModal = () => setIsModalOpen(false);
+
+
+
+
+
+
+
+
 
   return (
     <div className={styles.container}>
-      <UpLoadElements>
+      {/* <UpLoadElements>
         <div className={styles.textContainer}>
 
           <div className={styles.title}>
@@ -72,31 +75,29 @@ const Index = () => {
           </div>
         </div>
         <div className={styles.gridItem}>
-        <h5>
-          Ingrese XLSM
-          <InputsFile />
-        </h5>
-        <h5>
-          Ingrese Imagen de la Marca
-          <InputsFile />
-        </h5>
-        <h5>
-          Ingrese Imagen de la Marca
-          <InputsFile />
-        </h5>
+          <h5>
+            Ingrese XLSM
+            <InputsFile />
+          </h5>
+          <h5>
+            Ingrese Imagen de la Marca
+            <InputsFile />
+          </h5>
+          <h5>
+            Ingrese Imagen de la Marca
+            <InputsFile />
+          </h5>
 
         </div>
 
       </UpLoadElements>
 
-
-
-      {/* <div className={styles.button} >
-
-
-      </div> */}
       <div className={styles.images}>
         <ElegantGrid items={carouselItems} />
+      </div> */}
+      <div>
+        <h1>Upload a File</h1>
+        <FileUpload />
       </div>
     </div>
   );

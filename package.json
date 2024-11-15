@@ -21,7 +21,9 @@
     "dayjs": "^1.11.13",
     "embla-carousel-autoplay": "^8.3.1",
     "embla-carousel-react": "^8.3.1",
+    "formidable": "^1.2.6",
     "lucide-react": "^0.456.0",
+    "multer": "^1.4.5-lts.1",
     "next": "latest",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -33,6 +35,8 @@
     "tailwind-merge": "^2.5.4"
   },
   "devDependencies": {
+    "@types/formidable": "^3.4.5",
+    "@types/multer": "^1.4.12",
     "@types/node": "12.20.55",
     "@types/react": "17.0.83",
     "@types/react-dom": "^17.0.1",
