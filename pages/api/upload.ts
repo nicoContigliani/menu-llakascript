@@ -2,6 +2,9 @@ import { NextApiRequest, NextApiResponse } from "next";
 import multer from "multer";
 import fs from "fs";
 import path from "path";
+import { CreateFolder } from "../../servicesApi/CreateFolder.services";
+import { MovePrincipalFile } from "../../servicesApi/MovePrincipalFile.services";
+import { MovePictureFile } from "../../servicesApi/MovePicturesFile.services";
 
 // Configuración de Multer
 const storage = multer.diskStorage({
@@ -53,25 +56,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const uploadedFile = files.file[0];
         const uploadedPictures = files.pictures;
 
-        // Crear una carpeta con el nombre del archivo (sin extensión)
-        const folderName = uploadedFile.originalname.split(".")[0];
-        const folderPath = path.join(process.cwd(), "public", "foldercompanies", folderName);
+    
+        //create Folder 
+        const { folderName, folderPath } = await CreateFolder(uploadedFile, "public", "foldercompanies")
+        //Move principal file
+        const todo = MovePrincipalFile(uploadedFile, folderName, folderPath)
+        //Move picture files
+        const picturePaths = await MovePictureFile(uploadedPictures, folderName, folderPath)
 
-        if (!fs.existsSync(folderPath)) {
-            fs.mkdirSync(folderPath, { recursive: true });
-        }
-
-        // Mover el archivo principal a la carpeta
-        const fileNewPath = path.join(folderPath, uploadedFile.originalname);
-        fs.renameSync(uploadedFile.path, fileNewPath);
-
-        // Mover las imágenes a la carpeta
-        const picturePaths = [];
-        uploadedPictures.forEach((picture: any) => {
-            const pictureNewPath = path.join(folderPath, picture.originalname);
-            fs.renameSync(picture.path, pictureNewPath);
-            picturePaths.push(`/foldercompanies/${folderName}/${picture.originalname}`);
-        });
 
         res.status(200).json({
             message: "Archivos subidos y guardados con éxito",

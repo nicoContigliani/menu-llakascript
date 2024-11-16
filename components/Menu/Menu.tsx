@@ -1,5 +1,5 @@
 import React from 'react';
-import { MenuProfile } from '@/types/menu';
+import { MenuProfile } from '../../types/menu';
 import styles from './menu.module.css';
 
 interface MenuProps {

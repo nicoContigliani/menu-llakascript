@@ -1,5 +1,5 @@
 "use client"
-import { MenuProfile } from '@/types/menu';
+import { MenuProfile } from '../types/menu';
 
 export const italianMenuProfile: MenuProfile = {
   title: 'Cucina Italiana',
