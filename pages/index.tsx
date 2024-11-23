@@ -17,6 +17,11 @@ const IndexPage = () => (
       <div className={styles.titleApp}>Menu</div>
     </div>
     <div className={styles.button} >
+      <Link href={`/companies/LlakaScript`} className="text-#ffffff-600 hover:underline">
+        <div>
+          LlakaScript
+        </div>
+      </Link>
       <div>Ver Menú</div>
       <div>Nueva Empresa</div>
 

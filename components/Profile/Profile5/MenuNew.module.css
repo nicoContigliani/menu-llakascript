@@ -1,0 +1,135 @@
+/* Contenedor general */
+.menuContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 60px;
+    background-color: #000000;
+    background-size: cover;
+    background-position: center;
+    color: #ffffff;
+    overflow-x: hidden;
+}
+
+/* Cabecera */
+.header {
+    text-align: center;
+    padding: 30px 0;
+    border-bottom: 3px solid #f39c12;
+}
+
+.header h1 {
+    font-size: 4rem;
+    font-weight: 700;
+    color: #f39c12;
+    text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.8);
+}
+
+/* Sección */
+.section {
+    width: 100%;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: #f39c12;
+    margin-bottom: 25px;
+}
+
+/* Grid tipo masonry */
+.masonryGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 30px;
+    padding: 20px;
+    column-gap: 30px;
+    row-gap: 50px;
+}
+
+/* Tarjeta */
+.card {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+    position: relative;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+    transform: scale(1);
+    will-change: transform;
+    height: auto;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4);
+}
+
+.cardImage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 250px;
+    background-color: rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+}
+
+.cardImage img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: transform 0.3s ease-in-out;
+}
+
+.card:hover .cardImage img {
+    transform: scale(1.1);
+}
+
+.cardContent {
+    padding: 20px;
+    background: #fff;
+    text-align: center;
+}
+
+.cardTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.cardDescription {
+    font-size: 1rem;
+    color: #777;
+    margin-bottom: 15px;
+}
+
+.cardPrice {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #e74c3c;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .header h1 {
+        font-size: 2.5rem;
+    }
+
+    .sectionTitle {
+        font-size: 2rem;
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .cardTitle {
+        font-size: 1.4rem;
+    }
+
+    .cardPrice {
+        font-size: 1.3rem;
+    }
+}

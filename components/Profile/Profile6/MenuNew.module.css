@@ -1,0 +1,176 @@
+/* Contenedor del menú */
+.menuContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 80px;
+    padding: 60px;
+    background-color: #0a0a0a;
+    background-size: cover;
+    background-position: center;
+    color: white;
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 2s ease-in-out;
+}
+
+/* Título principal */
+.mainTitle {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #00ffcc;
+    text-shadow: 5px 5px 20px rgba(0, 255, 204, 0.6);
+    transform: scale(1.2);
+    transition: transform 0.5s ease-in-out;
+}
+
+.mainTitle:hover {
+    transform: scale(1.3);
+}
+
+/* Sección */
+.section {
+    width: 100%;
+    padding: 30px 0;
+    position: relative;
+}
+
+.sectionTitle {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #ff0077;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    letter-spacing: 2px;
+    animation: slideIn 1s ease-out;
+}
+
+/* Lista de elementos */
+.itemList {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 40px;
+    padding: 20px;
+}
+
+/* Tarjetas interactivas */
+.itemCard {
+    position: relative;
+    background-color: #111;
+    border-radius: 20px;
+    border: 3px solid transparent;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s ease-in-out;
+    cursor: pointer;
+    transform: perspective(1000px) rotateY(0deg);
+}
+
+.itemCard:hover {
+    transform: perspective(1000px) rotateY(15deg);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.5);
+    background-color: #222;
+    border-color: #ff0077;
+}
+
+/* Imagen de la tarjeta */
+.cardImageWrapper {
+    height: 300px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.cardImageWrapper img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.3s ease-in-out;
+}
+
+.itemCard:hover .cardImageWrapper img {
+    transform: scale(1.1);
+}
+
+/* Contenido de la tarjeta */
+.cardContent {
+    padding: 20px;
+    text-align: center;
+}
+
+.cardTitle {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #ffffff;
+    text-transform: uppercase;
+    margin: 15px 0;
+}
+
+.cardDescription {
+    font-size: 1rem;
+    color: #ccc;
+    margin-bottom: 15px;
+}
+
+.cardPrice {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: #ff0077;
+}
+
+/* Efectos de parallax */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-100%);
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+/* Hover de la tarjeta */
+.cardHovered {
+    transform: scale(1.05);
+    background-color: #00ffcc;
+    box-shadow: 0 25px 45px rgba(0, 255, 204, 0.2);
+}
+
+/* Fondo en movimiento */
+.menuContainer {
+    background-position: center center;
+    animation: moveBackground 50s linear infinite; /* Hacemos el movimiento más lento */
+}
+
+@keyframes moveBackground {
+    0% {
+        background-position: 0% 0%;
+    }
+    50% {
+        background-position: 50% 50%;
+    }
+    100% {
+        background-position: 0% 0%;
+    }
+}
+
+@media (max-width: 768px) {
+    .sectionTitle {
+        font-size: 2rem;
+    }
+
+    .cardTitle {
+        font-size: 1.5rem;
+    }
+
+    .cardPrice {
+        font-size: 1.2rem;
+    }
+}

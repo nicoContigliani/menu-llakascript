@@ -5,6 +5,7 @@ import path from "path";
 import { CreateFolder } from "../../servicesApi/CreateFolder.services";
 import { MovePrincipalFile } from "../../servicesApi/MovePrincipalFile.services";
 import { MovePictureFile } from "../../servicesApi/MovePicturesFile.services";
+import { ReadExcelFile } from "../../servicesApi/ReadExcelFile.services";
 
 // Configuración de Multer
 const storage = multer.diskStorage({
@@ -56,15 +57,29 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const uploadedFile = files.file[0];
         const uploadedPictures = files.pictures;
 
-    
+
         //create Folder 
         const { folderName, folderPath } = await CreateFolder(uploadedFile, "public", "foldercompanies")
         //Move principal file
         const todo = MovePrincipalFile(uploadedFile, folderName, folderPath)
+
+
         //Move picture files
         const picturePaths = await MovePictureFile(uploadedPictures, folderName, folderPath)
+        console.log("🚀 ~ handler ~ picturePaths:", picturePaths)
 
 
+        const filePath = path.join(process.cwd(), "public", "foldercompanies", folderName, uploadedFile.originalname);
+
+        if (!fs.existsSync(filePath)) {
+            throw new Error(`El archivo no existe en la ruta especificada: ${filePath}`);
+        }
+
+
+        const returnData = await ReadExcelFile(`foldercompanies/${folderName}/${uploadedFile.originalname}`);
+
+        console.log("🚀 ~ handler ~ returnData:", returnData)
+       
         res.status(200).json({
             message: "Archivos subidos y guardados con éxito",
             folderPath: `/foldercompanies/${folderName}`,
