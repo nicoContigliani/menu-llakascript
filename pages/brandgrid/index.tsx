@@ -1,11 +1,12 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import styles from './page.module.css'
 import InputsFile from '../../components/InputFile/InputsFile'
 import UpLoadElements from '../../components/upLoadElement/UpLoadElements'
 import FileUpload from '../../components/FileUpload/FileUpload'
+import ProfileGrid from '../../components/ProfileGrid/ElegantGrid'
 // import UpLoadElements from '../../components/updateElement/UpLoadElements'
 
 const ElegantGrid = dynamic(() => import('../../components/BrandGrid/ElegantGrid'), {
@@ -15,6 +16,9 @@ const ElegantGrid = dynamic(() => import('../../components/BrandGrid/ElegantGrid
 const Modals = dynamic(() => import('../../components/Modals/Modals'), {
   ssr: false,
 })
+
+
+
 
 
 
@@ -54,6 +58,330 @@ const carouselItems = [
 const Index = () => {
 
 
+  const [data, setExcelData] = useState<any | undefined>();
+  const [namecompanies, setNameCompanies] = useState<any | undefined>();
+
+  // useEffect(() => {
+  //   if (nombre) {
+  //     const nombre: any = router.query.nombre as string;
+
+  //     const fetchExcelData = async () => {
+  //       const formData = {
+  //         folder: nombre,
+  //         file: `${nombre}.xlsx`,
+  //       };
+  //       setNameCompanies(nombre)
+  //       try {
+  //         const response = await fetch("/api/readFile", {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify(formData),
+  //         });
+
+  //         const result = await response.json();
+
+  //         if (response.ok) {
+  //           console.log("🚀 Datos obtenidos correctamente:", result?.data);
+  //           setExcelData(result.data);
+  //         } else {
+  //           console.error("Error al obtener los datos:", result.error || result.message);
+  //         }
+  //       } catch (error) {
+  //         console.error("🚀 ~ Error en fetchExcelData:", error);
+  //       }
+  //     };
+
+  //     fetchExcelData();
+  //   }
+  // }, []);
+
+
+
+
+  const dataMocks: any[] = [
+    {
+      "Menu_Title": "Pizza",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#33ffff",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Pizza",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#33ffff",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Pizza",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#33ffff",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Pizza",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#33ffff",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "primera",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    },
+    {
+      "Menu_Title": "Cucina Italiana",
+      "Profile_Type": "profileE_one",
+      "Primary_Color": "#9b1c31",
+      "Secondary_color": "#d2a700",
+      "Background_Image": "background-food.jpg",
+      "Item_Image": "lasagna.jpg",
+      "Section": "segunda",
+      "Item_id": 1,
+      "Name": "Lasagna",
+      "Description": "asaña clásica con carne y salsa bechamel",
+      "Price": "17.50",
+      "profile": 1
+    }
+  ]
 
 
 
@@ -98,6 +426,12 @@ const Index = () => {
       <div>
         <h1>Upload a File</h1>
         <FileUpload />
+
+        <ProfileGrid
+          menuItems={dataMocks}
+          namecompanies={"LLakaScript"}
+
+        />
       </div>
     </div>
   );

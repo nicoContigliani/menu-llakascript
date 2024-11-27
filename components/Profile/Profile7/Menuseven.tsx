@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -24,6 +24,18 @@ interface MenuProps {
 }
 
 const MenuSeven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    // Función para filtrar los elementos según el término de búsqueda
+    const filterItems = (items: MenuItem[]) => {
+        return items.filter((item) =>
+            item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+    };
+
     return (
         <div
             className={styles.menuWrapper}
@@ -31,11 +43,38 @@ const MenuSeven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgr
                 backgroundImage: backgroundImages || 'none',
             }}
         >
+            {/* Título principal con mejoras */}
+
+
+            <header className={styles.header}>
+                <h1 className={styles.mainTitle}>{namecompanies}</h1>
+                {/* Add search input */}
+                <input
+                    type="text"
+                    placeholder="Search items..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                    className={styles.searchInput}
+                />
+            </header>
+            {/* <h1 className={styles.mainTitle}>{namecompanies}</h1> */}
+
+            {/* Campo de búsqueda
+            <div className={styles.searchWrapper}>
+                <input
+                    type="text"
+                    className={styles.searchInput}
+                    placeholder="Buscar por nombre, título, descripción o precio..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
+            </div> */}
+
             {Object.entries(groupedSections)?.map(([sectionName, items]) => (
                 <div key={sectionName} className={styles.section}>
                     <h1 className={styles.sectionTitle}>{sectionName}</h1>
                     <div className={styles.sectionItems}>
-                        {items?.map((item: any) => (
+                        {filterItems(items).map((item: MenuItem) => (
                             <div
                                 key={item.Item_id}
                                 className={styles.menuItem}

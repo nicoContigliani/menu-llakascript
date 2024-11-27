@@ -18,13 +18,29 @@ interface MenuItem {
 
 interface MenuProps {
     namecompanies: string;
-    groupedSections: Record<string, MenuItem[]>;
+    groupedSections: Record<string, MenuItem[]>; // Ensuring correct typing for groupedSections
     menuData: any;
     backgroundImages: string | null;
 }
 
 const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [hoveredItem, setHoveredItem] = useState<number | null>(null);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+
+    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    };
+
+    // Ensure proper typing for filteredSections
+    const filteredSections = Object.entries(groupedSections).map(([sectionName, items]) => {
+        const filteredItems = items.filter(item =>
+            item.Name.toLowerCase().includes(searchTerm.toLowerCase())||
+            item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())||
+            item.Description.toLowerCase().includes(searchTerm.toLowerCase())||
+            item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+        return [sectionName, filteredItems] as [string, MenuItem[]]; // Explicitly type the return value
+    });
 
     return (
         <div
@@ -35,9 +51,17 @@ const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         >
             <header className={styles.header}>
                 <h1 className={styles.mainTitle}>{namecompanies}</h1>
+                {/* Add search input */}
+                <input
+                    type="text"
+                    placeholder="Search items..."
+                    value={searchTerm}
+                    onChange={handleSearchChange}
+                    className={styles.searchInput}
+                />
             </header>
 
-            {Object.entries(groupedSections).map(([sectionName, items]) => (
+            {filteredSections.map(([sectionName, items]) => (
                 <section key={sectionName} className={styles.section}>
                     <h2 className={styles.sectionTitle}>{sectionName}</h2>
                     <div className={styles.itemList}>

@@ -133,3 +133,25 @@
         font-size: 1.3rem;
     }
 }
+/* Estilo para el campo de búsqueda */
+.searchInput {
+    width: 80%;
+    max-width: 400px;
+    padding: 10px 15px;
+    margin: 20px auto;
+    border-radius: 8px;
+    border: 2px solid #f39c12;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: #fff;
+    font-size: 1.2rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchInput::placeholder {
+    color: #bbb;
+}
+
+.searchInput:focus {
+    border-color: #f36c12;
+}

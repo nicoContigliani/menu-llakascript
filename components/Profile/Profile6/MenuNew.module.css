@@ -12,6 +12,8 @@
     overflow: hidden;
     position: relative;
     animation: fadeIn 2s ease-in-out;
+    max-width: 1200px; /* Ensure content doesn't stretch too wide */
+    margin: 0 auto; /* Center the content */
 }
 
 /* Título principal */
@@ -22,6 +24,7 @@
     text-shadow: 5px 5px 20px rgba(0, 255, 204, 0.6);
     transform: scale(1.2);
     transition: transform 0.5s ease-in-out;
+    text-align: center; /* Center the main title */
 }
 
 .mainTitle:hover {
@@ -43,6 +46,7 @@
     margin-bottom: 25px;
     letter-spacing: 2px;
     animation: slideIn 1s ease-out;
+    text-align: center; /* Center section title */
 }
 
 /* Lista de elementos */
@@ -161,6 +165,27 @@
     }
 }
 
+/* Estilos del filtro */
+.searchInput {
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    border: 2px solid #ff0077;
+    border-radius: 30px;
+    background-color: #222;
+    color: white;
+    width: 250px;
+    max-width: 100%;
+    margin: 20px auto;
+    display: block;
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+
+.searchInput:focus {
+    border-color: #00ffcc;
+}
+
+/* Estilos en móviles */
 @media (max-width: 768px) {
     .sectionTitle {
         font-size: 2rem;
@@ -172,5 +197,11 @@
 
     .cardPrice {
         font-size: 1.2rem;
+    }
+
+    /* Ajustar el tamaño del filtro */
+    .searchInput {
+        width: 80%;
+        font-size: 1rem;
     }
 }

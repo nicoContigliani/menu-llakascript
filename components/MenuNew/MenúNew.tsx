@@ -85,6 +85,9 @@ import Menufourd from '../Profile/Profile4/Menufourd';
 import Menufive from '../Profile/Profile5/Menufive';
 import MenuSix from '../Profile/Profile6/Menusix';
 import MenuSeven from '../Profile/Profile7/Menuseven';
+import MenuEight from '../Profile/Profile8/Menueight';
+import MenuNine from '../Profile/Profile9/Menunine';
+import Ecomerceone from '../Profile/ProfileE1/Ecomerceone';
 
 interface MenuItem {
     Menu_Title: string;
@@ -150,7 +153,8 @@ const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
             setGroupedSections(sections);
 
             setBackgroundImages(
-                `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})`
+                 `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})`||
+                  `url(/images/italia.jpg)`
             );
 
         } else {
@@ -227,7 +231,33 @@ const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
 
                     ""
             }
+            {
+                profile.includes("profile_eight") ?
+                    <MenuEight
+                        groupedSections={groupedSections}
+                        backgroundImages={backgroundImages}
+                        namecompanies={namecompanies} menuData={undefined} /> :
 
+                    ""
+            }
+            {
+                profile.includes("profile_nine") ?
+                    <MenuNine   
+                        groupedSections={groupedSections}
+                        backgroundImages={backgroundImages}
+                        namecompanies={namecompanies} menuData={undefined} /> :
+
+                    ""
+            }
+              {
+                profile.includes("profileE_one") ?
+                    <Ecomerceone   
+                        groupedSections={groupedSections}
+                        backgroundImages={backgroundImages}
+                        namecompanies={namecompanies} /> :
+
+                    ""
+            }
 
 
         </div>
