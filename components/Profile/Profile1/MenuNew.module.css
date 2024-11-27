@@ -20,7 +20,7 @@
     font-weight: 600;
     text-align: left;
     margin-bottom: 20px;
-    color: #dbdbdb; /* Gris oscuro elegante */
+    color: #6c757d; /* Gris oscuro elegante */
 }
 
 .sectionItems {
@@ -29,7 +29,8 @@
     gap: 30px;
     padding-bottom: 10px;
     justify-content: center;
-    align-items: stretch;
+    align-items: stretch; /* Asegura que los ítems se estiren uniformemente */
+    overflow: hidden; /* Evita que los ítems salgan del contenedor */
 }
 
 .sectionItems::-webkit-scrollbar {
@@ -48,8 +49,9 @@
 .menuItem {
     position: relative;
     flex: 0 0 auto;
-    width: 280px;
+    width: 100%; /* Asegura que ocupe toda la columna */
     height: 380px;
+    max-width: 280px; /* Limita el ancho máximo */
     border-radius: 20px;
     overflow: hidden;
     background-size: cover;
@@ -129,7 +131,7 @@
 }
 
 .menuItem:hover .itemImage {
-    transform: translate(-50%, -50%) scale(1.15);
+    transform: translate(-50%, -50%) scale(1.05);
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
 }
 
@@ -156,8 +158,13 @@
 }
 
 @media (max-width: 480px) {
+    .sectionItems {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta la cantidad de columnas */
+        gap: 10px; /* Reduce espacio entre ítems */
+    }
+
     .menuItem {
-        height: 300px;
+        height: 350px;
     }
 
     .itemImage {
@@ -176,16 +183,4 @@
     .itemInfo .price {
         font-size: 1.2rem;
     }
-}
-.header {
-    text-align: center;
-    padding: 20px 0;
-}
-
-.header h1 {
-    font-size: 2.5rem;
-    font-weight: bold;
-    color: #ffffff;
-    text-shadow: 3px 3px 8px rgba(0, 0, 0, 0.8);
-    margin: 0;
 }
