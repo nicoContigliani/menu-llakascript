@@ -48,7 +48,6 @@ export default function EmpresaPage({ params }: { params: { id: string } }) {
 
     return (
         <div>
-            <h1>Menu</h1>
             <MenuNew
                 menuItems={data}
                 namecompanies={namecompanies}

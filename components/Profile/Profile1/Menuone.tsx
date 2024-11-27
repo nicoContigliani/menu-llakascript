@@ -37,6 +37,9 @@ const Menuone: React.FC<MenuProps> = ({  groupedSections, namecompanies, backgro
                 backgroundImage: backgroundImages || '/images/italia.jpg',
             }}
         >
+               <header className={styles.header}>
+                <h1>{namecompanies}</h1>
+            </header>
             {Object.entries(groupedSections)?.map(([sectionName, items]) => (
                 <div key={sectionName} className={styles.section}>
                     <h1 className={styles.sectionTitle}>{sectionName}</h1>
