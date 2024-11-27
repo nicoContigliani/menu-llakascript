@@ -1,18 +1,7 @@
-/* Estilo general para todo el fondo */
-.body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: black;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-    overflow: hidden;
-    /* Evita el movimiento del fondo */
+/* General body styling */
 
 
-}
-
-/* Contenedor principal */
+/* Main container */
 .container {
     display: grid;
     grid-template-columns: 1fr;
@@ -21,16 +10,14 @@
     gap: 10px;
     padding: 20px;
     height: 100vh;
-    /* Hace que el contenedor ocupe toda la pantalla */
-  /* Efecto vidrio */
-  background: rgba(255, 255, 255, 0.01); /* Fondo semi-transparente */
-  backdrop-filter: blur(10px); /* Aplica el desenfoque detrás del contenedor */
-  border: 10px inset rgba(120, 120, 120, 0.364); /* Marco sutil */
-  border-radius: 2%;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Sombra sutil */
+    background: rgba(255, 255, 255, 0.01); /* Semi-transparent background */
+    backdrop-filter: blur(10px); /* Blur effect */
+    border: 10px inset rgba(120, 120, 120, 0.364); /* Subtle border */
+    border-radius: 2%;
+    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Soft shadow */
 }
 
-/* Contenedor para el texto */
+/* Text container */
 .textContainer {
     text-align: center;
     display: flex;
@@ -38,16 +25,14 @@
     align-items: center;
 }
 
-/* Estilo para el título principal */
+/* Title styles */
 .title {
     font-size: 9vw;
     font-weight: 700;
     color: #e0e0e0;
     margin: 5px 0;
-    
 }
 
-/* Estilo para el título de la app */
 .titleApp {
     font-size: 5vw;
     font-weight: 500;
@@ -55,13 +40,12 @@
     margin-top: 8px;
 }
 
-/* Estilo para la imagen */
+/* Image container */
 .image {
     display: flex;
     justify-content: center;
     padding: 5px;
     align-self: flex-end;
-    /* Mantiene la imagen más arriba en móviles */
 }
 
 .image img {
@@ -70,67 +54,60 @@
     border-radius: 8px;
 }
 
-/* Estilos para los botones */
+/* Button container */
 .button {
     width: 90%;
-    height: 20%;
-
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     align-items: center;
     justify-items: center;
-    background: rgba(255, 255, 255, 0.0033); /* Fondo semi-transparente */
+    background: rgba(255, 255, 255, 0.03); /* Darker semi-transparent background */
     color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.109); /* Borde sutil */
-    padding: 15px 30px;
+    border: 2px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
+    padding: 20px 40px;
     font-size: 1.1rem;
-    border-radius: 30px; /* Borde redondeado */
+    border-radius: 30px;
     text-transform: uppercase;
     font-weight: 300;
     cursor: pointer;
-    transition: all 0.3s ease; /* Transición suave */
-    backdrop-filter: blur(5px); /* Efecto vidrio */
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.045); 
-    margin-top: 50px;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(8px); /* Clearer glass effect */
+    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); /* Enhanced shadow */
+    margin-top: 20px;
 }
 
-/* Efecto al pasar el mouse */
+/* Button hover effect */
 .button:hover {
-    background: rgba(255, 255, 255, 0.2); /* Fondo más claro al pasar el mouse */
-    border-color: rgba(255, 255, 255, 0.7); /* Borde más brillante */
-    transform: scale(1.05); /* Agranda el botón un poco */
-    box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2); /* Sombra más pronunciada */
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.7);
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3); /* Stronger hover shadow */
 }
 
-/* Efecto al hacer clic */
+/* Button active effect */
 .button:active {
-    transform: scale(0.98); /* Hace que el botón se "presione" ligeramente */
+    transform: scale(0.98); /* Slightly pressed effect */
+    box-shadow: 0 3px 15px rgba(255, 255, 255, 0.1); /* Reduced shadow on click */
 }
 
+/* Button text color and styling for the links */
+.button a {
+    color: inherit; /* Ensures text color is inherited from button */
+    text-decoration: none; /* Removes underline */
+    font-weight: 500;
+    letter-spacing: 1px;
+}
 
-
-
-
-
-
-/* Estilos para pantallas grandes (escritorio) */
+/* Media queries for larger screens */
 @media (min-width: 768px) {
     .container {
-        grid-template-columns: repeat(1, 1fr);
-        /* Dos columnas para el diseño de escritorio */
+        grid-template-columns: repeat(1, 1fr); /* Keeps one column on desktop */
         padding: 40px;
         gap: 30px;
-        align-items: center;
-        justify-items: center;
-    }
-
-    .textContainer {
-        justify-self: center;
     }
 
     .title {
-        font-size: 3em;
-        /* Tamaño mayor en escritorio */
+        font-size: 3em; /* Larger title */
         color: #ffffff;
     }
 
@@ -139,14 +116,13 @@
         color: #d0d0d0;
     }
 
-    .image {
-        justify-content: center;
-        padding-right: 30px;
-        align-self: center;
+    .image img {
+        max-width: 70%;
+        /* Adjust image size for larger screens */
     }
 
-    .image img {
-        max-width: 80%;
-        /* Ajusta el tamaño de la imagen en escritorio */
+    .button {
+        font-size: 1.2rem;
+        padding: 20px 50px;
     }
 }
