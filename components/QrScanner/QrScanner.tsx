@@ -1,4 +1,3 @@
-// components/QRScanner.tsx
 import React, { useState, useEffect, useRef } from 'react';
 import { BrowserMultiFormatReader, DecodeHintType } from '@zxing/library';
 import styles from './QrScaner.module.css';
@@ -42,6 +41,7 @@ const QRScanner = () => {
             <button className={styles.button} onClick={startScanning} disabled={isScanning}>
                 {isScanning ? 'Escaneando...' : 'Iniciar Escaneo'}
             </button>
+
             <div className={styles.videoContainer}>
                 <video ref={videoRef} />
             </div>

@@ -11,7 +11,7 @@ const IndexPage = () => (
     <div className={styles.container}>
       {/* Logo Section */}
       <div className={styles.image}>
-        <Image src={flamaSvg} width={350} height={200} alt="Logo" />
+        <Image src={flamaSvg} width={350} height={250} alt="Logo" />
       </div>
 
       {/* Titles Section */}
@@ -29,13 +29,12 @@ const IndexPage = () => (
           Empresa
         </Link>
       </div>
-    </div>
-    {/* QR Scanner Section */}
-    <div className={styles.qrContainer}>
-      <QRScanner />
-    </div>
 
-
+    </div>
+      {/* QR Scanner Section */}
+      <div className={styles.qrContainer}>
+        <QRScanner />
+      </div>
   </div>
 );
 
