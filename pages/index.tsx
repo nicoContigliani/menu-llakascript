@@ -1,37 +1,40 @@
 import Link from "next/link";
 import Layout from "../components/Layout";
-import styles from './index.module.css'
+import styles from "./index.module.css";
 import Image from "next/image";
-import flamaSvg from '../icons/flama.svg';
-
-
+import flamaSvg from "../icons/flama.svg";
+import QRScanner from "../components/QrScanner/QrScanner";
 
 const IndexPage = () => (
-  <div className={styles.container}>
-    <div className={styles.image}>
-      <Image src={flamaSvg} width={300} height={200} alt="Logo" />
-    </div>
-
-    <div className={styles.textContainer}>
-      <div className={styles.title}>LlakaScript</div>
-      <div className={styles.titleApp}>Menu</div>
-    </div>
-    <div className={styles.button} >
-      <div>
-        <Link href={`/companies/LlakaScript`} className="text-#ffffff-600 hover:underline">
-          LlakaScript
-        </Link>
+  <div className={styles.body}>
+    {/* Main Content */}
+    <div className={styles.container}>
+      {/* Logo Section */}
+      <div className={styles.image}>
+        <Image src={flamaSvg} width={350} height={200} alt="Logo" />
       </div>
 
-      <div>
-        <Link href={`/brandgrid`} className="text-#ffffff-600 hover:underline">
+      {/* Titles Section */}
+      <div className={styles.textContainer}>
+        <h1 className={styles.title}>LlakaScript</h1>
+        <h2 className={styles.titleApp}>Menu</h2>
+      </div>
+
+      {/* Buttons Section */}
+      <div className={styles.buttonContainer}>
+        <Link href="/companies/LlakaScript" className={styles.link}>
+          LlakaScript
+        </Link>
+        <Link href="/brandgrid" className={styles.link}>
           Empresa
         </Link>
       </div>
-      {/* <div>Ver Menú</div>
-      <div>Nueva Empresa</div> */}
-
     </div>
+    {/* QR Scanner Section */}
+    <div className={styles.qrContainer}>
+      <QRScanner />
+    </div>
+
 
   </div>
 );

@@ -1,128 +1,130 @@
-/* General body styling */
-
-
-/* Main container */
-.container {
+/* General Body Styling */
+.body {
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    background-color: black;
+    color: #ffffff;
+    font-family: Arial, Helvetica, sans-serif;
+    overflow: hidden; /* Prevents scrolling */
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  /* QR Scanner Section */
+  .qrContainer {
     display: grid;
     grid-template-columns: 1fr;
+    justify-content: center;
     align-items: center;
+    padding: 20px;
+  }
+  
+  /* Main Container */
+  .container {
+    display: grid;
+    grid-template-columns: 1fr;
     justify-items: center;
-    gap: 10px;
+    align-items: center;
+    gap: 20px;
     padding: 20px;
     height: 100vh;
-    background: rgba(255, 255, 255, 0.01); /* Semi-transparent background */
-    backdrop-filter: blur(10px); /* Blur effect */
-    border: 10px inset rgba(120, 120, 120, 0.364); /* Subtle border */
-    border-radius: 2%;
-    box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1); /* Soft shadow */
-}
-
-/* Text container */
-.textContainer {
+    background: rgba(255, 255, 255, 0.05); /* Subtle glass effect */
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+  
+  /* Logo Image Styling */
+  .image {
+    display: flex;
+    justify-content: center;
+    padding: 10px;
+  }
+  
+  .image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
+  /* Text Container */
+  .textContainer {
     text-align: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-/* Title styles */
-.title {
-    font-size: 9vw;
+  }
+  
+  .title {
+    font-size: 8vw;
     font-weight: 700;
     color: #e0e0e0;
     margin: 5px 0;
-}
-
-.titleApp {
+  }
+  
+  .titleApp {
     font-size: 5vw;
     font-weight: 500;
     color: #c0c0c0;
     margin-top: 8px;
-}
-
-/* Image container */
-.image {
-    display: flex;
-    justify-content: center;
-    padding: 5px;
-    align-self: flex-end;
-}
-
-.image img {
-    max-width: 90%;
-    height: auto;
-    border-radius: 8px;
-}
-
-/* Button container */
-.button {
-    width: 90%;
+  }
+  
+  /* Buttons Section */
+  .buttonContainer {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    align-items: center;
+    gap: 20px;
+    width: 100%;
     justify-items: center;
-    background: rgba(255, 255, 255, 0.03); /* Darker semi-transparent background */
-    color: #fff;
-    border: 2px solid rgba(255, 255, 255, 0.15); /* Slightly brighter border */
-    padding: 20px 40px;
+  }
+  
+  .link {
+    text-align: center;
+    padding: 15px 30px;
     font-size: 1.1rem;
-    border-radius: 30px;
     text-transform: uppercase;
     font-weight: 300;
-    cursor: pointer;
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.1);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    border-radius: 30px;
+    text-decoration: none;
     transition: all 0.3s ease;
-    backdrop-filter: blur(8px); /* Clearer glass effect */
-    box-shadow: 0 4px 20px rgba(255, 255, 255, 0.15); /* Enhanced shadow */
-    margin-top: 20px;
-}
-
-/* Button hover effect */
-.button:hover {
+    backdrop-filter: blur(5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  }
+  
+  .link:hover {
     background: rgba(255, 255, 255, 0.2);
-    border-color: rgba(255, 255, 255, 0.7);
-    transform: scale(1.1);
-    box-shadow: 0 6px 30px rgba(255, 255, 255, 0.3); /* Stronger hover shadow */
-}
-
-/* Button active effect */
-.button:active {
-    transform: scale(0.98); /* Slightly pressed effect */
-    box-shadow: 0 3px 15px rgba(255, 255, 255, 0.1); /* Reduced shadow on click */
-}
-
-/* Button text color and styling for the links */
-.button a {
-    color: inherit; /* Ensures text color is inherited from button */
-    text-decoration: none; /* Removes underline */
-    font-weight: 500;
-    letter-spacing: 1px;
-}
-
-/* Media queries for larger screens */
-@media (min-width: 768px) {
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+  }
+  
+  .link:active {
+    transform: scale(0.98);
+  }
+  
+  /* Media Queries for Larger Screens */
+  @media (min-width: 768px) {
     .container {
-        grid-template-columns: repeat(1, 1fr); /* Keeps one column on desktop */
-        padding: 40px;
-        gap: 30px;
+      grid-template-columns: repeat(1, 1fr);
+      padding: 40px;
+      gap: 30px;
     }
-
+  
     .title {
-        font-size: 3em; /* Larger title */
-        color: #ffffff;
+      font-size: 3em;
     }
-
+  
     .titleApp {
-        font-size: 2em;
-        color: #d0d0d0;
+      font-size: 2em;
     }
-
+  
     .image img {
-        max-width: 70%;
-        /* Adjust image size for larger screens */
+      max-width: 80%;
     }
-
-    .button {
-        font-size: 1.2rem;
-        padding: 20px 50px;
-    }
-}
+  }
+  
