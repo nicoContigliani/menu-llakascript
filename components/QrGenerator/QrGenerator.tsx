@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { useQRCode } from 'next-qrcode';
 import styles from './page.module.css'; // Assuming you place the styles in a separate CSS file
 
@@ -7,16 +7,29 @@ const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
   nameCompanines,
 }) => {
   const { Canvas } = useQRCode();
+  const [isClient, setIsClient] = useState(false);
+
+  // Ensure that the code runs only on the client-side
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   const handleDownload = () => {
-    const canvas = document.querySelector('canvas');
-    if (canvas) {
-      const link = document.createElement('a') as HTMLAnchorElement; // Type assertion
-      link.href = canvas.toDataURL('image/png');
-      link.download = 'qr_code.png';
-      link.click();
+    if (typeof window !== 'undefined') {
+      const canvas = document.querySelector('canvas');
+      if (canvas) {
+        const link = document.createElement('a') as HTMLAnchorElement; // Type assertion
+        link.href = canvas.toDataURL('image/png');
+        link.download = 'qr_code.png';
+        link.click();
+      }
     }
   };
+
+  if (!isClient) {
+    // Return null or a loading message while client-side JavaScript is initializing
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className={styles.container}>
