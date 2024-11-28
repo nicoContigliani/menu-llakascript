@@ -27,7 +27,6 @@ interface MenuProps {
 
 // Array con los componentes de perfil
 const profiles = [
-  { name: 'Profile0', path: 'Profile1/Menucero' },
   { name: 'Profile1', path: 'Profile1/Menuone' },
   { name: 'Profile2', path: 'Profile2/Menutwo' },
   { name: 'Profile3', path: 'Profile3/Menuthree' },
