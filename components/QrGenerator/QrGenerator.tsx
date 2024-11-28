@@ -2,13 +2,16 @@ import React from 'react';
 import { useQRCode } from 'next-qrcode';
 import styles from './page.module.css'; // Assuming you place the styles in a separate CSS file
 
-const QrGenerator: React.FC<{ dataqrs: string,nameCompanines:string }> = ({ dataqrs,nameCompanines}) => {
+const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
+  dataqrs,
+  nameCompanines,
+}) => {
   const { Canvas } = useQRCode();
 
   const handleDownload = () => {
     const canvas = document.querySelector('canvas');
     if (canvas) {
-      const link = document.createElement('a');
+      const link = document.createElement('a') as HTMLAnchorElement; // Explicit cast
       link.href = canvas.toDataURL('image/png');
       link.download = 'qr_code.png';
       link.click();
@@ -19,8 +22,7 @@ const QrGenerator: React.FC<{ dataqrs: string,nameCompanines:string }> = ({ data
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>Generador de Código QR</h2>
-        <h3 className={styles.subtitle}>{nameCompanines}</h3>
-
+        {nameCompanines && <p className={styles.companyName}>{nameCompanines}</p>} {/* Display company name if provided */}
       </div>
       <Canvas
         text={dataqrs}
@@ -35,7 +37,9 @@ const QrGenerator: React.FC<{ dataqrs: string,nameCompanines:string }> = ({ data
           },
         }}
       />
-      <button className={styles.downloadButton} onClick={handleDownload}>Descargar QR</button>
+      <button className={styles.downloadButton} onClick={handleDownload}>
+        Descargar QR
+      </button>
     </div>
   );
 };
