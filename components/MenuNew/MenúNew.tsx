@@ -247,6 +247,7 @@ interface MenuProps {
 
 // Importación dinámica para los perfiles
 const profileComponents = {
+    profile_cero: dynamic(() => import('../Profile/Profile0/Menucero')),
     profile_one: dynamic(() => import('../Profile/Profile1/Menuone')),
     profile_two: dynamic(() => import('../Profile/Profile2/Menutwo')),
     profile_three: dynamic(() => import('../Profile/Profile3/Menuthree')),

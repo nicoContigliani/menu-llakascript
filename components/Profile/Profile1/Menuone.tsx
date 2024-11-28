@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -25,10 +25,23 @@ interface MenuProps {
 
 const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     // Memoizing groupedSections to avoid unnecessary re-calculation
-    const memoizedSections = useMemo(() => {
-        return Object.entries(groupedSections);
-    }, [groupedSections]);
+    const [searchTerm, setSearchTerm] = useState('');
 
+    // Memoizing groupedSections to avoid unnecessary re-calculation
+    const memoizedSections = useMemo(() => {
+        if (!searchTerm.trim()) return Object.entries(groupedSections);
+
+        // Filtrar por el término de búsqueda en los nombres de los ítems
+        return Object.entries(groupedSections).map(([sectionName, items]) => {
+            const filteredItems = items.filter((item) =>
+                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase())||
+                item.Price.toLowerCase().includes(searchTerm.toLowerCase())|| 
+                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            return [sectionName, filteredItems] as [string, MenuItem[]];
+        }).filter(([, items]) => items.length > 0); // Eliminar secciones vacías
+    }, [groupedSections, searchTerm]);
     return (
         <div
             className={styles.menuWrapper}
@@ -37,7 +50,15 @@ const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
             }}
         >
             <header className={styles.header}>
-                <h1>{namecompanies}</h1>
+                <h1 className={styles.companyName}>{namecompanies}</h1>
+                {/* Buscador */}
+                <input
+                    type="text"
+                    className={styles.searchInput}
+                    placeholder="Buscar en el menú..."
+                    value={searchTerm}
+                    onChange={(e) => setSearchTerm(e.target.value)}
+                />
             </header>
             {memoizedSections.map(([sectionName, items]) => (
                 <div key={sectionName} className={styles.section}>

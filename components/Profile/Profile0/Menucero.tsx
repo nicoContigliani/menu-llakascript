@@ -23,7 +23,7 @@ interface MenuProps {
     backgroundImages: string | null;
 }
 
-const Menucero: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
+const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     // Memoizing groupedSections to avoid unnecessary re-calculation
     const memoizedSections = useMemo(() => {
         return Object.entries(groupedSections);
@@ -33,7 +33,7 @@ const Menucero: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgro
         <div
             className={styles.menuWrapper}
             style={{
-                backgroundImage: backgroundImages || '/images/italia.jpg',
+                backgroundImage: `url(${backgroundImages || '/images/italia.jpg'})`,
             }}
         >
             <header className={styles.header}>
@@ -48,7 +48,7 @@ const Menucero: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgro
                                 key={item.Item_id}
                                 className={styles.menuItem}
                                 style={{
-                                    backgroundImage: backgroundImages || '/foldercompanies/LlakaScript/background-food.jpg',
+                                    backgroundImage: `url(${backgroundImages || '/foldercompanies/LlakaScript/background-food.jpg'})`,
                                 }}
                             >
                                 <div className={styles.overlay}></div>
@@ -75,4 +75,4 @@ const Menucero: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgro
     );
 };
 
-export default React.memo(Menucero); // Prevent unnecessary re-renders of the component
+export default React.memo(Menuone); // Prevent unnecessary re-renders of the component

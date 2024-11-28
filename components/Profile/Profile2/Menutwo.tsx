@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -24,10 +24,28 @@ interface MenuProps {
 }
 
 const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
-    // Memoizing the groupedSections to avoid unnecessary recalculation
+    const [searchTerm, setSearchTerm] = useState('');
+
     const memoizedSections = useMemo(() => {
         return Object.entries(groupedSections);
     }, [groupedSections]);
+
+    // Filter items based on search term
+    const filteredItems = useMemo(() => {
+        if (!searchTerm) return groupedSections;
+        return Object.entries(groupedSections).reduce((acc, [section, items]) => {
+            const filteredItems = items.filter(item =>
+                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            if (filteredItems.length > 0) {
+                acc[section] = filteredItems;
+            }
+            return acc;
+        }, {} as Record<string, MenuItem[]>);
+    }, [searchTerm, groupedSections]);
 
     return (
         <div
@@ -38,8 +56,17 @@ const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         >
             <header className={styles.header}>
                 <h1>{namecompanies}</h1>
+                <div className={styles.searchWrapper}>
+                    <input
+                        type="text"
+                        placeholder="Search items..."
+                        className={styles.searchInput}
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                    />
+                </div>
             </header>
-            {memoizedSections.map(([sectionName, items]) => (
+            {Object.entries(filteredItems).map(([sectionName, items]) => (
                 <section key={sectionName} className={styles.section}>
                     <h2 className={styles.sectionTitle}>{sectionName}</h2>
                     <div className={styles.itemGrid}>
@@ -80,4 +107,4 @@ const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
     );
 };
 
-export default React.memo(Menutwo); // Prevent unnecessary re-renders of the component
+export default React.memo(Menutwo);
