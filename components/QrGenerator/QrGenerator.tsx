@@ -11,7 +11,7 @@ const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
   const handleDownload = () => {
     const canvas = document.querySelector('canvas');
     if (canvas) {
-      const link = document.createElement('a') as HTMLAnchorElement; // Explicit cast
+      const link = document.createElement('a') as HTMLAnchorElement; // Type assertion
       link.href = canvas.toDataURL('image/png');
       link.download = 'qr_code.png';
       link.click();
@@ -22,7 +22,7 @@ const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>Generador de Código QR</h2>
-        {nameCompanines && <p className={styles.companyName}>{nameCompanines}</p>} {/* Display company name if provided */}
+        {nameCompanines && <p className={styles.companyName}>{nameCompanines}</p>}
       </div>
       <Canvas
         text={dataqrs}
