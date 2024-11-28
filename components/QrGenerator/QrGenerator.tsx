@@ -16,10 +16,13 @@ const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
 
   const handleDownload = () => {
     if (typeof window !== 'undefined') {
-      const canvas = document.querySelector('canvas');
+      const canvas = document.querySelector('canvas') as HTMLCanvasElement; // Asegurarse que sea un canvas
       if (canvas) {
-        const link:any|undefined = document.createElement('a') as HTMLAnchorElement||undefined; // Type assertion
-        link.href = canvas.toDataURL('image/png');
+        const dataURL = canvas.toDataURL('image/png'); // Obtener el data URL del canvas
+
+        // Crear un enlace temporal y simular un clic para descargar
+        const link = document.createElement('a');
+        link.href = dataURL;
         link.download = 'qr_code.png';
         link.click();
       }
