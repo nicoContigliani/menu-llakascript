@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import styles from './page.module.css'
 import QrGenerator from '../../components/QrGenerator/QrGenerator'
+import QRCodeGenerator from '../../components/QrGenerator/QrGenerator'
 
 
 const FileUpload = dynamic(() => import('../../components/FileUpload/FileUpload'), {
@@ -325,6 +326,9 @@ const Index = () => {
             nameCompanines={nameCompanines}
 
           />
+
+
+
         }
         <hr />
         <div>
