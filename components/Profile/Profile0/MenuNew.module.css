@@ -1,0 +1,186 @@
+.menuWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 20px;
+    align-items: center;
+    width: 100%;
+    background: #f8f9fa; /* Fondo limpio y profesional */
+    font-family: 'Poppins', sans-serif; /* Fuente elegante */
+}
+
+.section {
+    width: 100%;
+    padding: 0 20px;
+    text-align: center;
+}
+
+.sectionTitle {
+    font-size: 2.4rem;
+    font-weight: 600;
+    text-align: left;
+    margin-bottom: 20px;
+    color: #6c757d; /* Gris oscuro elegante */
+}
+
+.sectionItems {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    padding-bottom: 10px;
+    justify-content: center;
+    align-items: stretch; /* Asegura que los ítems se estiren uniformemente */
+    overflow: hidden; /* Evita que los ítems salgan del contenedor */
+}
+
+.sectionItems::-webkit-scrollbar {
+    height: 6px;
+}
+
+.sectionItems::-webkit-scrollbar-thumb {
+    background-color: #adb5bd; /* Gris elegante */
+    border-radius: 5px;
+}
+
+.sectionItems::-webkit-scrollbar-track {
+    background-color: #e9ecef;
+}
+
+.menuItem {
+    position: relative;
+    flex: 0 0 auto;
+    width: 100%; /* Asegura que ocupe toda la columna */
+    height: 380px;
+    max-width: 280px; /* Limita el ancho máximo */
+    border-radius: 20px;
+    overflow: hidden;
+    background-size: cover;
+    background-position: center;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    cursor: pointer;
+    background: linear-gradient(135deg, #dee2e6, #f8f9fa); /* Fondo sutil cuando no hay imagen */
+}
+
+.menuItem:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0.6) 100%);
+    z-index: 1;
+}
+
+.itemInfo {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    right: 20px;
+    z-index: 2;
+    color: #fff;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    padding: 20px;
+    transition: background 0.4s ease, transform 0.4s ease;
+}
+
+.itemInfo h2 {
+    margin: 0;
+    font-size: 1.6rem;
+    font-weight: 700;
+    color: #ffc107; /* Amarillo elegante */
+}
+
+.itemInfo p {
+    margin: 10px 0;
+    font-size: 1rem;
+    color: #ced4da; /* Gris claro */
+    line-height: 1.5;
+}
+
+.itemInfo .price {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #38d9a9; /* Verde llamativo */
+}
+
+.itemImage {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #fff;
+    z-index: 2;
+    transform: translate(-50%, -50%);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.itemImage img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.menuItem:hover .itemImage {
+    transform: translate(-50%, -50%) scale(1.05);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.4);
+}
+
+.menuItem:hover .itemInfo {
+    transform: translateY(-10px);
+    background: rgba(0, 0, 0, 0.9);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .sectionItems {
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 20px;
+    }
+
+    .menuItem {
+        height: 340px;
+    }
+
+    .itemImage {
+        width: 120px;
+        height: 120px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sectionItems {
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta la cantidad de columnas */
+        gap: 10px; /* Reduce espacio entre ítems */
+    }
+
+    .menuItem {
+        height: 350px;
+    }
+
+    .itemImage {
+        width: 100px;
+        height: 100px;
+    }
+
+    .itemInfo h2 {
+        font-size: 1.4rem;
+    }
+
+    .itemInfo p {
+        font-size: 0.9rem;
+    }
+
+    .itemInfo .price {
+        font-size: 1.2rem;
+    }
+}
