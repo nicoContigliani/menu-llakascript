@@ -1,3 +1,4 @@
+"use client";
 import React, { useEffect, useState } from 'react';
 import { useQRCode } from 'next-qrcode';
 import styles from './page.module.css'; // Assuming you place the styles in a separate CSS file
@@ -16,10 +17,10 @@ const QrGenerator: React.FC<{ dataqrs: string; nameCompanines?: string }> = ({
 
   const handleDownload = () => {
     if (typeof window !== 'undefined') {
-      const canvas = document.querySelector('canvas') as HTMLCanvasElement; // Asegurarse que sea un canvas
-      if (canvas) {
-        const dataURL = canvas.toDataURL('image/png'); // Obtener el data URL del canvas
-
+      const canvas = document.querySelector('canvas');
+      if (canvas instanceof HTMLCanvasElement) {  // Asegúrate de que el elemento sea un canvas
+        const dataURL = canvas.toDataURL('image/png');  // Obtener el data URL del canvas
+  
         // Crear un enlace temporal y simular un clic para descargar
         const link = document.createElement('a');
         link.href = dataURL;
