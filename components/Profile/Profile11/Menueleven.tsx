@@ -1,6 +1,6 @@
-import React, { useState, useMemo } from 'react';
-import Image from 'next/image';
+import React, { useState, useMemo, useCallback } from 'react';
 import styles from './MenuNew.module.css';
+
 interface MenuItem {
     Menu_Title: string;
     Profile_Type: string;
@@ -25,9 +25,9 @@ interface MenuProps {
 const Menueleven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handleSearchChange = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
-    };
+    }, []);
 
     const filteredSections = useMemo(() => {
         if (!searchTerm) return groupedSections;
@@ -64,7 +64,7 @@ const Menueleven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backg
                             <h2 className={styles.sectionTitle}>{sectionName}</h2>
                             <div className={styles.sectionItems}>
                                 {items.map(item => (
-                                    <div key={item.Item_id} className={styles.menuItem}>
+                                    <div key={item.Item_id} className={`${styles.menuItem} ${styles.glassEffect}`}>
                                         <div className={styles.itemInfo}>
                                             <div>
                                                 <h3 className={styles.itemName}>{item.Name}</h3>
@@ -88,4 +88,3 @@ const Menueleven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backg
 };
 
 export default Menueleven;
-

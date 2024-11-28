@@ -57,18 +57,7 @@ const MenuSeven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgr
                     className={styles.searchInput}
                 />
             </header>
-            {/* <h1 className={styles.mainTitle}>{namecompanies}</h1> */}
-
-            {/* Campo de búsqueda
-            <div className={styles.searchWrapper}>
-                <input
-                    type="text"
-                    className={styles.searchInput}
-                    placeholder="Buscar por nombre, título, descripción o precio..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                />
-            </div> */}
+       
 
             {Object.entries(groupedSections)?.map(([sectionName, items]) => (
                 <div key={sectionName} className={styles.section}>

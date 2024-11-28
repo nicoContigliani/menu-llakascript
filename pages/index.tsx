@@ -1,9 +1,14 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
-import Layout from "../components/Layout";
-import styles from "./index.module.css";
 import Image from "next/image";
+import styles from "./index.module.css";
 import flamaSvg from "../icons/flama.svg";
-import QRScanner from "../components/QrScanner/QrScanner";
+
+// Importación dinámica del componente QRScanner
+const QRScanner = dynamic(() => import("../components/QrScanner/QrScanner"), {
+  ssr: false, // Desactiva el renderizado del servidor si usa APIs del navegador
+  loading: () => <p>Loading QR Scanner...</p>, // Muestra un indicador de carga
+});
 
 const IndexPage = () => (
   <div className={styles.body}>
@@ -11,7 +16,7 @@ const IndexPage = () => (
     <div className={styles.container}>
       {/* Logo Section */}
       <div className={styles.image}>
-        <Image src={flamaSvg} width={350} height={250} alt="Logo" />
+        <Image src={flamaSvg} width={350} height={250} alt="Logo" priority />
       </div>
 
       {/* Titles Section */}
@@ -29,12 +34,12 @@ const IndexPage = () => (
           Empresa
         </Link>
       </div>
-
     </div>
-      {/* QR Scanner Section */}
-      <div className={styles.qrContainer}>
-        <QRScanner />
-      </div>
+
+    {/* QR Scanner Section */}
+    <div className={styles.qrContainer}>
+      <QRScanner />
+    </div>
   </div>
 );
 

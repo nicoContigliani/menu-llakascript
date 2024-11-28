@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -27,20 +27,23 @@ const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
     const [hoveredItem, setHoveredItem] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Memoize the search handler to prevent unnecessary re-creations on every render
+    const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
-    };
+    }, []);
 
-    // Ensure proper typing for filteredSections
-    const filteredSections = Object.entries(groupedSections).map(([sectionName, items]) => {
-        const filteredItems = items.filter(item =>
-            item.Name.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Description.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Price.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-        return [sectionName, filteredItems] as [string, MenuItem[]]; // Explicitly type the return value
-    });
+    // Memoize filteredSections to avoid recalculating on every render
+    const filteredSections = useMemo(() => {
+        return Object.entries(groupedSections).map(([sectionName, items]) => {
+            const filteredItems = items.filter((item) =>
+                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            return [sectionName, filteredItems] as [string, MenuItem[]];
+        });
+    }, [searchTerm, groupedSections]); // Recompute when searchTerm or groupedSections change
 
     return (
         <div
@@ -51,7 +54,7 @@ const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         >
             <header className={styles.header}>
                 <h1 className={styles.mainTitle}>{namecompanies}</h1>
-                {/* Add search input */}
+                {/* Search input with optimized handler */}
                 <input
                     type="text"
                     placeholder="Search items..."

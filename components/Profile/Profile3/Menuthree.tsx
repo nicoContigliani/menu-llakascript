@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useMemo } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -25,29 +25,27 @@ interface MenuProps {
 
 const Menuthree: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState<string>(''); // Estado para el término de búsqueda
-    const [filteredSections, setFilteredSections] = useState(groupedSections); // Estado para secciones filtradas
 
-    // Efecto para actualizar las secciones filtradas cada vez que cambia el término de búsqueda
-    useEffect(() => {
+    // Use useMemo to memoize filteredSections and only recalculate when searchTerm or groupedSections change
+    const filteredSections = useMemo(() => {
         if (searchTerm === '') {
-            setFilteredSections(groupedSections); // Si no hay búsqueda, muestra todo
-        } else {
-            const filtered = Object.entries(groupedSections).reduce((acc, [sectionName, items]) => {
-                const filteredItems = items.filter((item) =>
-                    item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                    item.Price.includes(searchTerm)||
-                    item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())
-                );
-                if (filteredItems.length > 0) {
-                    acc[sectionName] = filteredItems;
-                }
-                return acc;
-            }, {} as Record<string, MenuItem[]>);
-
-            setFilteredSections(filtered); // Actualiza las secciones filtradas
+            return groupedSections; // If no search term, return all sections
         }
-    }, [searchTerm, groupedSections]);
+
+        // Filter the sections based on the search term
+        return Object.entries(groupedSections).reduce((acc, [sectionName, items]) => {
+            const filteredItems = items.filter((item) =>
+                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Price.includes(searchTerm) ||
+                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            if (filteredItems.length > 0) {
+                acc[sectionName] = filteredItems; // Only add the section if it has matching items
+            }
+            return acc;
+        }, {} as Record<string, MenuItem[]>);
+    }, [searchTerm, groupedSections]); // Only re-run this effect if searchTerm or groupedSections change
 
     const handleSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value); // Actualiza el término de búsqueda

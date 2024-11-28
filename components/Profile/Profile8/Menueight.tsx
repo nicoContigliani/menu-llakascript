@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -25,21 +25,26 @@ interface MenuProps {
 
 const MenuEight: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState<string>(''); // State for search query
-    const [filteredItems, setFilteredItems] = useState<MenuItem[]>([]); // State for filtered items
 
-    // Function to filter items based on search term
-    const filterItems = (term: string) => {
-        const allItems = Object.values(groupedSections).flat(); // Get all menu items
-        return allItems.filter(item =>
-            item.Name.toLowerCase().includes(term.toLowerCase()) ||
-            item.Description.toLowerCase().includes(term.toLowerCase())
-        );
-    };
+    // Debounced search term to optimize performance
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>(searchTerm);
 
-    // Effect to filter items whenever the search term changes
     useEffect(() => {
-        setFilteredItems(filterItems(searchTerm));
-    }, [searchTerm, groupedSections]);
+        const timer = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 300); // 300ms debounce delay
+
+        return () => clearTimeout(timer); // Cleanup on effect re-run
+    }, [searchTerm]);
+
+    // Memoized filtering function
+    const filteredItems = useMemo(() => {
+        const allItems = Object.values(groupedSections).flat();
+        return allItems.filter(item =>
+            item.Name.toLowerCase().includes(debouncedSearchTerm.toLowerCase()) ||
+            item.Description.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
+        );
+    }, [debouncedSearchTerm, groupedSections]);
 
     return (
         <div

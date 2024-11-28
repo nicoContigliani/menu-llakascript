@@ -1,7 +1,7 @@
 import React from 'react'
 import Logo from '../Logo/Logo'
 import styles from './headers.module.css'
-const Headers = () => {
+const HeaderBody = () => {
     return (
         <div className={styles.container}>
             <div className={styles.image}>
@@ -16,4 +16,4 @@ const Headers = () => {
     )
 }
 
-export default Headers
+export default HeaderBody

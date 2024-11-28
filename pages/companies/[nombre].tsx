@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { notFound } from 'next/navigation';
 import { useRouter } from 'next/router';
 import MenuNew from '../../components/MenuNew/MenúNew';
+import Layout from '../../components/Layout';
 
 export default function EmpresaPage({ params }: { params: { id: string } }) {
     const router = useRouter();
@@ -10,7 +11,7 @@ export default function EmpresaPage({ params }: { params: { id: string } }) {
 
     useEffect(() => {
         if (router.isReady) {
-            const nombre:any = router.query.nombre as string;
+            const nombre: any = router.query.nombre as string;
 
             const fetchExcelData = async () => {
                 const formData = {
@@ -47,13 +48,16 @@ export default function EmpresaPage({ params }: { params: { id: string } }) {
     }, [router.isReady, router.query.id, router.query.nombre]);
 
     return (
-        <div>
-            <MenuNew
-                menuItems={data}
-                namecompanies={namecompanies}
-            />
+        <>
+            <Layout>
 
+                <MenuNew
+                    menuItems={data}
+                    namecompanies={namecompanies}
+                />
 
-        </div>
+            </Layout>
+
+        </>
     );
 }

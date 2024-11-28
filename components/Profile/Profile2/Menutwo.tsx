@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -24,6 +24,11 @@ interface MenuProps {
 }
 
 const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
+    // Memoizing the groupedSections to avoid unnecessary recalculation
+    const memoizedSections = useMemo(() => {
+        return Object.entries(groupedSections);
+    }, [groupedSections]);
+
     return (
         <div
             className={styles.menuContainer}
@@ -34,11 +39,11 @@ const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
             <header className={styles.header}>
                 <h1>{namecompanies}</h1>
             </header>
-            {Object.entries(groupedSections)?.map(([sectionName, items]) => (
+            {memoizedSections.map(([sectionName, items]) => (
                 <section key={sectionName} className={styles.section}>
                     <h2 className={styles.sectionTitle}>{sectionName}</h2>
                     <div className={styles.itemGrid}>
-                        {items?.map((item) => (
+                        {items.map((item) => (
                             <div
                                 key={item.Item_id}
                                 className={styles.card}
@@ -57,7 +62,7 @@ const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
                                             alt={item.Name}
                                             width={100}
                                             height={100}
-                                            priority
+                                            priority // Prioritize images that are visible above the fold
                                         />
                                     </div>
                                     <div className={styles.cardDetails}>
@@ -75,4 +80,4 @@ const Menutwo: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
     );
 };
 
-export default Menutwo;
+export default React.memo(Menutwo); // Prevent unnecessary re-renders of the component

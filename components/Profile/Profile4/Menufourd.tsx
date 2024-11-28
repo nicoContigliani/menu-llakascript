@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -26,17 +26,24 @@ interface MenuProps {
 const Menufourd: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Filtrar los elementos de menú en base al término de búsqueda
-    const filteredSections = Object.entries(groupedSections).map(([sectionName, items]) => {
-        // Filtramos los items por nombre
-        const filteredItems = items.filter((item) =>
-            item.Name.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Description.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())||
-            item.Price.toLowerCase().includes(searchTerm.toLowerCase())    
-        );
-        return [sectionName, filteredItems] as [string, MenuItem[]];
-    });
+    // Memoize filteredSections to only re-calculate when searchTerm or groupedSections change
+    const filteredSections = useMemo(() => {
+        return Object.entries(groupedSections).map(([sectionName, items]) => {
+            // Filter the items by search term
+            const filteredItems = items.filter((item) =>
+                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+            );
+            return [sectionName, filteredItems] as [string, MenuItem[]];
+        });
+    }, [searchTerm, groupedSections]); // Only re-run when searchTerm or groupedSections change
+
+    // Use callback to memoize the setSearchTerm handler and avoid re-creating it on each render
+    const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    }, []); // Empty dependency array, as this function doesn't depend on any external state
 
     return (
         <div
@@ -47,16 +54,16 @@ const Menufourd: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgr
         >
             <header className={styles.header}>
                 <h1>{namecompanies}</h1>
-                {/* Campo de búsqueda */}
+                {/* Search input */}
                 <input
                     type="text"
                     placeholder="Buscar artículo..."
                     className={styles.searchInput}
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearchChange} // Using the memoized callback
                 />
             </header>
-            
+
             {filteredSections.map(([sectionName, items]) => (
                 <section key={sectionName} className={styles.section}>
                     <h2 className={styles.sectionTitle}>{sectionName}</h2>

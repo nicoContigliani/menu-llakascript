@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -25,24 +25,36 @@ interface MenuProps {
 
 const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>(searchTerm);
+
+    // Debounce the search term to optimize performance
+    const debounceSearch = useCallback(() => {
+        const timer = setTimeout(() => {
+            setDebouncedSearchTerm(searchTerm);
+        }, 300); // 300ms debounce delay
+
+        return () => clearTimeout(timer);
+    }, [searchTerm]);
 
     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(event.target.value);
+        debounceSearch();
     };
 
+    // Filter sections only if necessary and return early if there's no search term
     const filteredSections = useMemo(() => {
-        if (!searchTerm) return groupedSections;
+        if (!debouncedSearchTerm) return groupedSections;
 
         const filtered: Record<string, MenuItem[]> = {};
         Object.entries(groupedSections).forEach(([sectionName, items]) => {
             const filteredItems = items.filter(item =>
                 [item.Name, item.Menu_Title, item.Description, item.Price]
-                    .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()))
+                    .some(field => field.toLowerCase().includes(debouncedSearchTerm.toLowerCase()))
             );
             if (filteredItems.length) filtered[sectionName] = filteredItems;
         });
         return filtered;
-    }, [searchTerm, groupedSections]);
+    }, [debouncedSearchTerm, groupedSections]);
 
     return (
         <div
@@ -64,7 +76,7 @@ const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
             </header>
 
             <div className={styles.menuWrapper}>
-                {Object.entries(filteredSections)?.length > 0 ? (
+                {Object.entries(filteredSections).length > 0 ? (
                     Object.entries(filteredSections).map(([sectionName, items]) => (
                         <div key={sectionName} className={styles.section}>
                             <h2 className={styles.sectionTitle}>{sectionName}</h2>
@@ -102,4 +114,3 @@ const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
 };
 
 export default Menuten;
-

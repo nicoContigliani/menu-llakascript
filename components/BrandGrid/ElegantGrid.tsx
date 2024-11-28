@@ -14,12 +14,12 @@ interface ElegantGridProps {
 const ElegantGrid: React.FC<ElegantGridProps> = ({ items }) => {
   return (
     <div className={styles.gridContainer}>
-      {items.map((item) => (
+      {items?.map((item) => (
         <div key={item.id} className={styles.gridItem}>
           <div className={styles.imageContainer}>
-            <img src={item.imageUrl} alt={item.title} className={styles.image} />
+            <img src={item?.imageUrl} alt={item.title} className={styles.image} />
           </div>
-          <h3 className={styles.title}>{item.title}</h3>
+          <h3 className={styles.title}>{item?.title}</h3>
         </div>
       ))}
     </div>

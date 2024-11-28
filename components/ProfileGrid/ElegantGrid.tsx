@@ -1,11 +1,9 @@
 'use client'
 
-import React, { useEffect, useLayoutEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import dynamic from 'next/dynamic'
 import styles from './ElegantGrid.module.css'
-import MenuNew from '../MenuNew/MenúNew';
-import Menuone from '../Profile/Profile1/Menuone';
-import Image from 'next/image';
+import Image from 'next/image'
 import backgrounImage from "../../public/images/italia.jpg"
 
 interface MenuItem {
@@ -27,7 +25,6 @@ interface MenuProps {
   namecompanies: string;
 }
 
-
 // Array con los componentes de perfil
 const profiles = [
   { name: 'Profile1', path: 'Profile1/Menuone' },
@@ -39,6 +36,10 @@ const profiles = [
   { name: 'Profile7', path: 'Profile7/Menuseven' },
   { name: 'Profile8', path: 'Profile8/Menueight' },
   { name: 'Profile9', path: 'Profile9/Menunine' },
+  { name: 'Profile10', path: 'Profile10/Menuten' },
+  { name: 'Profile11', path: 'Profile11/Menueleven' },
+  { name: 'Profile12', path: 'Profile12/Menutwelve' },
+  { name: 'Profile13', path: 'Profile13/Menuthirteen' },
 ];
 
 // Mapea los componentes dinámicamente
@@ -47,71 +48,40 @@ const dynamicProfiles: any = profiles?.map(profile => ({
   component: dynamic(() => import(`../../components/Profile/${profile.path}`), { ssr: false }),
 }));
 
-
-
-const backgroundImage:string='`url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})`'
-
-
-const ProfileGrid = (props: any) => {
-  const { menuItems, namecompanies } = props
-
+const ProfileGrid = ({ menuItems, namecompanies }: MenuProps) => {
   const [menuData, setMenuData] = useState<MenuItem[]>([]);
-  const [groupedSections, setGroupedSections] = useState<Record<string, MenuItem[]>>({});
-  const [backgroundImages, setBackgroundImages] = useState<string | null>(null);
   const [profile, setSelectedProfile] = useState("")
 
-  useLayoutEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        const fetchedData = await new Promise<MenuItem[]>((resolve) =>
-          setTimeout(() => resolve(menuItems), 500)
-        );
-        setMenuData(fetchedData);
-      } catch (error) {
-        console.error('Error fetching menu data:', error);
-        setMenuData([]);
-      }
-    };
+  // Fetch the menu data once and set the background image and profile
+  useEffect(() => {
+    if (menuItems.length) {
+      const fetchedData = menuItems;
+      setMenuData(fetchedData);
+      setSelectedProfile(fetchedData[0]?.Profile_Type);
+    }
+  }, [menuItems]);
 
-    fetchMenuData();
-  }, [menuItems, namecompanies])
-  useLayoutEffect(() => {
-    const fetchMenuData = async () => {
-      try {
-        if (menuItems) setSelectedProfile(menuItems[0]?.Profile_Type)
-      } catch (error) {
-        console.error('Error fetching menu data:', error);
-      }
-    };
-
-    fetchMenuData();
-  }, [menuItems, namecompanies])
-
-
-
-  useLayoutEffect(() => {
-    if (menuData?.length > 0) {
-      const sections = menuData.reduce((acc, item) => {
+  // Memoize grouped sections to prevent unnecessary recalculations
+  const groupedSections = useMemo(() => {
+    if (menuData.length) {
+      return menuData.reduce((acc, item) => {
         acc[item.Section] = acc[item.Section] || [];
         acc[item.Section].push(item);
         return acc;
       }, {} as Record<string, MenuItem[]>);
-      setGroupedSections(sections);
-
-      setBackgroundImages(
-        `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})`
-      );
-
-    } else {
-      setGroupedSections({});
-      setBackgroundImages(null);
     }
-  }, [menuData, namecompanies]);
+    return {};
+  }, [menuData]);
 
+  // Memoize the background image
+  const backgroundImage = useMemo(() => {
+    return menuData.length
+      ? `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})`
+      : null;
+  }, [menuData, namecompanies]);
 
   return (
     <div className={styles.container}>
-   
       {dynamicProfiles.map(({ name, component: Component }) => (
         <div key={name}>
           <h1>{name}</h1>
@@ -119,14 +89,11 @@ const ProfileGrid = (props: any) => {
           <Component
             menuData={menuData}
             groupedSections={groupedSections}
-            backgroundImages={backgroundImages}
+            backgroundImages={backgroundImage}
             namecompanies={namecompanies}
           />
         </div>
       ))}
-
-
-
     </div>
   );
 };

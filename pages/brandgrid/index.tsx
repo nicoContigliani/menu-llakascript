@@ -18,11 +18,6 @@ const ProfileGrid = dynamic(() => import('../../components/ProfileGrid/ElegantGr
 const Index = () => {
 
 
-  const [data, setExcelData] = useState<any | undefined>();
-  const [namecompanies, setNameCompanies] = useState<any | undefined>();
-
-  
-
   const dataMocks: any[] = [
     {
       "Menu_Title": "Pizza",
@@ -305,13 +300,6 @@ const Index = () => {
       "profile": 1
     }
   ]
-
-
-
-
-
-
-
 
 
   return (

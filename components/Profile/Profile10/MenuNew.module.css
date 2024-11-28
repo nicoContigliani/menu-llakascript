@@ -172,3 +172,71 @@
   }
 }
 
+/* Estilo para el campo de búsqueda */
+.searchInput {
+  width: 60%;
+  padding: 10px;
+  margin: 20px 0;
+  font-size: 1rem;
+  border: 2px solid #909090;
+  border-radius: 5px;
+  outline: none;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.searchInput::placeholder {
+  color: #888;
+}
+
+/* Efecto hover sutil para el campo de búsqueda */
+.searchInput:hover {
+  border-color: #0078d7; /* Color azul de Windows */
+  box-shadow: 0 0 8px rgba(0, 120, 215, 0.3); /* Sombra sutil */
+}
+
+/* Efecto focus para mayor enfoque */
+.searchInput:focus {
+  border-color: #0078d7; /* Azul de enfoque */
+  box-shadow: 0 0 8px rgba(0, 120, 215, 0.6); /* Sombra más intensa cuando el campo está enfocado */
+}
+
+
+/* Estilo para los elementos del menú */
+.menuItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0;
+  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil */
+  cursor: pointer;
+}
+
+/* Efecto hover sutil para los elementos del menú */
+.menuItem:hover {
+  transform: translateY(-5px); /* Eleva ligeramente el elemento */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
+  background-color: rgba(255, 255, 255, 0.15); /* Fondo ligeramente más oscuro */
+}
+
+/* Estilo para la imagen del elemento (si la quieres mostrar en hover) */
+.itemImage {
+  display: block; /* Mostrar la imagen al hacer hover */
+  width: 40px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 50%;
+  overflow: hidden;
+  transition: background 0.3s ease;
+}
+
+.menuItem:hover .itemImage {
+  background: rgba(0, 120, 215, 0.3); /* Fondo azul suave al hacer hover */
+}
+
+.itemImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

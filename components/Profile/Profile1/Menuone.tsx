@@ -1,9 +1,6 @@
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+import React, { useMemo } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
-import  backgrounImages from "../../../public/images/italia.jpg"
-
-
 
 interface MenuItem {
     Menu_Title: string;
@@ -22,13 +19,15 @@ interface MenuItem {
 interface MenuProps {
     namecompanies: string;
     groupedSections: Record<string, MenuItem[]>;
-    menuData: any,
-    backgroundImages: any
+    menuData: any;
+    backgroundImages: string | null;
 }
 
-const Menuone: React.FC<MenuProps> = ({  groupedSections, namecompanies, backgroundImages }) => {
-
-
+const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
+    // Memoizing groupedSections to avoid unnecessary re-calculation
+    const memoizedSections = useMemo(() => {
+        return Object.entries(groupedSections);
+    }, [groupedSections]);
 
     return (
         <div
@@ -37,19 +36,19 @@ const Menuone: React.FC<MenuProps> = ({  groupedSections, namecompanies, backgro
                 backgroundImage: backgroundImages || '/images/italia.jpg',
             }}
         >
-               <header className={styles.header}>
+            <header className={styles.header}>
                 <h1>{namecompanies}</h1>
             </header>
-            {Object.entries(groupedSections)?.map(([sectionName, items]) => (
+            {memoizedSections.map(([sectionName, items]) => (
                 <div key={sectionName} className={styles.section}>
                     <h1 className={styles.sectionTitle}>{sectionName}</h1>
                     <div className={styles.sectionItems}>
-                        {items?.map((item:any) => (
+                        {items.map((item: MenuItem) => (
                             <div
                                 key={item.Item_id}
                                 className={styles.menuItem}
                                 style={{
-                                    backgroundImage: backgroundImages ||'/foldercompanies/LlakaScript/background-food.jpg',
+                                    backgroundImage: backgroundImages || '/foldercompanies/LlakaScript/background-food.jpg',
                                 }}
                             >
                                 <div className={styles.overlay}></div>
@@ -60,10 +59,11 @@ const Menuone: React.FC<MenuProps> = ({  groupedSections, namecompanies, backgro
                                 </div>
                                 <div className={styles.itemImage}>
                                     <Image
-                                        src={`/foldercompanies/${namecompanies}/${item.Item_Image}`||`/foldercompanies/LlakaScript/background-food.jpg`}
+                                        src={`/foldercompanies/${namecompanies}/${item.Item_Image}` || '/foldercompanies/LlakaScript/background-food.jpg'}
                                         alt={item.Name}
                                         width={100}
                                         height={100}
+                                        priority // Prioritize loading images that are above the fold
                                     />
                                 </div>
                             </div>
@@ -75,5 +75,4 @@ const Menuone: React.FC<MenuProps> = ({  groupedSections, namecompanies, backgro
     );
 };
 
-export default Menuone;
-
+export default React.memo(Menuone); // Prevent unnecessary re-renders of the component
