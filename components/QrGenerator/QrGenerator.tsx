@@ -19,6 +19,8 @@ const QrGenerator: React.FC<{ dataqrs: string,nameCompanines:string }> = ({ data
     <div className={styles.container}>
       <div className={styles.titleContainer}>
         <h2 className={styles.title}>Generador de Código QR</h2>
+        <h3 className={styles.subtitle}>{nameCompanines}</h3>
+
       </div>
       <Canvas
         text={dataqrs}
