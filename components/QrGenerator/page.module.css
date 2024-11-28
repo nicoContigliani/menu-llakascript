@@ -1,0 +1,83 @@
+/* Estilo general para todo el fondo */
+.container {
+  display: grid;
+  align-items: center;
+  justify-items: start;
+  width: auto;
+  background-color: rgba(26, 26, 26, 0.235);
+  color: #e0e0e0;
+  text-align: center;
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  border-radius: 5%;
+}
+
+/* Contenedor para el texto */
+.textContainer {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Estilo para el título principal */
+.title {
+  font-size: 9vw;
+  font-weight: 700;
+  color: #e0e0e0;
+  margin: 5px 0;
+  box-shadow: 1px 4px 8px rgba(199, 199, 199, 0.4);
+  border-radius: 5%;
+}
+
+/* Estilo para los botones */
+.button {
+  width: 75%;
+  height: 20%;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  justify-items: center;
+  background: rgba(255, 255, 255, 0.0033);
+  color: #fff;
+  border: 2px solid rgba(255, 255, 255, 0.109);
+  padding: 15px 30px 30px;
+  font-size: 1.1rem;
+  border-radius: 30px;
+  font-weight: 300;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(5px);
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.045);
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.button:hover {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: rgba(255, 255, 255, 0.7);
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
+}
+
+.button:active {
+  transform: scale(0.98);
+}
+
+/* Estilos para pantallas grandes (escritorio) */
+@media (min-width: 768px) {
+  .container {
+    padding-top: 10%;
+    background-color: rgba(255, 255, 255, 0.003);
+    align-items: center;
+    justify-items: center;
+  }
+
+  .title {
+    font-size: 2em;
+    color: #ffffff;
+  }
+
+  .button {
+    width: 50%;
+  }
+}

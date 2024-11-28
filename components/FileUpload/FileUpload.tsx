@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const FileUploadWithMultiplePictures = () => {
+const FileUploadWithMultiplePictures = ({setDataqrs,dataqrs,nameCompaines,setNameCompaines}) => {
     const [file, setFile] = useState<File | null>(null);
     const [pictures, setPictures] = useState<File[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -40,6 +40,21 @@ const FileUploadWithMultiplePictures = () => {
             } else {
                 setMessage(`Error: ${result.message}`);
             }
+
+            if (response.ok) {
+                setDataqrs(`Éxito: ${result.dataqr}`);
+            } else {
+                setDataqrs(`Error: ${result.dataqr}`);
+            }
+            if (response.ok) {
+                setDataqrs(`Éxito: ${result.setNameCompaines}`);
+            } else {
+                setDataqrs(`Error: ${result.setNameCompaines}`);
+            }
+
+
+
+
         } catch (error) {
             setMessage("Ocurrió un error al subir los archivos.");
         }
@@ -50,24 +65,24 @@ const FileUploadWithMultiplePictures = () => {
     return (
         <div>
             <h1>Subir archivo y múltiples imágenes</h1>
-            <input 
-                type="file" 
-                name="file" 
-                onChange={handleFileChange} 
+            <input
+                type="file"
+                name="file"
+                onChange={handleFileChange}
             />
             {file === null && <p style={{ color: "red" }}>Por favor selecciona un archivo principal.</p>}
             <br />
-            <input 
-                type="file" 
-                name="pictures" 
-                multiple 
-                onChange={handlePicturesChange} 
+            <input
+                type="file"
+                name="pictures"
+                multiple
+                onChange={handlePicturesChange}
             />
             {pictures.length === 0 && <p style={{ color: "red" }}>Por favor selecciona al menos una imagen.</p>}
             <br />
             <hr />
-            <button 
-                onClick={handleUpload} 
+            <button
+                onClick={handleUpload}
                 disabled={!isFormValid} // Botón deshabilitado si el formulario no es válido
             >
                 Subir

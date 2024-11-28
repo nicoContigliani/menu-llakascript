@@ -51,7 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const files = (req as any).files;
 
         if (!files || !files.file || !files.pictures) {
-            return res.status(400).json({ message: "El archivo y las imágenes son obligatorios" });
+            return res.status(400).json({ message: "El archivo y las imágenes son obligatorios",dataqr:"",namecompaines:"" });
         }
 
         const uploadedFile = files.file[0];
@@ -79,8 +79,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         const returnData = await ReadExcelFile(`foldercompanies/${folderName}/${uploadedFile.originalname}`);
 
         console.log("🚀 ~ handler ~ returnData:", returnData)
-       
+
+
+        const qrDAta = `https://menu-nicocontigliani.netlify.app/companies/${folderName}`
+
+
+
         res.status(200).json({
+            namecompaines: folderName,
+            dataqr: qrDAta,
             message: "Archivos subidos y guardados con éxito",
             folderPath: `/foldercompanies/${folderName}`,
             files: {

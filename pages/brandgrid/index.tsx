@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react'
 import dynamic from 'next/dynamic'
 import styles from './page.module.css'
+import QrGenerator from '../../components/QrGenerator/QrGenerator'
 
 
 const FileUpload = dynamic(() => import('../../components/FileUpload/FileUpload'), {
@@ -16,6 +17,8 @@ const ProfileGrid = dynamic(() => import('../../components/ProfileGrid/ElegantGr
 
 
 const Index = () => {
+  const [dataqrs, setDataqrs] = useState<string>("");
+  const [nameCompanines, setNameCompanines] = useState<string>("");
 
 
   const dataMocks: any[] = [
@@ -304,20 +307,45 @@ const Index = () => {
 
   return (
     <div className={styles.container}>
-  
+
       <div  >
         <div className={styles.titleApp}>
-          <h1>Crear Empresa</h1>
+
+          {
+            !dataqrs ?
+              <h1>Crear Empresa</h1> :
+              <h1>Empresa {nameCompanines} funcionando correctamente</h1>
+          }
         </div>
-<hr />
-        <div>
-          <FileUpload />
-        </div>
-        <div>
-          <ProfileGrid
-            menuItems={dataMocks}
-            namecompanies={"LLakaScript"}
+
+        {
+          dataqrs &&
+          <QrGenerator
+            dataqrs={dataqrs}
+            nameCompanines={nameCompanines}
+
           />
+        }
+        <hr />
+        <div>
+          {
+            !dataqrs &&
+
+            <FileUpload setDataqrs={setDataqrs} dataqrs={dataqrs} setNameCompaines={setNameCompanines} nameCompaines={nameCompanines} />
+          }
+
+
+        </div>
+        <hr />
+        <br />
+        <div>
+          {
+            !dataqrs &&
+            <ProfileGrid
+              menuItems={dataMocks}
+              namecompanies={"LLakaScript"}
+            />
+          }
 
         </div>
       </div>
