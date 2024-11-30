@@ -1,33 +1,68 @@
-/* styles/globals.css */
-
 /* Reset de estilos generales */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-  }
-  
-  /* Estilos globales para el body */
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: black;
-    color: #ffffff;
-    font-family: Arial, Helvetica, sans-serif;
-  }
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
+/* Estilos globales para el body */
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, 
+              #1a1a1a 0%,     /* Gris oscuro */
+              #3a3a3a 25%,   /* Gris intermedio */
+              #ff5722 50%,   /* Naranja vibrante */
+              #3a3a3a 75%,   /* Gris intermedio */
+              #1a1a1a 100%); /* Gris oscuro */
+  background-blend-mode: overlay;
+  background-size: cover;
+  font-family: 'Arial', sans-serif;
+  color: #ffffff;
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Fija el fondo */
+}
 
+/* Estilos generales para botones */
+button {
+  display: inline-block;
+  background: linear-gradient(90deg, #ff8a00, #e52e71); /* Gradiente llamativo */
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 25px;
+  text-transform: uppercase;
+  cursor: pointer;
+  text-decoration: none;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease-in-out;
+}
 
-  /* Estilos adicionales para hacer el carrusel más elegante */
+/* Efectos en botones */
+button:hover {
+  background: linear-gradient(90deg, #e52e71, #ff8a00); /* Inversión del gradiente */
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+}
+
+button:active {
+  transform: scale(0.95);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Carrusel: Elegancia adicional */
 .slick-dots li button:before {
   font-size: 12px;
-  color: #333;
+  color: #ff8a00; /* Color del gradiente */
 }
 
 .slick-prev:before,
 .slick-next:before {
   font-size: 24px;
-  color: #333;
+  color: #ff8a00; /* Color del gradiente */
 }
 
 .slick-prev {

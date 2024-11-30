@@ -330,7 +330,6 @@ const Index = () => {
 
 
         }
-        <hr />
         <div>
           {
             !dataqrs &&

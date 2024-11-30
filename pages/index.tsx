@@ -3,6 +3,10 @@ import Link from "next/link";
 import Image from "next/image";
 import styles from "./index.module.css";
 import flamaSvg from "../icons/flama.svg";
+import { AuthForms } from "../components/AuthForms/AuthForms";
+import LogoPresentation from "../components/LogoPresentation/LogoPresentation";
+
+
 
 // Importación dinámica del componente QRScanner
 const QRScanner = dynamic(() => import("../components/QrScanner/QrScanner"), {
@@ -13,11 +17,17 @@ const QRScanner = dynamic(() => import("../components/QrScanner/QrScanner"), {
 const IndexPage = () => (
   <div className={styles.body}>
     {/* Main Content */}
+
+    <div className={styles.qrContainer}><AuthForms /></div>
+
+
+
     <div className={styles.container}>
       {/* Logo Section */}
-      <div className={styles.image}>
+      {/* <div className={styles.image}>
         <Image src={flamaSvg} width={350} height={250} alt="Logo" priority />
-      </div>
+      </div> */}
+      <LogoPresentation />
 
       {/* Titles Section */}
       <div className={styles.textContainer}>

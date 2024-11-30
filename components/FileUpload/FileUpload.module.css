@@ -1,22 +1,23 @@
 /* Estilo general para todo el fondo */
+.link {
+  text-decoration: none;
+}
 
 /* Contenedor principal */
 .container {
   display: grid;
-
-
-
   align-items: center;
-  justify-items: center;
+  justify-items: flex-start;
   width: 100%;
-  background-color: rgba(26, 26, 26, 0.235);
+  background-image: url('/imagesflama.png'); /* Ruta de la imagen */
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  background-attachment: fixed; /* Fija el fondo para un efecto de paralaje */
   color: #e0e0e0;
   text-align: center;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
   border-radius: 5%;
-  /* position: relative; */
-
-  border-radius: 5%;
+  padding: 20px; /* Espaciado adicional */
 }
 
 /* Contenedor para el texto */
@@ -34,9 +35,7 @@
   color: #e0e0e0;
   margin: 5px 0;
   box-shadow: 1px 4px 8px rgba(199, 199, 199, 0.4);
-  /* Sombra para el contenedor */
   border-radius: 5%;
-
 }
 
 /* Estilo para el título de la app */
@@ -54,9 +53,7 @@
   justify-content: center;
   padding: 5px;
   align-self: flex-end;
-  /* Mantiene la imagen más arriba en móviles */
   border-radius: 10%;
-
 }
 
 .image img {
@@ -64,75 +61,55 @@
   max-width: 80%;
   height: auto;
   border-radius: 8px;
-  border-radius: 10%;
-
-
 }
 
 /* Estilos para los botones */
 .button {
-  width: 75%;
-  height: 20%;
-
+  width: 100%;
+  height: 50%;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
   align-items: center;
   justify-items: center;
   background: rgba(255, 255, 255, 0.0033);
-  /* Fondo semi-transparente */
   color: #fff;
   border: 2px solid rgba(255, 255, 255, 0.109);
-  /* Borde sutil */
-  padding: 15px 30px 30px;
+  padding: 10px 50px 10px;
   font-size: 1.1rem;
   border-radius: 30px;
-  /* Borde redondeado */
-
   font-weight: 300;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* Transición suave */
   backdrop-filter: blur(5px);
-  /* Efecto vidrio */
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.045);
   margin-top: 10px;
-  margin-bottom: 10px;
+  margin-bottom: 18px;
+}
 
+/* Eliminar subrayado de los enlaces */
+.button a {
+  text-decoration: none;
+  color: inherit;
 }
 
 /* Efecto al pasar el mouse */
 .button:hover {
   background: rgba(255, 255, 255, 0.2);
-  /* Fondo más claro al pasar el mouse */
   border-color: rgba(255, 255, 255, 0.7);
-  /* Borde más brillante */
   transform: scale(1.05);
-  /* Agranda el botón un poco */
   box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-  /* Sombra más pronunciada */
 }
 
 /* Efecto al hacer clic */
 .button:active {
   transform: scale(0.98);
-  /* Hace que el botón se "presione" ligeramente */
 }
-
-
-
-
-
-
 
 /* Estilos para pantallas grandes (escritorio) */
 @media (min-width: 768px) {
   .container {
-
-    padding-top: 5%;
+    padding-top: 1%;
     grid-template-columns: repeat(1, 1fr);
-    /* Dos columnas para el diseño de escritorio */
-    /* padding: 5px; */
-    /* gap: 5px; */
     background-color: rgba(255, 255, 255, 0.003);
     align-items: center;
     justify-items: center;
@@ -143,13 +120,8 @@
     justify-content: center;
     align-items: center;
     opacity: 0.9;
-    /* Ajusta el valor de 0 a 1 según el nivel de transparencia que desees */
     padding-bottom: 15%;
-
-
   }
-
-
 
   .textContainer {
     justify-self: center;
@@ -157,7 +129,6 @@
 
   .title {
     font-size: 2em;
-    /* Tamaño mayor en escritorio */
     color: #ffffff;
   }
 
@@ -174,6 +145,5 @@
 
   .image img {
     max-width: 50%;
-    /* Ajusta el tamaño de la imagen en escritorio */
   }
 }

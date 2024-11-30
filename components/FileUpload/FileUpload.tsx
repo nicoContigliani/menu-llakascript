@@ -1,6 +1,7 @@
 import { useState } from "react";
-
-const FileUploadWithMultiplePictures = ({setDataqrs,dataqrs,nameCompaines,setNameCompaines}) => {
+import styles from "./FileUpload.module.css";
+import ButtonDownloadFile from "../ButtonDownloadFile/ButtonDownloadFile";
+const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, setNameCompaines }) => {
     const [file, setFile] = useState<File | null>(null);
     const [pictures, setPictures] = useState<File[]>([]);
     const [message, setMessage] = useState<string>("");
@@ -63,31 +64,60 @@ const FileUploadWithMultiplePictures = ({setDataqrs,dataqrs,nameCompaines,setNam
     const isFormValid = file !== null && pictures.length > 0; // Validación del formulario
 
     return (
-        <div>
-            <h1>Subir archivo y múltiples imágenes</h1>
-            <input
-                type="file"
-                name="file"
-                onChange={handleFileChange}
-            />
-            {file === null && <p style={{ color: "red" }}>Por favor selecciona un archivo principal.</p>}
-            <br />
-            <input
-                type="file"
-                name="pictures"
-                multiple
-                onChange={handlePicturesChange}
-            />
-            {pictures.length === 0 && <p style={{ color: "red" }}>Por favor selecciona al menos una imagen.</p>}
-            <br />
-            <hr />
-            <button
-                onClick={handleUpload}
-                disabled={!isFormValid} // Botón deshabilitado si el formulario no es válido
-            >
-                Subir
-            </button>
-            {message && <p>{message}</p>}
+        <div className={styles.container}>
+
+
+            <div>
+                <div className={styles.textContainer}>
+                    <h4 className={styles.titleApp}>Descargar hoja de datos y modificar</h4>
+                </div>
+                <ButtonDownloadFile
+                    fileurl="/files/basic/LlakaScript.xlsx"
+                    label="Descargar hoja de datos"
+                />
+                 <ButtonDownloadFile
+                    fileurl="/files/basic/LlakaScript.xlsx"
+                    label="Manual de uso"
+                />
+            </div>
+
+
+
+            <div>
+                <div className={styles.textContainer}>
+                    <h4 className={styles.titleApp}>Subir archivo y múltiples imágenes</h4>
+
+                </div>
+
+                <input
+                    type="file"
+                    name="file"
+                    onChange={handleFileChange}
+                />
+                {file === null && <p style={{ color: "red" }}>Por favor selecciona un archivo principal.</p>}
+                <br />
+                <input
+                    type="file"
+                    name="pictures"
+                    multiple
+                    onChange={handlePicturesChange}
+                />
+                {pictures.length === 0 && <p style={{ color: "red" }}>Por favor selecciona al menos una imagen.</p>}
+                <br />
+                <hr />
+                <div >
+
+                    <button
+                        onClick={handleUpload}
+                        disabled={!isFormValid} // Botón deshabilitado si el formulario no es válido
+                        className={styles.button}
+                    >
+                        Subir
+                    </button>
+                </div>
+                {message && <p>{message}</p>}
+            </div>
+
         </div>
     );
 };

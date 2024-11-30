@@ -9,9 +9,9 @@
     align-items: center;
     min-height: 100vh;
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    grid-auto-rows: minmax(300px, auto);
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    grid-auto-rows: minmax(400px, auto);
   }
   
   /* Main Container */
