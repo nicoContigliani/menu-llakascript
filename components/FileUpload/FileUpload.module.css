@@ -7,17 +7,23 @@
 .container {
   display: grid;
   align-items: center;
-  justify-items: flex-start;
+  justify-items: center;
   width: 100%;
-  background-image: url('/imagesflama.png'); /* Ruta de la imagen */
-  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
-  background-position: center; /* Centra la imagen */
-  background-attachment: fixed; /* Fija el fondo para un efecto de paralaje */
+  background-image: url('/imagesflama.png');
+  /* Ruta de la imagen */
+  background-size: cover;
+  /* Asegura que la imagen cubra todo el contenedor */
+  background-position: center;
+  /* Centra la imagen */
+  background-attachment: fixed;
+  /* Fija el fondo para un efecto de paralaje */
   color: #e0e0e0;
   text-align: center;
   box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
   border-radius: 5%;
-  padding: 20px; /* Espaciado adicional */
+  padding: 20px;
+  /* Espaciado adicional */
+  border: 2px solid rgba(255, 255, 255, 0.109);
 }
 
 /* Contenedor para el texto */
@@ -146,4 +152,77 @@
   .image img {
     max-width: 50%;
   }
+}
+
+.buttonContainer {
+  display: grid;
+  align-items: center;
+  justify-items: center;
+}
+
+.button {
+  width: auto;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  justify-items: center;
+  background: linear-gradient(90deg, #ff8a00, #ff2d55);
+  color: #ffffff;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 40, 90, 0.3);
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+
+/* Efecto al pasar el mouse */
+.button:hover {
+  background: linear-gradient(90deg, #ff2d55, #ff8a00);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 40, 90, 0.4);
+}
+
+/* Efecto al hacer clic */
+.button:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(255, 40, 90, 0.6);
+}
+
+.buttonSend {
+  width: auto;
+  height: auto;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  align-items: center;
+  justify-items: center;
+  background: linear-gradient(90deg, #ff8a00, #ff2d55);
+  color: #ffffff;
+  border: none;
+  padding: 15px 40px;
+  font-size: 1.2rem;
+  border-radius: 30px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 6px 20px rgba(255, 40, 90, 0.3);
+  margin-top: 20px;
+  text-transform: uppercase;
+}
+/* Efecto al pasar el mouse */
+.buttonSend:hover {
+  background: linear-gradient(90deg, #ff2d55, #ff8a00);
+  transform: scale(1.1);
+  box-shadow: 0 8px 25px rgba(255, 40, 90, 0.4);
+}
+
+/* Efecto al hacer clic */
+.buttonSend:active {
+  transform: scale(0.95);
+  box-shadow: 0 4px 10px rgba(255, 40, 90, 0.6);
 }

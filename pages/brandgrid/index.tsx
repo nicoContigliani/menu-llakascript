@@ -339,7 +339,7 @@ const Index = () => {
 
 
         </div>
-        <hr />
+        <br />
         <br />
         <div>
           {

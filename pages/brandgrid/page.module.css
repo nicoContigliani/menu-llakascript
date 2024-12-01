@@ -2,21 +2,15 @@
 
 /* Contenedor principal */
 .container {
+  padding-top: 5%;
   display: grid;
-
-
-
   align-items: center;
   justify-items: center;
   width: 100%;
   background-color: rgba(26, 26, 26, 0.235);
   color: #e0e0e0;
   text-align: center;
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
-  border-radius: 5%;
-  /* position: relative; */
-
-  border-radius: 5%;
+  border-radius: 10px;
 }
 
 /* Contenedor para el texto */
@@ -29,135 +23,81 @@
 
 /* Estilo para el título principal */
 .title {
-  font-size: 9vw;
+  font-size: 7vw;
   font-weight: 700;
   color: #e0e0e0;
-  margin: 5px 0;
+  margin: 10px 0;
   box-shadow: 1px 4px 8px rgba(199, 199, 199, 0.4);
-  /* Sombra para el contenedor */
-  border-radius: 5%;
-
+  border-radius: 5px;
 }
 
 /* Estilo para el título de la app */
 .titleApp {
-  font-size: 5vw;
+  font-size: 4.5vw;
   font-weight: 500;
   color: #c0c0c0;
-  margin-top: 1px;
-  padding-bottom: 5%;
+  margin: 10px 0;
 }
 
 /* Estilo para la imagen */
 .image {
   display: flex;
   justify-content: center;
-  padding: 5px;
-  align-self: flex-end;
-  /* Mantiene la imagen más arriba en móviles */
-  border-radius: 10%;
-
+  padding: 10px;
+  align-self: center;
+  border-radius: 10px;
 }
 
 .image img {
-  padding-left: 2%;
-  max-width: 80%;
+  max-width: 90%;
   height: auto;
   border-radius: 8px;
-  border-radius: 10%;
-
-
 }
 
 /* Estilos para los botones */
 .button {
-  width: 75%;
-  height: 20%;
-
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
+  width: 90%;
+  display: flex;
   align-items: center;
-  justify-items: center;
-  background: rgba(255, 255, 255, 0.0033);
-  /* Fondo semi-transparente */
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.05);
   color: #fff;
-  border: 2px solid rgba(255, 255, 255, 0.109);
-  /* Borde sutil */
-  padding: 15px 30px 30px;
-  font-size: 1.1rem;
-  border-radius: 30px;
-  /* Borde redondeado */
-
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  padding: 15px;
+  font-size: 1rem;
+  border-radius: 20px;
   font-weight: 300;
   cursor: pointer;
   transition: all 0.3s ease;
-  /* Transición suave */
-  backdrop-filter: blur(5px);
-  /* Efecto vidrio */
-  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.045);
-  margin-top: 10px;
-  margin-bottom: 10px;
-
+  box-shadow: 0 4px 15px rgba(255, 255, 255, 0.1);
+  margin: 15px 0;
 }
 
-/* Efecto al pasar el mouse */
 .button:hover {
   background: rgba(255, 255, 255, 0.2);
-  /* Fondo más claro al pasar el mouse */
-  border-color: rgba(255, 255, 255, 0.7);
-  /* Borde más brillante */
+  border-color: rgba(255, 255, 255, 0.5);
   transform: scale(1.05);
-  /* Agranda el botón un poco */
-  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.2);
-  /* Sombra más pronunciada */
+  box-shadow: 0 6px 20px rgba(255, 255, 255, 0.3);
 }
 
-/* Efecto al hacer clic */
 .button:active {
   transform: scale(0.98);
-  /* Hace que el botón se "presione" ligeramente */
 }
-
-
-
-
-
-
 
 /* Estilos para pantallas grandes (escritorio) */
 @media (min-width: 768px) {
   .container {
-
-    padding-top: 5%;
-    grid-template-columns: repeat(1, 1fr);
-    /* Dos columnas para el diseño de escritorio */
-    /* padding: 5px; */
-    /* gap: 5px; */
-    background-color: rgba(255, 255, 255, 0.003);
-    align-items: center;
-    justify-items: center;
+    padding: 5%;
+    grid-template-columns: 1fr;
+    background-color: rgba(255, 255, 255, 0.02);
   }
-
-  .images {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    opacity: 0.9;
-    /* Ajusta el valor de 0 a 1 según el nivel de transparencia que desees */
-    padding-bottom: 15%;
-
-
-  }
-
-
 
   .textContainer {
     justify-self: center;
   }
 
   .title {
-    font-size: 2em;
-    /* Tamaño mayor en escritorio */
+    font-size: 3em;
     color: #ffffff;
   }
 
@@ -167,13 +107,11 @@
   }
 
   .image {
-    justify-content: start;
-    padding-right: 50px;
-    align-self: center;
+    justify-content: center;
+    padding: 20px;
   }
 
   .image img {
-    max-width: 50%;
-    /* Ajusta el tamaño de la imagen en escritorio */
+    max-width: 60%;
   }
 }

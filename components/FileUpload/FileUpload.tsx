@@ -1,10 +1,15 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import styles from "./FileUpload.module.css";
 import ButtonDownloadFile from "../ButtonDownloadFile/ButtonDownloadFile";
+
 const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, setNameCompaines }) => {
     const [file, setFile] = useState<File | null>(null);
     const [pictures, setPictures] = useState<File[]>([]);
     const [message, setMessage] = useState<string>("");
+
+    // Referencias para los inputs
+    const fileInputRef = useRef<HTMLInputElement>(null);
+    const picturesInputRef = useRef<HTMLInputElement>(null);
 
     const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         if (event.target.files && event.target.files[0]) {
@@ -38,86 +43,87 @@ const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, se
 
             if (response.ok) {
                 setMessage(`Éxito: ${result.message}`);
+                setDataqrs(result.dataqr);
+                setNameCompaines(result.nameCompaines);
             } else {
                 setMessage(`Error: ${result.message}`);
             }
-
-            if (response.ok) {
-                setDataqrs(`Éxito: ${result.dataqr}`);
-            } else {
-                setDataqrs(`Error: ${result.dataqr}`);
-            }
-            if (response.ok) {
-                setDataqrs(`Éxito: ${result.setNameCompaines}`);
-            } else {
-                setDataqrs(`Error: ${result.setNameCompaines}`);
-            }
-
-
-
-
         } catch (error) {
             setMessage("Ocurrió un error al subir los archivos.");
         }
     };
 
-    const isFormValid = file !== null && pictures.length > 0; // Validación del formulario
+    const isFormValid = file !== null && pictures.length > 0;
 
     return (
         <div className={styles.container}>
-
-
             <div>
                 <div className={styles.textContainer}>
-                    <h4 className={styles.titleApp}>Descargar hoja de datos y modificar</h4>
+                    <span className={styles.titleApp}>Descargar hoja de datos y modificar</span>
                 </div>
-                <ButtonDownloadFile
-                    fileurl="/files/basic/LlakaScript.xlsx"
-                    label="Descargar hoja de datos"
-                />
-                 <ButtonDownloadFile
-                    fileurl="/files/basic/LlakaScript.xlsx"
-                    label="Manual de uso"
-                />
+                <div className={styles.buttonContainer}>
+                    <ButtonDownloadFile
+                        fileurl="/files/basic/LlakaScript.xlsx"
+                        label="Descargar hoja de datos"
+                    />
+                    <ButtonDownloadFile
+                        fileurl="/files/basic/LlakaScript.xlsx"
+                        label="Manual de uso"
+                    />
+                </div>
             </div>
 
-
-
+<br /><br />
             <div>
                 <div className={styles.textContainer}>
                     <h4 className={styles.titleApp}>Subir archivo y múltiples imágenes</h4>
-
                 </div>
 
+                {/* Botón para subir archivo principal */}
+                <button
+                    onClick={() => fileInputRef.current?.click()}
+                    className={styles.uploadButton}
+                >
+                    Seleccionar archivo principal
+                </button>
                 <input
                     type="file"
                     name="file"
                     onChange={handleFileChange}
+                    ref={fileInputRef}
+                    style={{ display: "none" }}
                 />
                 {file === null && <p style={{ color: "red" }}>Por favor selecciona un archivo principal.</p>}
-                <br />
+
+                {/* Botón para subir imágenes */}
+                <button
+                    onClick={() => picturesInputRef.current?.click()}
+                    className={styles.uploadButton}
+                >
+                    Seleccionar imágenes
+                </button>
                 <input
                     type="file"
                     name="pictures"
                     multiple
                     onChange={handlePicturesChange}
+                    ref={picturesInputRef}
+                    style={{ display: "none" }}
                 />
                 {pictures.length === 0 && <p style={{ color: "red" }}>Por favor selecciona al menos una imagen.</p>}
-                <br />
-                <hr />
-                <div >
 
+                <hr />
+                <div className={styles.buttonContainer}>
                     <button
                         onClick={handleUpload}
-                        disabled={!isFormValid} // Botón deshabilitado si el formulario no es válido
-                        className={styles.button}
+                        disabled={!isFormValid}
+                        className={styles.buttonSend}
                     >
                         Subir
                     </button>
                 </div>
                 {message && <p>{message}</p>}
             </div>
-
         </div>
     );
 };

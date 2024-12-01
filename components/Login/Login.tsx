@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
 import styles from './Login.module.css';
+import GoogleIcons from '@mui/icons-material/Google';
 
 export function Login() {
   const [error, setError] = useState<string | null>(null);
@@ -39,7 +40,11 @@ export function Login() {
             <span>Logging in...</span>
           ) : (
             <span className={styles.googleContent}>
-              <GoogleIcon />
+              {/* <GoogleIcon /> */}
+             <GoogleIcons
+             
+             />
+             <hr />
               Sign in with Google
             </span>
           )}
@@ -57,7 +62,7 @@ export function Login() {
 function GoogleIcon() {
   return (
     <svg
-      className="w-2 h-2 mr-2"
+      className="w-1 h-1 mr-2"
       viewBox="0 0 24 24"
       xmlns="http://www.w3.org/2000/svg"
     >

@@ -9,7 +9,7 @@
 body {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-evenly;
   background: linear-gradient(135deg, 
               #1a1a1a 0%,     /* Gris oscuro */
               #3a3a3a 25%,   /* Gris intermedio */
@@ -20,7 +20,6 @@ body {
   background-size: cover;
   font-family: 'Arial', sans-serif;
   color: #ffffff;
-  background-position: center; /* Centra la imagen */
   background-attachment: fixed; /* Fija el fondo */
 }
 
