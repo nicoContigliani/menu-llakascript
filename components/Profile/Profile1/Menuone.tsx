@@ -24,24 +24,22 @@ interface MenuProps {
 }
 
 const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
-    // Memoizing groupedSections to avoid unnecessary re-calculation
     const [searchTerm, setSearchTerm] = useState('');
 
-    // Memoizing groupedSections to avoid unnecessary re-calculation
     const memoizedSections = useMemo(() => {
         if (!searchTerm.trim()) return Object.entries(groupedSections);
 
-        // Filtrar por el término de búsqueda en los nombres de los ítems
         return Object.entries(groupedSections).map(([sectionName, items]) => {
             const filteredItems = items.filter((item) =>
                 item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.Description.toLowerCase().includes(searchTerm.toLowerCase())||
-                item.Price.toLowerCase().includes(searchTerm.toLowerCase())|| 
+                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                item.Price.toLowerCase().includes(searchTerm.toLowerCase()) || 
                 item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase())
             );
             return [sectionName, filteredItems] as [string, MenuItem[]];
-        }).filter(([, items]) => items.length > 0); // Eliminar secciones vacías
+        }).filter(([, items]) => items.length > 0);
     }, [groupedSections, searchTerm]);
+
     return (
         <div
             className={styles.menuWrapper}
@@ -51,7 +49,6 @@ const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         >
             <header className={styles.header}>
                 <h1 className={styles.companyName}>{namecompanies}</h1>
-                {/* Buscador */}
                 <input
                     type="text"
                     className={styles.searchInput}
@@ -84,7 +81,7 @@ const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
                                         alt={item.Name}
                                         width={100}
                                         height={100}
-                                        priority // Prioritize loading images that are above the fold
+                                        priority
                                     />
                                 </div>
                             </div>
@@ -96,4 +93,4 @@ const Menuone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
     );
 };
 
-export default React.memo(Menuone); // Prevent unnecessary re-renders of the component
+export default React.memo(Menuone);

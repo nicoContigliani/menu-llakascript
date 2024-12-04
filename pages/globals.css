@@ -7,9 +7,10 @@
 
 /* Estilos globales para el body */
 body {
-  display: flex;
+  display: grid;
+  grid-template-rows: repeat(1, 1fr);
   align-items: center;
-  justify-content: space-evenly;
+  justify-items: center;
   background: linear-gradient(135deg, 
               #1a1a1a 0%,     /* Gris oscuro */
               #3a3a3a 25%,   /* Gris intermedio */
@@ -21,6 +22,10 @@ body {
   font-family: 'Arial', sans-serif;
   color: #ffffff;
   background-attachment: fixed; /* Fija el fondo */
+  /* overflow: hidden;  */
+  min-height: 100vh;
+  padding: 1%;
+  width: 100%; /* Asegura que ocupe el 100% del ancho de la pantalla */
 }
 
 /* Estilos generales para botones */
@@ -38,6 +43,9 @@ button {
   text-decoration: none;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   transition: all 0.3s ease-in-out;
+  white-space: nowrap; /* Evita que el texto se divida */
+  text-overflow: ellipsis; /* Si el texto es largo, se corta con "..." */
+  overflow: hidden; /* Evita el desbordamiento */
 }
 
 /* Efectos en botones */
@@ -70,4 +78,62 @@ button:active {
 
 .slick-next {
   right: -35px;
+}
+
+/* Responsividad */
+
+/* Pantallas medianas (tablets) */
+@media (max-width: 768px) {
+  body {
+    grid-template-rows: auto; /* Ajusta filas según contenido */
+    padding: 10px; /* Reduce el relleno */
+    overflow: auto; /* Habilita el desplazamiento si es necesario */
+  }
+
+  button {
+    font-size: 0.9rem; /* Reduce tamaño del texto */
+    padding: 8px 15px; /* Ajusta el espacio del botón */
+    border-radius: 20px;
+  }
+
+  .slick-dots li button:before {
+    font-size: 10px; /* Reduce tamaño de los puntos del carrusel */
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 20px; /* Reduce tamaño de flechas */
+  }
+}
+
+/* Pantallas pequeñas (teléfonos) */
+@media (max-width: 480px) {
+  body {
+    grid-template-rows: auto;
+    background-size: 150%; /* Amplía el fondo para adaptarlo */
+    padding: 5px;
+    overflow: auto; /* Habilita el desplazamiento si es necesario */
+  }
+
+  button {
+    font-size: 0.8rem; /* Ajusta texto aún más pequeño */
+    padding: 6px 12px; /* Reduce espaciado en botones */
+  }
+
+  .slick-dots li button:before {
+    font-size: 8px; /* Más pequeño para puntos del carrusel */
+  }
+
+  .slick-prev:before,
+  .slick-next:before {
+    font-size: 18px; /* Flechas más pequeñas */
+  }
+
+  .slick-prev {
+    left: -25px; /* Ajusta posición de flecha izquierda */
+  }
+
+  .slick-next {
+    right: -25px; /* Ajusta posición de flecha derecha */
+  }
 }

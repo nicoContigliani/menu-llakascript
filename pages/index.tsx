@@ -23,19 +23,14 @@ const IndexPage = () => (
 
 
     <div className={styles.container}>
-      {/* Logo Section */}
-      {/* <div className={styles.image}>
-        <Image src={flamaSvg} width={350} height={250} alt="Logo" priority />
-      </div> */}
+    
       <LogoPresentation />
 
-      {/* Titles Section */}
       <div className={styles.textContainer}>
         <h1 className={styles.title}>LlakaScript</h1>
         <h2 className={styles.titleApp}>Menu</h2>
       </div>
 
-      {/* Buttons Section */}
       <div className={styles.buttonContainer}>
         <Link href="/companies/LlakaScript" className={styles.link}>
           LlakaScript
@@ -46,7 +41,6 @@ const IndexPage = () => (
       </div>
     </div>
 
-    {/* QR Scanner Section */}
     <div className={styles.qrContainer}>
       <QRScanner />
     </div>

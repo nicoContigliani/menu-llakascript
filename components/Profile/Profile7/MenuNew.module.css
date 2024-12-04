@@ -1,235 +1,188 @@
-/* Fondo de movimiento suave con un toque de elegancia */
-.menuWrapper {
+/* Contenedor principal con imagen de fondo */
+.menuContainer {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    padding: 40px;
     align-items: center;
-    width: 100%;
-    background: linear-gradient(135deg, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)),
-        url('https://path/to/luxury-background.jpg') no-repeat center center fixed;
+    padding: 30px;
+    background: rgba(255, 255, 255, 0.85);
+    /* Transparencia */
+    color: #333;
+    max-width: 1200px;
+    margin: 0 auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    font-family: 'Merriweather', serif;
+    backdrop-filter: blur(30px);
+    /* Suavizado */
     background-size: cover;
-    animation: moveBackground 60s ease-in-out infinite; /* Movimiento suave y continuo */
+    /* La imagen cubre todo el área */
+    background-position: center;
+    /* Centrada */
+    background-attachment: fixed;
+    /* Fijada mientras se hace scroll */
 }
 
-/* Animación del fondo suave */
-@keyframes moveBackground {
-    0% {
-        background-position: 0% 0%;
-    }
-    50% {
-        background-position: 50% 50%;
-    }
-    100% {
-        background-position: 0% 0%;
-    }
+/* Encabezado */
+.header {
+    text-align: center;
+    margin-bottom: 40px;
 }
 
-/* Diseño de las secciones */
+.mainTitle {
+    font-size: 2.8rem;
+    font-weight: 700;
+    color: #5c4033;
+    /* Marrón cálido */
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 4px 4px 10px white;
+
+}
+
+.searchInput {
+    width: 100%;
+    max-width: 400px;
+    padding: 12px 20px;
+    font-size: 1rem;
+    border: 2px solid #aaa;
+    border-radius: 50px;
+    background-color: rgba(255, 255, 255, 0.9);
+    /* Transparencia */
+    color: #333;
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.searchInput:focus {
+    border-color: #6a5acd;
+    box-shadow: 0 0 10px rgba(106, 90, 205, 0.5);
+}
+
+/* Sección */
 .section {
     width: 100%;
-    padding: 0 30px;
-    text-align: center;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    margin-bottom: 30px;
+    font-weight: 700;
+
 }
 
 .sectionTitle {
-    font-size: 3rem;
-    font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    font-family: 'Helvetica Neue', sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Sombra para resaltar */
+    font-size: 2rem;
+    font-weight: 600;
+    color: #ffffff;
+    /* Marrón oscuro */
+    margin-bottom: 20px;
+    text-align: center;
+    border-bottom: 2px solid rgba(200, 180, 150, 0.5);
+    padding-bottom: 5px;
+    text-shadow: 4px 4px 10px black;
+
 }
 
-/* Estilos para los items del menú */
-.sectionItems {
+/* Lista de elementos */
+.itemList {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 40px;
-    justify-items: center;
-    align-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
 }
 
-.menuItem {
+/* Tarjetas */
+.itemCard {
+    background-color: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(200, 180, 150, 0.6);
+    /* Color cálido */
+    border-radius: 12px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.itemCard:hover {
+    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+    transform: translateY(-5px);
+}
+
+.cardImageWrapper {
+    height: 180px;
+    overflow: hidden;
     position: relative;
-    width: 350px;
-    height: 500px;
-    border-radius: 25px;
-    background-size: cover;
-    background-position: center;
-    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.7);
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease, border-radius 0.4s ease;
-    cursor: pointer;
-    opacity: 0.85;
+    background-color: rgba(245, 245, 245, 0.8);
 }
 
-.menuItem:hover {
-    transform: translateY(-15px);
-    box-shadow: 0 12px 60px rgba(0, 0, 0, 0.9);
-    border-radius: 35px;
-    opacity: 1;
-    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
-}
-
-/* Superposición de colores para dar un toque elegante */
-.overlay {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(180deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.7) 100%);
-    z-index: 1;
-}
-
-/* Información del item */
-.itemInfo {
-    position: absolute;
-    bottom: 20px;
-    left: 20px;
-    right: 20px;
-    z-index: 2;
-    color: #fff;
-    text-align: left;
-    background: rgba(0, 0, 0, 0.7);
-    border-radius: 15px;
-    padding: 30px;
-    transition: background 0.3s ease;
-}
-
-.itemInfo h2 {
-    margin: 0;
-    font-size: 2.2rem;
-    font-weight: 700;
-    color: #fff;
-    font-family: 'Times New Roman', serif;
-}
-
-.itemInfo p {
-    margin: 10px 0;
-    font-size: 1.2rem;
-    color: #ccc;
-    line-height: 1.6;
-}
-
-.itemInfo .price {
-    font-size: 1.6rem;
-    font-weight: bold;
-    color: #ffd700;
-}
-
-/* Imagen circular del item */
-.itemImage {
-    position: absolute;
-    top: 25%;
-    left: 50%;
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
-    overflow: hidden;
-    border: 5px solid white;
-    z-index: 2;
-    transform: translate(-50%, -50%);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-}
-
-.itemImage img {
+.cardImageWrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+    transition: transform 0.3s ease;
 }
 
-.menuItem:hover .itemImage {
-    transform: translate(-50%, -50%) scale(1.1);
-    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5);
+.itemCard:hover .cardImageWrapper img {
+    transform: scale(1.1);
 }
 
-/* Efecto de desplazamiento suave */
-@media (max-width: 768px) {
-    .sectionItems {
-        grid-template-columns: 1fr 1fr; /* 2 columnas para pantallas pequeñas */
-    }
-
-    .menuItem {
-        width: 90%;
-        height: 400px;
-    }
+.cardContent {
+    padding: 20px;
+    text-align: left;
 }
 
-/* Estilos para el contenedor de búsqueda */
-.searchWrapper {
-    margin-bottom: 30px;
-    text-align: center;
-}
-
-/* Estilos para el input de búsqueda */
-.searchInput {
-    padding: 12px;
-    width: 80%;
-    max-width: 600px;
-    font-size: 1rem;
-    border: 2px solid #ff0077;
-    border-radius: 5px;
-    outline: none;
-    transition: border 0.3s ease, box-shadow 0.3s ease;
-}
-
-.searchInput:focus {
-    border-color: #00ffcc;
-    box-shadow: 0 0 10px rgba(0, 255, 204, 0.5); /* Efecto de enfoque suave */
-}
-
-/* Estilos responsivos para un diseño móvil amigable */
-@media (max-width: 480px) {
-    .menuWrapper {
-        padding: 20px;
-    }
-
-    .menuItem {
-        width: 100%;
-        height: 400px;
-    }
-
-    .searchInput {
-        width: 90%;
-    }
-}
-
-/* Título principal */
-.mainTitle {
-    font-size: 5rem;
+.cardTitle {
+    font-size: 1.4rem;
     font-weight: 700;
-    color: #fff;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 30px;
-    font-family: 'Helvetica Neue', sans-serif;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    transition: transform 0.5s ease-in-out;
+    margin-bottom: 10px;
+    color: #2c2c2c;
 }
 
-.mainTitle:hover {
-    transform: scale(1.05);
+.cardDescription {
+    font-size: 1rem;
+    margin-bottom: 15px;
+    color: #666;
+    line-height: 1.5;
+    font-style: italic;
 }
 
-.searchInput {
-    padding: 10px 20px;
+.cardFooter {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+}
+
+.cardPrice {
     font-size: 1.2rem;
-    border: 2px solid #ffffff;
-    border-radius: 30px;
-    background-color: #222;
-    color: white;
-    width: 450px;
-    max-width: 100%;
-    margin: 20px auto;
-    display: block;
-    outline: none;
-    transition: border-color 0.3s ease;
+    font-weight: 600;
+    color: #6a5acd;
 }
 
-.searchInput:focus {
-    border-color: #c1c1c1;
+/* Responsivo */
+@media (max-width: 768px) {
+    .menuContainer {
+        padding: 20px;
+        background-size: cover;
+        /* Asegura que la imagen aún se vea bien */
+        background-position: center;
+        /* Centra la imagen */
+    }
+
+    .mainTitle {
+        font-size: 2.2rem;
+    }
+
+    .itemList {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .menuContainer {
+        padding: 10px;
+        background-size: cover;
+        /* Ajusta la imagen al tamaño del dispositivo */
+        background-position: center;
+    }
+
+    .itemList {
+        grid-template-columns: repeat(2, 1fr);
+    }
 }

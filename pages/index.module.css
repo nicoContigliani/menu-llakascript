@@ -1,155 +1,162 @@
 /* General Body Styles */
 .body {
-    color: #fff;
-    font-family: 'Helvetica Neue', Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+  color: #fff;
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  /* min-height: 100vh; */
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: minmax(300px, auto);
+  overflow: hidden;
+  width: 100%;
+
+}
+
+/* Main Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  /* Space between elements */
+  /* padding: 40px; */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  max-width: 800px;
+  margin: 0 auto;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Logo Section */
+.image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Text Container */
+.textContainer {
+  text-align: center;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin: 0;
+}
+
+.titleApp {
+  font-size: 1.8rem;
+  color: #bbb;
+}
+
+/* Buttons Section */
+.buttonContainer {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.link {
+  text-decoration: none;
+  color: #fff;
+  background-color: #333;
+  padding: 15px 30px;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  transition: background-color 0.3s ease;
+  overflow: hidden;
+}
+
+.link:hover {
+  background-color: #555;
+}
+
+/* QR Scanner Section */
+.qrContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  overflow: hidden;
+}
+
+/* Responsive Design */
+
+/* Medium to small screens (tablets, phones) */
+@media (max-width: 768px) {
+  .body {
+
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-    grid-auto-rows: minmax(400px, auto);
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
+    grid-auto-rows: minmax(300px, auto);
   }
-  
-  /* Main Container */
+
   .container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 20px; /* Space between elements */
-    padding: 40px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
+    padding: 10px;
+    gap: 0px;
   }
-  
-  /* Logo Section */
-  .image {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+
+  .image img {
+    width: 200px;
+    height: auto;
   }
-  
-  /* Text Container */
-  .textContainer {
-    text-align: center;
-  }
-  
+
   .title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin: 0;
+    font-size: 2rem;
   }
-  
+
   .titleApp {
-    font-size: 1.8rem;
-    color: #bbb;
+    font-size: 1.5rem;
   }
-  
-  /* Buttons Section */
+
   .buttonContainer {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
+    flex-direction: row;
+    gap: 1px;
   }
-  
+
   .link {
-    text-decoration: none;
-    color: #fff;
-    background-color: #333;
-    padding: 15px 30px;
-    border-radius: 5px;
-    font-size: 1.2rem;
-    transition: background-color 0.3s ease;
+    font-size: 1rem;
+    padding: 1px 2px;
   }
-  
-  .link:hover {
-    background-color: #555;
+}
+
+/* Small screens (phones) */
+@media (max-width: 480px) {
+  .body {
+
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: 0px;
+    grid-auto-rows: minmax(300px, auto);
   }
-  
-  /* QR Scanner Section */
+
+  .container {
+    gap: 10px;
+  }
+
+  .image img {
+    width: 180px;
+  }
+
+  .title {
+    font-size: 1.6rem;
+  }
+
+  .link {
+    font-size: 0.9rem;
+    padding: 8px 20px;
+  }
+
   .qrContainer {
-    margin-top: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
+    margin-top: 15px;
   }
-  
-  /* Responsive Design */
-  
-  /* Medium to small screens (tablets, phones) */
-  @media (max-width: 768px) {
-    .body {
-   
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 0px;
-        grid-auto-rows: minmax(300px, auto);
-      }
-    .container {
-      padding: 10px;
-      gap: 0px;
-    }
-  
-    .image img {
-      width: 200px;
-      height: auto;
-    }
-  
-    .title {
-      font-size: 2rem;
-    }
-  
-    .titleApp {
-      font-size: 1.5rem;
-    }
-  
-    .buttonContainer {
-      flex-direction: row;
-      gap: 10px;
-    }
-  
-    .link {
-      font-size: 1rem;
-      padding: 12px 25px;
-    }
-  }
-  
-  /* Small screens (phones) */
-  @media (max-width: 480px) {
-    .body {
-   
-        display: grid;
-        grid-template-columns: repeat(1, 1fr);
-        gap: 0px;
-        grid-auto-rows: minmax(300px, auto);
-      }
-    .container {
-      gap: 10px;
-    }
-  
-    .image img {
-      width: 180px;
-    }
-  
-    .title {
-      font-size: 1.6rem;
-    }
-  
-    .link {
-      font-size: 0.9rem;
-      padding: 8px 20px;
-    }
-  
-    .qrContainer {
-      margin-top: 15px;
-    }
-  }
-  
+}

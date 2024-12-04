@@ -60,7 +60,10 @@ const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         <div
             className={styles.menuContainer}
             style={{
-                backgroundImage: backgroundImages ? `url(${backgroundImages})` : 'none',
+                backgroundImage: backgroundImages || 'none',
+                backgroundSize: 'cover', // Correcta propiedad en camelCase
+                backgroundPosition: 'center', // Correcta propiedad en camelCase
+                backgroundAttachment: 'fixed', // Correcta propiedad en camelCase
             }}
         >
             <header className={styles.header}>

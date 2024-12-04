@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
 import styles from './MenuNew.module.css';
 
@@ -19,76 +19,70 @@ interface MenuItem {
 interface MenuProps {
     namecompanies: string;
     groupedSections: Record<string, MenuItem[]>;
-    menuData: any;
-    backgroundImages: any;
+    backgroundImages: string | null;
 }
 
 const MenuSeven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    // Función para filtrar los elementos según el término de búsqueda
-    const filterItems = (items: MenuItem[]) => {
-        return items.filter((item) =>
-            item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-            item.Price.toLowerCase().includes(searchTerm.toLowerCase())
-        );
-    };
+    const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+        setSearchTerm(e.target.value);
+    }, []);
+
+    const filteredSections = useMemo(() => {
+        return Object.entries(groupedSections).map(([sectionName, items]) => {
+            const filteredItems = items.filter((item) =>
+                [item.Name, item.Menu_Title, item.Description, item.Price]
+                    .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()))
+            );
+            return [sectionName, filteredItems] as [string, MenuItem[]];
+        });
+    }, [searchTerm, groupedSections]);
 
     return (
         <div
-            className={styles.menuWrapper}
+            className={styles.menuContainer}
             style={{
                 backgroundImage: backgroundImages || 'none',
             }}
         >
-            {/* Título principal con mejoras */}
-
-
             <header className={styles.header}>
                 <h1 className={styles.mainTitle}>{namecompanies}</h1>
-                {/* Add search input */}
                 <input
                     type="text"
-                    placeholder="Search items..."
+                    placeholder="Buscar en el menú..."
                     value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
+                    onChange={handleSearchChange}
                     className={styles.searchInput}
                 />
             </header>
-       
 
-            {Object.entries(groupedSections)?.map(([sectionName, items]) => (
-                <div key={sectionName} className={styles.section}>
-                    <h1 className={styles.sectionTitle}>{sectionName}</h1>
-                    <div className={styles.sectionItems}>
-                        {filterItems(items).map((item: MenuItem) => (
-                            <div
-                                key={item.Item_id}
-                                className={styles.menuItem}
-                                style={{
-                                    backgroundImage: `url(${item.Background_Image})`,
-                                }}
-                            >
-                                <div className={styles.overlay}></div>
-                                <div className={styles.itemInfo}>
-                                    <h2>{item.Name}</h2>
-                                    <p>{item.Description}</p>
-                                    <span className={styles.price}>{`$${item.Price}`}</span>
-                                </div>
-                                <div className={styles.itemImage}>
+            {filteredSections.map(([sectionName, items]) => (
+                <section key={sectionName} className={styles.section}>
+                    <h2 className={styles.sectionTitle}>{sectionName}</h2>
+                    <div className={styles.itemList}>
+                        {items.map(item => (
+                            <div key={item.Item_id} className={styles.itemCard}>
+                                <div className={styles.cardImageWrapper}>
                                     <Image
                                         src={`/foldercompanies/${namecompanies}/${item.Item_Image}`}
                                         alt={item.Name}
-                                        width={120}
-                                        height={120}
+                                        width={500}
+                                        height={500}
+                                        priority
                                     />
+                                </div>
+                                <div className={styles.cardContent}>
+                                    <h3 className={styles.cardTitle}>{item.Name}</h3>
+                                    <p className={styles.cardDescription}>{item.Description}</p>
+                                    <div className={styles.cardFooter}>
+                                        <span className={styles.cardPrice}>{`$${item.Price}`}</span>
+                                    </div>
                                 </div>
                             </div>
                         ))}
                     </div>
-                </div>
+                </section>
             ))}
         </div>
     );

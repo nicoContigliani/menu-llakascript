@@ -2,19 +2,23 @@
 .menuContainer {
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 20px;
     padding: 50px;
     background-color: #1e1e1e;
     background-size: cover;
     background-position: center;
     color: #ffffff;
     font-family: 'Arial', sans-serif;
+    background-size: cover; /* La imagen cubre todo el área */
+    background-position: center; /* Centrada */
+    background-attachment: fixed; /* Fijada mientras se hace scroll */
+
 }
 
 /* Cabecera */
 .header {
     text-align: center;
-    padding: 30px 0;
+    padding: 10px 0;
     background: linear-gradient(90deg, #ffcc00 0%, #ff9900 100%);
     border-radius: 10px;
     box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3);
@@ -31,7 +35,7 @@
 /* Sección */
 .section {
     width: 100%;
-    padding: 0 15px;
+    padding: 0 1px;
 }
 
 .sectionTitle {
@@ -49,7 +53,7 @@
 .itemGrid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-    gap: 25px;
+    gap: 10px;
     padding: 10px 0;
 }
 
@@ -127,6 +131,9 @@
     color: #dddddd;
     margin: 12px 0;
     line-height: 1.6;
+    word-wrap: break-word; /* Asegura que las palabras largas se dividan correctamente */
+    overflow-wrap: break-word; /* Garantiza que el texto largo no se desborde */
+    text-align: center; /* Alineación a la izquierda para mayor legibilidad */
 }
 
 .cardPrice {
@@ -139,7 +146,7 @@
 /* Responsive */
 @media (max-width: 768px) {
     .menuContainer {
-        padding: 30px;
+        padding: 5px;
     }
 
     .sectionTitle {
@@ -147,7 +154,7 @@
     }
 
     .cardContent {
-        padding: 20px;
+        padding: 5px;
     }
 
     .cardTitle {
@@ -164,6 +171,10 @@
 }
 
 @media (max-width: 480px) {
+    .itemGrid {
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Mínimo 140px por columna */
+        gap:8px; /* Ajusta el espacio entre las tarjetas */
+    }
     .card {
         border-radius: 15px;
     }

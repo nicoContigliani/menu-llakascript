@@ -8,7 +8,13 @@
     background: linear-gradient(180deg, #f9f9f908 0%, #ffffff30 100%);
     color: #e1e1e1;
     font-family: -apple-system, BlinkMacSystemFont, 'San Francisco', 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
+
+    background-size: cover;
+    /* La imagen cubre todo el área */
+    background-position: center;
+    /* Centrada */
+    background-attachment: fixed;
+    /* Fijada mientras se hace scroll */}
 
 /* Cabecera */
 .header {

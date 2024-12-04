@@ -10,6 +10,10 @@
     color: #ffffff;
     box-sizing: border-box;
     min-height: 100vh;
+    background-size: cover; /* La imagen cubre todo el área */
+    background-position: center; /* Centrada */
+    background-attachment: fixed; /* Fijada mientras se hace scroll */
+
 }
 
 /* Cabecera */
@@ -143,6 +147,7 @@
 }
 
 @media (max-width: 480px) {
+    
     .menuContainer {
         padding: 10px;
     }
@@ -166,6 +171,11 @@
     .cardDescription {
         font-size: 0.9rem;
     }
+    .carousel{
+        grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); /* Mínimo 140px por columna */
+        gap:8px; /* Ajusta el espacio entre las tarjetas */
+    }
+
 }
 /* Estilo del campo de búsqueda */
 .searchInput {

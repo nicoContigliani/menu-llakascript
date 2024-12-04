@@ -47,6 +47,9 @@ const Menuthirteen: React.FC<MenuProps> = ({ groupedSections, namecompanies, bac
             className={styles.menuContainer}
             style={{
                 backgroundImage: backgroundImages || 'none',
+                backgroundSize: 'cover', // Correcta propiedad en camelCase
+                backgroundPosition: 'center', // Correcta propiedad en camelCase
+                backgroundAttachment: 'fixed', // Correcta propiedad en camelCase
             }}
         >
             <div className={styles.menuWrapper}>

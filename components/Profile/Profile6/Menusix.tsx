@@ -18,32 +18,26 @@ interface MenuItem {
 
 interface MenuProps {
     namecompanies: string;
-    groupedSections: Record<string, MenuItem[]>; // Ensuring correct typing for groupedSections
-    menuData: any;
+    groupedSections: Record<string, MenuItem[]>;
     backgroundImages: string | null;
 }
 
 const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
-    const [hoveredItem, setHoveredItem] = useState<number | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');
 
-    // Memoize the search handler to prevent unnecessary re-creations on every render
     const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
         setSearchTerm(e.target.value);
     }, []);
 
-    // Memoize filteredSections to avoid recalculating on every render
     const filteredSections = useMemo(() => {
         return Object.entries(groupedSections).map(([sectionName, items]) => {
             const filteredItems = items.filter((item) =>
-                item.Name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.Menu_Title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.Description.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                item.Price.toLowerCase().includes(searchTerm.toLowerCase())
+                [item.Name, item.Menu_Title, item.Description, item.Price]
+                    .some(field => field.toLowerCase().includes(searchTerm.toLowerCase()))
             );
             return [sectionName, filteredItems] as [string, MenuItem[]];
         });
-    }, [searchTerm, groupedSections]); // Recompute when searchTerm or groupedSections change
+    }, [searchTerm, groupedSections]);
 
     return (
         <div
@@ -54,7 +48,6 @@ const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
         >
             <header className={styles.header}>
                 <h1 className={styles.mainTitle}>{namecompanies}</h1>
-                {/* Search input with optimized handler */}
                 <input
                     type="text"
                     placeholder="Search items..."
@@ -68,17 +61,8 @@ const MenuSix: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
                 <section key={sectionName} className={styles.section}>
                     <h2 className={styles.sectionTitle}>{sectionName}</h2>
                     <div className={styles.itemList}>
-                        {items.map((item) => (
-                            <div
-                                key={item.Item_id}
-                                className={`${styles.itemCard} ${hoveredItem === item.Item_id ? styles.cardHovered : ''}`}
-                                style={{
-                                    backgroundColor: item.Primary_Color,
-                                    borderColor: item.Secondary_color,
-                                }}
-                                onMouseEnter={() => setHoveredItem(item.Item_id)}
-                                onMouseLeave={() => setHoveredItem(null)}
-                            >
+                        {items.map(item => (
+                            <div key={item.Item_id} className={styles.itemCard}>
                                 <div className={styles.cardImageWrapper}>
                                     <Image
                                         src={`/foldercompanies/${namecompanies}/${item.Item_Image}`}

@@ -2,13 +2,17 @@
 .menuContainer {
     display: flex;
     flex-direction: column;
-    gap: 60px;
-    padding: 60px;
+    gap: 30px;
+    padding: 1px;
     background-color: #000000;
     background-size: cover;
     background-position: center;
     color: #ffffff;
     overflow-x: hidden;
+    background-size: cover; /* La imagen cubre todo el área */
+    background-position: center; /* Centrada */
+    background-attachment: fixed; /* Fijada mientras se hace scroll */
+
 }
 
 /* Cabecera */
@@ -40,7 +44,7 @@
 /* Cuadrícula */
 .grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Para que las tarjetas se ajusten automáticamente */
     gap: 30px;
     padding: 20px;
 }
@@ -56,6 +60,7 @@
     cursor: pointer;
     transform: scale(1);
     will-change: transform;
+    margin: 0; /* Eliminar margenes extra */
 }
 
 .card:hover {
@@ -67,31 +72,31 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 200px;
+    height: 180px; /* Reducir el tamaño de la imagen */
     background-color: rgba(0, 0, 0, 0.3);
 }
 
 .cardContent {
-    padding: 20px;
+    padding: 15px; /* Reducir el padding */
     background: #fff;
     text-align: center;
 }
 
 .cardTitle {
-    font-size: 1.8rem;
+    font-size: 1.4rem; /* Reducir el tamaño del título */
     font-weight: 700;
     color: #333;
     margin-bottom: 10px;
 }
 
 .cardDescription {
-    font-size: 1rem;
+    font-size: 0.9rem; /* Reducir tamaño de descripción */
     color: #777;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
 }
 
 .cardPrice {
-    font-size: 1.5rem;
+    font-size: 1.3rem; /* Reducir tamaño del precio */
     font-weight: 700;
     color: #e74c3c;
 }
@@ -105,6 +110,12 @@
 }
 
 /* Responsivo */
+@media (max-width: 1200px) {
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* Aseguramos que al reducir el tamaño de pantalla las tarjetas se ajusten */
+    }
+}
+
 @media (max-width: 768px) {
     .header h1 {
         font-size: 2.5rem;
@@ -114,8 +125,12 @@
         font-size: 2rem;
     }
 
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); /* Las tarjetas se ajustan en más columnas */
+    }
+
     .card {
-        width: 100%;
+        width: 100%; /* Asegura que las tarjetas se adapten al tamaño del contenedor */
     }
 
     .cardTitle {
@@ -126,6 +141,29 @@
         font-size: 1.3rem;
     }
 }
+
+@media (max-width: 480px) {
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .sectionTitle {
+        font-size: 1.8rem;
+    }
+
+    .grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); /* Ajuste para pantallas más pequeñas */
+    }
+
+    .cardTitle {
+        font-size: 1.2rem;
+    }
+
+    .cardPrice {
+        font-size: 1.2rem;
+    }
+}
+
 /* Estilo para el campo de búsqueda */
 .searchInput {
     width: 80%;

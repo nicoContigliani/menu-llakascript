@@ -1,15 +1,19 @@
+/* Fondo y contenedor principal */
 .menuContainer {
   min-height: 100vh;
   background-color: #2a2a2a;
   color: white;
   padding: 2rem;
   font-family: 'Segoe UI', system-ui, sans-serif;
-  background-image: 
+  background-image:
     radial-gradient(circle, transparent 20%, #2a2a2a 20%, #2a2a2a 80%, transparent 80%, transparent),
     radial-gradient(circle, transparent 20%, #2a2a2a 20%, #2a2a2a 80%, transparent 80%, transparent);
   background-size: 10px 10px;
   background-position: 0 0, 5px 5px;
   position: relative;
+  transition: background 0.3s ease;
+  text-shadow: 4px 4px 10px rgb(0, 0, 0);
+
 }
 
 .header {
@@ -23,8 +27,9 @@
   font-weight: 600;
   margin-bottom: 1.5rem;
   font-family: 'Segoe Script', cursive;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.779);
   position: relative;
+  color: #fff;
 }
 
 .mainTitle::after {
@@ -35,26 +40,39 @@
   transform: translateX(-50%);
   width: 180px;
   height: 2px;
-  background: white;
+  background: #fff;
 }
 
+/* Estilo para el input de búsqueda */
 .searchInput {
-  max-width: 300px;
-  margin: 0 auto;
-  padding: 0.75rem 1rem;
-  background: rgba(255, 255, 255, 0.1);
-  border: 2px solid rgba(255, 255, 255, 0.3);
+  width: 70%;
+  padding: 10px;
+  margin: 20px auto;
+  font-size: 1rem;
+  border: 2px solid #909090;
+  border-radius: 5px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.372);
   color: white;
-  border-radius: 4px;
-  width: 100%;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.779);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.416)); /* Degradado más oscuro en hover */
+
+
 }
 
 .searchInput::placeholder {
-  color: rgba(255, 255, 255, 0.5);
+  color: #ffffff;
 }
 
+.searchInput:focus {
+  border: 1px solid rgba(255, 255, 255, 0.226);
+  box-shadow: 0 0 8px rgba(85, 85, 85, 0.6);
+}
+
+/* Contenedor de menú */
 .menuWrapper {
-  max-width: 1000px;
+  max-width: 1200px;
   margin: 0 auto;
   display: grid;
   gap: 3rem;
@@ -67,34 +85,14 @@
   position: relative;
 }
 
-.section::before {
-  content: '';
-  position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
-  border: 2px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  pointer-events: none;
-}
-
 .sectionTitle {
   font-size: 2rem;
   margin-bottom: 1.5rem;
   font-family: 'Segoe Script', cursive;
   position: relative;
   padding-left: 1rem;
-}
-
-.sectionTitle::after {
-  content: '';
-  position: absolute;
-  left: 1rem;
-  right: 1rem;
-  bottom: -5px;
-  height: 2px;
-  background: rgba(255, 255, 255, 0.3);
+  color: #fff;
+  
 }
 
 .sectionItems {
@@ -109,122 +107,23 @@
   justify-content: space-between;
   align-items: center;
   padding: 0.5rem 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-}
-
-.itemImage {
-  display: none;
-}
-
-.itemInfo {
-  display: flex;
-  justify-content: space-between;
-  align-items: baseline;
-  width: 100%;
-}
-
-.itemName {
-  font-size: 1.1rem;
-  font-weight: 500;
-}
-
-.itemDescription {
-  font-size: 0.9rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-style: italic;
-}
-
-.price {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-left: 1rem;
-  white-space: nowrap;
-}
-
-.noResults {
-  text-align: center;
-  padding: 2rem;
-  color: rgba(255, 255, 255, 0.7);
-  font-style: italic;
-}
-
-/* Decorative elements */
-.section::after {
-  content: '☕';
-  position: absolute;
-  top: -15px;
-  right: -15px;
-  font-size: 1.5rem;
-  transform: rotate(15deg);
-}
-
-@media (max-width: 768px) {
-  .menuContainer {
-    padding: 1rem;
-  }
-  
-  .mainTitle {
-    font-size: 2.5rem;
-  }
-  
-  .sectionTitle {
-    font-size: 1.75rem;
-  }
-}
-
-/* Estilo para el campo de búsqueda */
-.searchInput {
-  width: 60%;
-  padding: 10px;
-  margin: 20px 0;
-  font-size: 1rem;
-  border: 2px solid #909090;
-  border-radius: 5px;
-  outline: none;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.searchInput::placeholder {
-  color: #888;
-}
-
-/* Efecto hover sutil para el campo de búsqueda */
-.searchInput:hover {
-  border-color: #0078d7; /* Color azul de Windows */
-  box-shadow: 0 0 8px rgba(0, 120, 215, 0.3); /* Sombra sutil */
-}
-
-/* Efecto focus para mayor enfoque */
-.searchInput:focus {
-  border-color: #0078d7; /* Azul de enfoque */
-  box-shadow: 0 0 8px rgba(0, 120, 215, 0.6); /* Sombra más intensa cuando el campo está enfocado */
-}
-
-
-/* Estilo para los elementos del menú */
-.menuItem {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0.5rem 0;
-  border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.1); /* Fondo sutil */
+  border: 1px solid rgba(255, 255, 255, 0.226);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.4)); /* Degradado vertical */
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.502);
   cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Efecto hover sutil para los elementos del menú */
 .menuItem:hover {
-  transform: translateY(-5px); /* Eleva ligeramente el elemento */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra suave */
-  background-color: rgba(255, 255, 255, 0.15); /* Fondo ligeramente más oscuro */
+  transform: translateY(-5px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.416)); /* Degradado más oscuro en hover */
 }
 
-/* Estilo para la imagen del elemento (si la quieres mostrar en hover) */
 .itemImage {
-  display: block; /* Mostrar la imagen al hacer hover */
-  width: 40px;
-  height: 40px;
+  display: block;
+  width: 50px;
+  height: 50px;
   background: rgba(255, 255, 255, 0.2);
   border-radius: 50%;
   overflow: hidden;
@@ -232,11 +131,77 @@
 }
 
 .menuItem:hover .itemImage {
-  background: rgba(0, 120, 215, 0.3); /* Fondo azul suave al hacer hover */
+  background: rgba(0, 120, 215, 0.3);
 }
 
 .itemImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.itemInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  width: 100%;
+}
+
+.itemName {
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #fff;
+}
+
+.itemDescription {
+  padding-left: 1%;
+  font-size: 1rem;
+  color: rgb(255, 255, 255);
+  font-style: italic;
+}
+
+.price {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-left: 1rem;
+  color: #fff;
+}
+
+/* Mensaje de no resultados */
+.noResults {
+  text-align: center;
+  padding: 2rem;
+  color: rgba(255, 255, 255, 0.7);
+  font-style: italic;
+}
+
+/* Estilos responsivos */
+@media (max-width: 768px) {
+  .menuContainer {
+    padding: 1rem;
+  }
+
+  .mainTitle {
+    font-size: 2.5rem;
+  }
+
+  .sectionTitle {
+    font-size: 1.75rem;
+  }
+
+  .searchInput {
+    width: 80%;
+  }
+
+  .itemName {
+    font-size: 1rem;
+  }
+
+  .itemDescription {
+    font-size: 0.9rem;
+  }
+
+  .price {
+    font-size: 1rem;
+  }
 }

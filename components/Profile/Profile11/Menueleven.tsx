@@ -44,7 +44,14 @@ const Menueleven: React.FC<MenuProps> = ({ groupedSections, namecompanies, backg
     }, [searchTerm, groupedSections]);
 
     return (
-        <div className={styles.menuContainer}>
+        <div className={styles.menuContainer}
+        style={{
+            backgroundImage: backgroundImages || 'none',
+            backgroundSize: 'cover', // Correcta propiedad en camelCase
+            backgroundPosition: 'center', // Correcta propiedad en camelCase
+            backgroundAttachment: 'fixed', // Correcta propiedad en camelCase
+        }}
+        >
             <header className={styles.header}>
                 <h1 className={styles.mainTitle}>{namecompanies}</h1>
                 <input
