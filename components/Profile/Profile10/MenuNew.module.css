@@ -49,14 +49,15 @@
   padding: 10px;
   margin: 20px auto;
   font-size: 1rem;
-  border: 2px solid #909090;
+  border: 1px solid #909090;
   border-radius: 5px;
   outline: none;
   background: rgba(255, 255, 255, 0.372);
   color: white;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.779);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.416)); /* Degradado más oscuro en hover */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.4) 50%, rgba(255, 255, 255, 0.1)); /* Gradiente más oscuro en hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra más suave */
 
 
 }
@@ -106,38 +107,40 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem 0;
-  border: 1px solid rgba(255, 255, 255, 0.226);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.2), rgba(0, 0, 0, 0.4)); /* Degradado vertical */
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.502);
+  padding: 1rem;
+  border-radius: 10px; /* Bordes más suaves */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(255, 255, 255, 0.1)); /* Gradiente más oscuro en hover */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3); /* Sombra más suave */
   cursor: pointer;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
 }
 
 .menuItem:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.416)); /* Degradado más oscuro en hover */
+  transform: translateY(-5px); /* Suave desplazamiento hacia arriba */
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5); /* Sombra más pronunciada */
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.5) 50%, rgba(255, 255, 255, 0.1)); /* Gradiente más oscuro en hover */
 }
 
 .itemImage {
   display: block;
-  width: 50px;
-  height: 50px;
-  background: rgba(255, 255, 255, 0.2);
+  width: 60px; /* Un poco más grande */
+  height: 60px;
+  background: rgba(255, 255, 255, 0.3); /* Fondo más claro */
   border-radius: 50%;
   overflow: hidden;
-  transition: background 0.3s ease;
+  transition: background 0.3s ease, transform 0.3s ease;
 }
 
 .menuItem:hover .itemImage {
-  background: rgba(0, 120, 215, 0.3);
+  background: rgba(0, 120, 215, 0.9); /* Color de fondo más sutil en hover */
+  transform: scale(1.1); /* Efecto de ampliación suave */
 }
 
 .itemImage img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  border-radius: 50%; /* Asegura que la imagen se recorte dentro del círculo */
 }
 
 .itemInfo {
@@ -145,12 +148,29 @@
   flex-direction: column;
   gap: 0.5rem;
   width: 100%;
+  padding-left: 1rem; /* Para mejor alineación */
 }
 
 .itemName {
-  font-size: 1.2rem;
-  font-weight: 500;
+  font-size: 1.3rem;
+  font-weight: 600;
   color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Efecto sutil de sombra para darle profundidad */
+}
+
+.itemDescription {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.8);
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.price {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-left: 1rem;
+  color: #fff;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* Sombra sutil para el precio */
 }
 
 .itemDescription {

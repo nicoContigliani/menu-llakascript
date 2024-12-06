@@ -82,7 +82,7 @@ const Ecomerceone: React.FC<MenuProps> = ({ groupedSections, namecompanies, back
         <div
             className={styles.menuWrapper}
             style={{
-                backgroundImage: `url(${backgroundImages || 'none'})`,
+                backgroundImage: backgroundImages || 'none',
             }}
         >
             <div className={styles.searchBar}>

@@ -262,6 +262,7 @@ const profileComponents = {
     profile_thirteen: dynamic(() => import('../Profile/Profile13/Menuthirteen')),
     profileE_one: dynamic(() => import('../Profile/ProfileE1/Ecomerceone')),
     
+    
 };
 
 const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
