@@ -2,7 +2,6 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./index.module.css";
-import flamaSvg from "../icons/flama.svg";
 import { AuthForms } from "../components/AuthForms/AuthForms";
 import LogoPresentation from "../components/LogoPresentation/LogoPresentation";
 
