@@ -9,22 +9,23 @@ import { useMongoDbConnection } from '../hooks/useMongoDbConnection';
 
 function MyApp({ Component, pageProps }) {
   const { isConnected, error, isLoading, verifyConnection } = useMongoDbConnection();
+  console.log("🚀 ~ MyApp ~ error:", error)
   console.log("🚀 ~ MyApp ~ isConnected:", isConnected)
   
 
-  useEffect(() => {
-    if (!isConnected) {
-      const interval = setInterval(() => {
-        console.log('Attempting to verify MongoDB connection...');
-        verifyConnection();
-      }, 5000); // Intenta reconectar cada 5 segundos
+  // useEffect(() => {
+  //   if (!isConnected) {
+  //     const interval = setInterval(() => {
+  //       console.log('Attempting to verify MongoDB connection...');
+  //       verifyConnection();
+  //     }, 5000); // Intenta reconectar cada 5 segundos
 
-      return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
-    }
-  }, [isConnected, verifyConnection]);
-
+  //     return () => clearInterval(interval); // Limpia el intervalo cuando el componente se desmonte
+  //   }
+  // }, [isConnected, verifyConnection]);
   return (
     <Provider store={store}> {/* Envuelve la aplicación con el Provider */}
+      <button onClick={verifyConnection}>Verify MongoDB</button>
 
       <Component {...pageProps} /> {/* Renderiza la página correspondiente */}
     </Provider>
