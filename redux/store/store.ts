@@ -1,8 +1,8 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import counterReducer from '../features/counter/counterSlice';
-// import userReducer from '../features/user/userSlice';   
+
 import userReducer from '../slices/userSlice';
 import chExcelDataReducer from '../slices/chExcelDataSlice';
+import { useDispatch } from 'react-redux';
 
 // ... importar otros reducers
 
@@ -18,3 +18,4 @@ export const store = configureStore({
 
 export type RootState = ReturnType<typeof store.getState>;
 export type AppDispatch = typeof store.dispatch;
+export const useAppDispatch = () => useDispatch<AppDispatch>();
