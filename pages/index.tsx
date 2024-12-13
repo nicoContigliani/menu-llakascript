@@ -8,6 +8,10 @@ import styles from './index.module.css';
 import { AuthForms } from '../components/AuthForms/AuthForms';
 import LogoPresentation from '../components/LogoPresentation/LogoPresentation';
 
+
+
+
+
 // Importación dinámica del componente QRScanner
 const QRScanner = dynamic(() => import('../components/QrScanner/QrScanner'), {
   ssr: false,
