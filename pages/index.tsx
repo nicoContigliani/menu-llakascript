@@ -1,14 +1,12 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
-import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
+import { RootState } from '../redux/store/store'; // Asegúrate de que esta ruta sea correcta
+import { logout } from '../redux/slices/userSlice'; // Asegúrate de importar la acción logout correctamente
 
 import styles from './index.module.css';
-import flamaSvg from '../icons/flama.svg';
 import { AuthForms } from '../components/AuthForms/AuthForms';
 import LogoPresentation from '../components/LogoPresentation/LogoPresentation';
-import { RootState } from '../redux/store/store';
-import { useState } from 'react';
 
 // Importación dinámica del componente QRScanner
 const QRScanner = dynamic(() => import('../components/QrScanner/QrScanner'), {
@@ -18,17 +16,12 @@ const QRScanner = dynamic(() => import('../components/QrScanner/QrScanner'), {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
+  
+  const user = useSelector((state: RootState) => state.user);  // Accede al estado del usuario
 
-
-  // const [user, setUer] = useState<any>(true)
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
-
-  const user = useSelector((state: RootState) => state.user);  // Accede al estado
-
-
-
+  // Handler para logout
   const handleLogout = () => {
-    // dispatch(logout());
+    dispatch(logout());  // Despacha la acción de logout
   };
 
   return (
@@ -47,11 +40,11 @@ const IndexPage = () => {
         </div>
 
         <div className={styles.userInfo}>
-          {isLoggedIn ? (
+          {user.isLoggedIn ? (
             <>
-              <p>Welcome, {user?.name}!</p>
-              <p>Role: {user?.role}</p>
-              {user?.additionalInfo && <p>Info: {user.additionalInfo}</p>}
+              <p>Welcome, {user.user?.name}!</p>
+              <p>Role: {user.user?.role}</p>
+              {user.user?.additionalInfo && <p>Info: {user.user.additionalInfo}</p>}
               <button onClick={handleLogout} className={styles.logoutButton}>
                 Logout
               </button>
@@ -65,7 +58,7 @@ const IndexPage = () => {
           <Link href="/companies/LlakaScript" className={styles.link}>
             LlakaScript
           </Link>
-          {isLoggedIn && user?.role === 'admin' && (
+          {user.isLoggedIn && user.user?.role === 'admin' && (
             <Link href="/admin-dashboard" className={styles.link}>
               Admin Dashboard
             </Link>
