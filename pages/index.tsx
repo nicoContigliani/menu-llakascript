@@ -1,11 +1,12 @@
 import dynamic from 'next/dynamic';
 import Link from 'next/link';
+import Image from 'next/image';
+import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './index.module.css';
+import flamaSvg from '../icons/flama.svg';
 import { AuthForms } from '../components/AuthForms/AuthForms';
 import LogoPresentation from '../components/LogoPresentation/LogoPresentation';
-import { useDispatch, useSelector } from 'react-redux';
-import { logout } from '../redux/slices/userSlice';
 import { RootState } from '../redux/store/store';
 import { useState } from 'react';
 
@@ -16,17 +17,18 @@ const QRScanner = dynamic(() => import('../components/QrScanner/QrScanner'), {
 });
 
 const IndexPage = () => {
-  const [user, setUser] = useState<any | null>(null);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-
-
   const dispatch = useDispatch();
-  const userState = useSelector((state: RootState) => state.user);
-  console.log("🚀 ~ IndexPage ~ userState:", userState)
+
+
+  // const [user, setUer] = useState<any>(true)
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
+  const user = useSelector((state: RootState) => state.user);  // Accede al estado
+
+
 
   const handleLogout = () => {
-    dispatch(logout());
+    // dispatch(logout());
   };
 
   return (

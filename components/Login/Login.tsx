@@ -1,12 +1,15 @@
 import { useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
+import { signInWithPopup, GoogleAuthProvider, UserCredential } from 'firebase/auth';
 import { auth } from '../../lib/firebase';
+import { useDispatch } from 'react-redux';
+import { login } from '../../redux/slices/userSlice'; // Importar la acción de login
 import styles from './Login.module.css';
 import GoogleIcons from '@mui/icons-material/Google';
 
 export function Login() {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
+  const dispatch = useDispatch(); // Hook para despachar acciones
 
   const handleGoogleLogin = async () => {
     setIsLoading(true);
@@ -14,7 +17,17 @@ export function Login() {
 
     try {
       const provider = new GoogleAuthProvider();
-      await signInWithPopup(auth, provider);
+      const result: UserCredential = await signInWithPopup(auth, provider);
+      const user = result.user;
+
+      // Despachamos la acción de login con los datos del usuario
+      dispatch(login({
+        name: user.displayName || '',  // Nombre del usuario de Google
+        email: user.email || '',  // Correo del usuario
+        role: 'user',  // Aquí puedes definir un rol predeterminado, puedes modificar esto según sea necesario
+        additionalInfo: null,  // Puedes agregar información adicional si la tienes
+      }));
+
       console.log("Google login successful");
     } catch (error) {
       console.error("Google login error:", error);
@@ -31,20 +44,14 @@ export function Login() {
         <button
           onClick={handleGoogleLogin}
           disabled={isLoading}
-          className={`
-            ${styles.googleButton} 
-            ${isLoading ? styles.disabledButton : ''}
-          `}
+          className={`${styles.googleButton} ${isLoading ? styles.disabledButton : ''}`}
         >
           {isLoading ? (
             <span>Logging in...</span>
           ) : (
             <span className={styles.googleContent}>
-              {/* <GoogleIcon /> */}
-             <GoogleIcons
-             
-             />
-             <hr />
+              <GoogleIcons />
+              <hr />
               Sign in with Google
             </span>
           )}
@@ -56,20 +63,5 @@ export function Login() {
         )}
       </div>
     </div>
-  );
-}
-
-function GoogleIcon() {
-  return (
-    <svg
-      className="w-1 h-1 mr-2"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        fill="#ffffff"
-        d="M12.24 10.285V14.4h6.806c-.275 1.765-2.056 5.174-6.806 5.174-4.095 0-7.439-3.389-7.439-7.574s3.345-7.574 7.439-7.574c2.33 0 3.891.989 4.785 1.849l3.254-3.138C18.189 1.186 15.479 0 12.24 0c-6.635 0-12 5.365-12 12s5.365 12 12 12c6.926 0 11.52-4.869 11.52-11.726 0-.788-.085-1.39-.189-1.989H12.24z"
-      />
-    </svg>
   );
 }
