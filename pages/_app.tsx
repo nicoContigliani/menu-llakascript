@@ -9,8 +9,8 @@ import { useMongoDbConnection } from '../hooks/useMongoDbConnection';
 
 function MyApp({ Component, pageProps }) {
   const { isConnected, error, isLoading, verifyConnection } = useMongoDbConnection();
- 
-  console.log("🚀 ~ MyApp ~ process.env.MONGO_URI_ATLAS:", `mongodb+srv://nicocontigliani:ch8piRaA4WKxa3hi@clusterllakascript.tv2rm.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLlakaScript`)
+  console.log("🚀 ~ MyApp ~ error:", error)
+  console.log("🚀 ~ MyApp ~ isConnected:", isConnected)
 
 
   // useEffect(() => {
@@ -25,7 +25,10 @@ function MyApp({ Component, pageProps }) {
   // }, [isConnected, verifyConnection]);
   return (
     <Provider store={store}> {/* Envuelve la aplicación con el Provider */}
-      <button onClick={verifyConnection}>Verify MongoDB</button>
+      {
+        !isConnected ? <button onClick={verifyConnection}>Verify MongoDB</button> : null
+
+      }
 
       <Component {...pageProps} /> {/* Renderiza la página correspondiente */}
     </Provider>

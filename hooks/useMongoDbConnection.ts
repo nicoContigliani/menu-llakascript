@@ -10,9 +10,10 @@ export function useMongoDbConnection() {
     setError(null);
     try {
       const response = await fetch('/api/verify-mongodb');
+      if (response.status == 200) setIsConnected(true)
       console.log("🚀 ~ verifyConnection ~ response:", response)
     } catch (error) {
-      console.log("🚀 ~ verifyConnection ~ error:", error)     
+      console.log("🚀 ~ verifyConnection ~ error:", error)
     }
   }, []);
 
