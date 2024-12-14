@@ -11,18 +11,8 @@ export function useMongoDbConnection() {
     try {
       const response = await fetch('/api/verify-mongodb');
       console.log("🚀 ~ verifyConnection ~ response:", response)
-      const data = await response.json();
-      if (response.ok) {
-        setIsConnected(true);
-      } else {
-        setError(data.error);
-        setIsConnected(false);
-      }
-    } catch (err) {
-      setError('Failed to verify connection');
-      setIsConnected(false);
-    } finally {
-      setIsLoading(false);
+    } catch (error) {
+      console.log("🚀 ~ verifyConnection ~ error:", error)     
     }
   }, []);
 
