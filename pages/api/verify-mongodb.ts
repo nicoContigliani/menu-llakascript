@@ -22,7 +22,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
     try {
         await client.connect()
-        await client.db("admin").command({ ping: 1 })
+        await client.db("menuDb").command({ ping: 1 })
         res.status(200).json({ message: "Successfully connected to MongoDB!" })
     } catch (error) {
         console.error('Error connecting to MongoDB:', error)
