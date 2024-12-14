@@ -11,7 +11,8 @@ function MyApp({ Component, pageProps }) {
   const { isConnected, error, isLoading, verifyConnection } = useMongoDbConnection();
   console.log("🚀 ~ MyApp ~ error:", error)
   console.log("🚀 ~ MyApp ~ isConnected:", isConnected)
-  
+  console.log("🚀 ~ MyApp ~ process.env.MONGO_URI_ATLAS:", process.env.MONGO_URI_ATLAS)
+
 
   // useEffect(() => {
   //   if (!isConnected) {
