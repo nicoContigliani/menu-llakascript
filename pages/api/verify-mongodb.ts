@@ -4,9 +4,9 @@ import { MongoClient, ServerApiVersion } from 'mongodb'
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     const uri = `mongodb+srv://nicocontigliani:ch8piRaA4WKxa3hi@clusterllakascript.tv2rm.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLlakaScript`
     // process.env.MONGO_URI_ATLAS || process.env.MONGO_URI_LOCAL 
-    if (
-        (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") || process.env.NODE_ENV === undefined
-    ) console.log("🚀 ~ handler ~ uri:", uri)
+    // if (
+    //     (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") || process.env.NODE_ENV === undefined
+    // ) console.log("🚀 ~ handler ~ uri:", uri)
 
     if (!uri) {
         return res.status(500).json({ error: 'MongoDB URI is not defined' })
@@ -19,6 +19,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             deprecationErrors: true,
         }
     })
+    console.log("🚀 ~ handler ~ client:", client)
 
     try {
         await client.connect()
