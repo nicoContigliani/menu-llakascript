@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }) {
   const { isConnected, error, isLoading, verifyConnection } = useMongoDbConnection();
   console.log("🚀 ~ MyApp ~ error:", error)
   console.log("🚀 ~ MyApp ~ isConnected:", isConnected)
-  console.log("🚀 ~ MyApp ~ process.env.MONGO_URI_ATLAS:", process.env.MONGO_URI_ATLAS)
+  console.log("🚀 ~ MyApp ~ process.env.MONGO_URI_ATLAS:", `mongodb+srv://nicocontigliani:ch8piRaA4WKxa3hi@clusterllakascript.tv2rm.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLlakaScript`)
 
 
   // useEffect(() => {
