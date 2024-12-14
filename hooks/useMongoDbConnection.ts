@@ -10,6 +10,7 @@ export function useMongoDbConnection() {
     setError(null);
     try {
       const response = await fetch('/api/verify-mongodb');
+      console.log("🚀 ~ verifyConnection ~ response:", response)
       const data = await response.json();
       if (response.ok) {
         setIsConnected(true);
