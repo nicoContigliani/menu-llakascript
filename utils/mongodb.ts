@@ -1,6 +1,6 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
-const uri = process.env.MONGO_URI_ATLAS;
+const uri = process.env.MONGO_URI_ATLAS||`mongodb+srv://nicocontigliani:ch8piRaA4WKxa3hi@clusterllakascript.tv2rm.mongodb.net/?retryWrites=true&w=majority&appName=ClusterLlakaScript`;
 
 if (!uri) {
   throw new Error("Please define the MONGODB_URI environment variable");
