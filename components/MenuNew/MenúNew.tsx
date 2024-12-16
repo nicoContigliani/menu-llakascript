@@ -222,7 +222,10 @@
 
 // export default MenuNew;
 
-import React, { useEffect, useLayoutEffect, useState } from 'react';
+
+
+
+import React, { useEffect, useLayoutEffect, useState, useMemo } from 'react';
 import dynamic from 'next/dynamic';
 import styles from './MenuNew.module.css';
 
@@ -238,10 +241,11 @@ interface MenuItem {
     Name: string;
     Description: string;
     Price: string;
+    hojas: { Hoja1: any[] };
 }
 
 interface MenuProps {
-    menuItems: MenuItem[];
+    menuItems: { hojas: { Hoja1: MenuItem[] } };
     namecompanies: string;
 }
 
@@ -261,25 +265,32 @@ const profileComponents = {
     profile_twelve: dynamic(() => import('../Profile/Profile12/Menutwelve')),
     profile_thirteen: dynamic(() => import('../Profile/Profile13/Menuthirteen')),
     profileE_one: dynamic(() => import('../Profile/ProfileE1/Ecomerceone')),
-    
-    
 };
 
 const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
     const [menuData, setMenuData] = useState<MenuItem[]>([]);
-    const [groupedSections, setGroupedSections] = useState<Record<string, MenuItem[]>>({});
-    const [backgroundImages, setBackgroundImages] = useState<string | null>(null);
-    const [profile, setSelectedProfile] = useState<string>('');
+    const [profile, setProfile] = useState<string>('');
+    const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
 
+    // Agrupamiento de secciones con useMemo
+    const groupedSections = useMemo(() => {
+        return menuData.reduce<Record<string, MenuItem[]>>((acc, item) => {
+            acc[item.Section] = acc[item.Section] || [];
+            acc[item.Section].push(item);
+            return acc;
+        }, {});
+    }, [menuData]);
+
+    // Cargar datos del menú
     useLayoutEffect(() => {
         const fetchMenuData = async () => {
             try {
-                const fetchedData = await new Promise<MenuItem[]>((resolve) =>
-                    setTimeout(() => resolve(menuItems), 500)
-                );
-                setMenuData(fetchedData);
-                if (fetchedData?.length > 0) {
-                    setSelectedProfile(fetchedData[0]?.Profile_Type || '');
+                const data = menuItems?.hojas?.Hoja1 || [];
+                setMenuData(data);
+
+                // Configurar el perfil seleccionado
+                if (data.length > 0) {
+                    setProfile(data[0].Profile_Type || '');
                 }
             } catch (error) {
                 console.error('Error fetching menu data:', error);
@@ -290,35 +301,25 @@ const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
         fetchMenuData();
     }, [menuItems]);
 
-    useEffect(() => {
-        if (menuData?.length > 0) {
-            const sections = menuData.reduce((acc, item) => {
-                acc[item.Section] = acc[item.Section] || [];
-                acc[item.Section].push(item);
-                return acc;
-            }, {} as Record<string, MenuItem[]>);
-            setGroupedSections(sections);
-
-            setBackgroundImages(
-                `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})` ||
-                `url(/images/italia.jpg)`
-            );
-        } else {
-            setGroupedSections({});
-            setBackgroundImages(null);
-        }
-    }, [menuData, namecompanies]);
-
-    // Renderizado condicional del componente dinámico
+    // Configurar la imagen de fondo
+         useEffect(() => {
+             if (menuData?.length > 0) {
+                 const backgroundImageUrl =
+                     `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})` ||
+                     `url(/images/italia.jpg)`;
+                     setBackgroundImage(backgroundImageUrl);
+             }
+         }, [menuData, namecompanies]);
+    // Componente dinámico seleccionado
     const SelectedProfileComponent = profileComponents[profile] || null;
 
     return (
-        <div>
-            {profile && SelectedProfileComponent ? (
+        <div className={styles.container}>
+            {SelectedProfileComponent ? (
                 <SelectedProfileComponent
                     menuData={menuData}
                     groupedSections={groupedSections}
-                    backgroundImages={backgroundImages}
+                    backgroundImages={backgroundImage}
                     namecompanies={namecompanies}
                 />
             ) : (

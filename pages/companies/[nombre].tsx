@@ -156,9 +156,9 @@ import React, { useEffect, useState, useMemo } from 'react';
 import { useRouter } from 'next/router';
 import dynamic from 'next/dynamic';
 import Layout from '../../components/Layout';
+import { fetchData } from '../../servicesApi/fetch.services';
 import { useDispatch } from 'react-redux';
 import { setChExcelData } from '../../redux/slices/chExcelDataSlice';
-import { fetchData } from '../../servicesApi/fetch.services';
 
 // Importación dinámica de MenuNew con una imagen de fondo mientras se carga
 const MenuNew = dynamic(() => import('../../components/MenuNew/MenúNew'), {
@@ -212,6 +212,7 @@ export default function EmpresaPage({ nombre }: { nombre: string }) {
 
             try {
                 const response = await fetchData(formData, 'POST', '/api/readFile');
+                console.log("🚀 ~ return ~ response:", response)
                 if (response.ok) {
                     dispatch(setChExcelData(response));
                     setExcelData(response?.data);

@@ -27,7 +27,7 @@
 //     const [searchTerm, setSearchTerm] = useState<string>('');
 //     const [debouncedSearchTerm, setDebouncedSearchTerm] = useState<string>(searchTerm);
 
-//     // Debounce the search term to optimize performance
+//     // UseEffect for debounce behavior
 //     const debounceSearch = useCallback(() => {
 //         const timer = setTimeout(() => {
 //             setDebouncedSearchTerm(searchTerm);
@@ -36,14 +36,17 @@
 //         return () => clearTimeout(timer);
 //     }, [searchTerm]);
 
+//     React.useEffect(() => {
+//         debounceSearch();
+//     }, [debounceSearch]);
+
 //     const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
 //         setSearchTerm(event.target.value);
-//         debounceSearch();
 //     };
 
 //     // Filter sections only if necessary and return early if there's no search term
 //     const filteredSections = useMemo(() => {
-//         if (!debouncedSearchTerm) return groupedSections;
+//         if (!debouncedSearchTerm.trim()) return groupedSections;  // If search term is empty, return all sections
 
 //         const filtered: Record<string, MenuItem[]> = {};
 //         Object.entries(groupedSections).forEach(([sectionName, items]) => {
@@ -61,9 +64,9 @@
 //             className={styles.menuContainer}
 //             style={{
 //                 backgroundImage: backgroundImages || 'none',
-//                 backgroundSize: 'cover', // Correcta propiedad en camelCase
-//                 backgroundPosition: 'center', // Correcta propiedad en camelCase
-//                 backgroundAttachment: 'fixed', // Correcta propiedad en camelCase
+//                 backgroundSize: 'cover',
+//                 backgroundPosition: 'center',
+//                 backgroundAttachment: 'fixed',
 //             }}
 //         >
 //             <header className={styles.header}>
@@ -117,7 +120,6 @@
 // };
 
 // export default Menuten;
-
 
 import React, { useState, useMemo, useCallback } from 'react';
 import Image from 'next/image';
@@ -210,7 +212,7 @@ const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
                             <div className={styles.sectionItems}>
                                 {items.map(item => (
                                     <div
-                                        key={item.Item_id}
+                                        key={`${sectionName}-${item.Item_id}`} // Clave única combinando sección e ID
                                         className={styles.menuItem}
                                     >
                                         <div className={styles.itemImage}>
