@@ -4,52 +4,39 @@
   font-family: 'Helvetica Neue', Arial, sans-serif;
   margin: 0;
   padding: 0;
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  /* min-height: 100vh; */
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  justify-content: center;
+  align-items: center;
+  grid-template-columns: 1fr;
   gap: 10px;
-  grid-auto-rows: minmax(300px, auto);
   overflow: hidden;
   width: 100%;
-
+  min-height: 100vh;
 }
 
 /* Main Container */
-.container {
+.container, .messages {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
-  /* Space between elements */
-  /* padding: 40px; */
+  /* gap: 10px; */
+  padding: 5px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
   max-width: 800px;
-  margin: 0 auto;
   width: 100%;
   overflow: hidden;
 }
 
-/* Logo Section */
-.image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-/* Text Container */
-.textContainer {
+/* Title and Text Styles */
+.title, .titleApp {
   text-align: center;
 }
 
 .title {
   font-size: 2.5rem;
   font-weight: bold;
-  margin: 0;
 }
 
 .titleApp {
@@ -64,99 +51,43 @@
   gap: 20px;
 }
 
-.link {
-  text-decoration: none;
-  color: #fff;
+.button {
   background-color: #333;
-  padding: 15px 30px;
+  color: #fff;
+  padding: 10px 20px;
   border-radius: 5px;
   font-size: 1.2rem;
+  cursor: pointer;
   transition: background-color 0.3s ease;
-  overflow: hidden;
+  border: none;
 }
 
-.link:hover {
+.button:hover {
   background-color: #555;
 }
 
-/* QR Scanner Section */
-.qrContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  overflow: hidden;
-}
-
 /* Responsive Design */
-
-/* Medium to small screens (tablets, phones) */
 @media (max-width: 768px) {
   .body {
-
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 0px;
-    grid-auto-rows: minmax(300px, auto);
-  }
-
-  .container {
-    padding: 10px;
-    gap: 0px;
-  }
-
-  .image img {
-    width: 200px;
-    height: auto;
+    gap: 15px;
   }
 
   .title {
     font-size: 2rem;
   }
 
-  .titleApp {
-    font-size: 1.5rem;
-  }
-
   .buttonContainer {
-    flex-direction: row;
-    gap: 1px;
-  }
-
-  .link {
-    font-size: 1rem;
-    padding: 1px 2px;
+    flex-direction: column;
+    gap: 10px;
   }
 }
 
-/* Small screens (phones) */
 @media (max-width: 480px) {
   .body {
-
-    display: grid;
-    grid-template-columns: repeat(1, 1fr);
-    gap: 0px;
-    grid-auto-rows: minmax(300px, auto);
-  }
-
-  .container {
     gap: 10px;
-  }
-
-  .image img {
-    width: 180px;
   }
 
   .title {
     font-size: 1.6rem;
-  }
-
-  .link {
-    font-size: 0.9rem;
-    padding: 8px 20px;
-  }
-
-  .qrContainer {
-    margin-top: 15px;
   }
 }

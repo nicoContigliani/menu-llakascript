@@ -1,51 +1,67 @@
 import React, { useEffect, useState } from 'react';
 import Layout from '../../components/Layout';
 import styles from './index.module.css';
-import { useDispatch } from 'react-redux';
 import { useRouter } from 'next/router';
 import { fetchData } from '../../servicesApi/fetch.services';
 
 const Index = () => {
-  const dispatch = useDispatch();
   const router = useRouter();
   const [data, setExcelData] = useState<any | undefined>(undefined);
   const [isLoaded, setIsLoaded] = useState(false);
+  const [responseMessage, setResponseMessage] = useState("");
+  const [urls, setUrls] = useState<string>();
 
-  useEffect(() => {
-    const fetchDataAsync = async () => {
-      try {
-        const response = await fetchData('GET', '/api/admin');
-        console.log('🚀 ~ return ~ response:', response);
+  // Function to handle API calls
+  const fetchDataAsync = async (url: string) => {
 
-        if (response.ok) {
-          setExcelData(response?.data);
-          setIsLoaded(true);
-        } else {
-          router.push('/notfound');
-        }
-      } catch (error) {
-        console.error('Error in fetchDataAsync:', error);
+    try {
+      const response = await fetchData('GET', url);
+      console.log('🚀 ~ response:', response);
+
+      if (response.ok) {
+        setExcelData(response?.data);
+        setIsLoaded(true);
+        return response?.message || ""; // Return message if any
+      } else {
         router.push('/notfound');
+        return "Failed to fetch data"; // In case of an error
       }
+    } catch (error) {
+      console.error('Error in fetchDataAsync:', error);
+      router.push('/notfound');
+      return "An error occurred during fetching"; // In case of network error
+    }
+  };
+
+  // Effect hook to load data on mount
+  useEffect(() => {
+    const loadInitialData = async () => {
+      const initialMessage = await fetchDataAsync('/api/admin');
+      setResponseMessage(initialMessage);
     };
-    fetchDataAsync();
-  }, [router]);
+    loadInitialData();
+  }, [router]); // Run only once when router changes
 
-
+  // Update DB handler
   const updateDB = async () => {
-    alert("si")
-  }
-
-
-
+    const newMessage = await fetchDataAsync('/api/uploadgeneral');
+    setResponseMessage(newMessage);
+    await fetchDataAsync('/api/admin')
+  };
 
   return (
     <Layout>
       <div className={styles.body}>
-        <h1>Hello</h1>
+        <h1 className={styles.title}>Hello</h1>
+        <div className={styles.container}>
+          Cantidad de empresas operando el sistema: {data ? data.length : 0}
+        </div>
         <div className={styles.buttonContainer}>
-          <button onClick={() => { /* Add reload DB logic */ }}>Reload DB</button>
-          <button onClick={() => { updateDB() }}>Update DB</button>
+          <button className={styles.button} onClick={() => updateDB()}>Update DB</button>
+          <button className={styles.button} onClick={() => { /* Add reload DB logic */ }}>Reload DB</button>
+        </div>
+        <div className={styles.messages}>
+          {responseMessage && <p>{responseMessage}</p>}
         </div>
       </div>
     </Layout>
