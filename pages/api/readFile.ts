@@ -51,6 +51,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     if (req.method !== "POST") {
         return res.status(405).json({ error: "Método no permitido, usa POST" });
     }
+    
 
     const { folder } = req.body;
     if (!folder || typeof folder !== "string") {
@@ -72,10 +73,12 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
 
         // Buscar en la colección según el folderName
         const company = await collection?.findOne({ companyName: folder });
+        console.log("🚀 ~ handler ~ company:", company)
 
         if (!company) {
             return res.status(404).json({ error: "No se encontró una empresa con el folder especificado" });
         }
+        cache.clear(); 
 
         // Almacenar en caché usando cache.put()
         cache.put(folder, company);  // Guardamos el resultado en caché con la clave 'folder'
@@ -84,6 +87,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
         return res.status(200).json({ data: company });
     } catch (error) {
         console.error("Error al procesar la solicitud:", error);
+        cache.clear(); 
+
         return res.status(500).json({ error: "Ocurrió un error al procesar la solicitud" });
     }
 }

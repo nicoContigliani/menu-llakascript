@@ -268,6 +268,7 @@ const profileComponents = {
 };
 
 const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
+    console.log("🚀 ~ menuItems:", menuItems)
     const [menuData, setMenuData] = useState<MenuItem[]>([]);
     const [profile, setProfile] = useState<string>('');
     const [backgroundImage, setBackgroundImage] = useState<string | null>(null);
@@ -283,33 +284,38 @@ const MenuNew: React.FC<MenuProps> = ({ menuItems, namecompanies }) => {
 
     // Cargar datos del menú
     useLayoutEffect(() => {
-        const fetchMenuData = async () => {
+        const fetchMenuData = () => {
             try {
-                const data = menuItems?.hojas?.Hoja1 || [];
+                // Validar si menuItems y hojas están disponibles
+                const data = menuItems?.hojas?.Hoja1 ?? [];
+    
+                // Establecer datos del menú
                 setMenuData(data);
-
-                // Configurar el perfil seleccionado
+    
+                // Configurar el perfil seleccionado solo si hay datos
                 if (data.length > 0) {
-                    setProfile(data[0].Profile_Type || '');
+                    setProfile(data[0]?.Profile_Type ?? '');
                 }
             } catch (error) {
                 console.error('Error fetching menu data:', error);
+                // Si ocurre un error, reinicia los datos
                 setMenuData([]);
+                setProfile('');
             }
         };
-
+    
         fetchMenuData();
     }, [menuItems]);
 
     // Configurar la imagen de fondo
-         useEffect(() => {
-             if (menuData?.length > 0) {
-                 const backgroundImageUrl =
-                     `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})` ||
-                     `url(/images/italia.jpg)`;
-                     setBackgroundImage(backgroundImageUrl);
-             }
-         }, [menuData, namecompanies]);
+    useEffect(() => {
+        if (menuData?.length > 0) {
+            const backgroundImageUrl =
+                `url(/foldercompanies/${namecompanies}/${menuData[0]?.Background_Image})` ||
+                `url(/images/italia.jpg)`;
+            setBackgroundImage(backgroundImageUrl);
+        }
+    }, [menuData, namecompanies]);
     // Componente dinámico seleccionado
     const SelectedProfileComponent = profileComponents[profile] || null;
 

@@ -211,7 +211,7 @@ export default function EmpresaPage({ nombre }: { nombre: string }) {
             };
 
             try {
-                const response = await fetchData(formData, 'POST', '/api/readFile');
+                const response = await fetchData( 'POST', '/api/readFile',formData);
                 console.log("🚀 ~ return ~ response:", response)
                 if (response.ok) {
                     dispatch(setChExcelData(response));

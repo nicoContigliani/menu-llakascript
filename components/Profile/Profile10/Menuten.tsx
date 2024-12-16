@@ -206,11 +206,11 @@ const Menuten: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgrou
 
             <div className={styles.menuWrapper}>
                 {Object.entries(filteredSections).length > 0 ? (
-                    Object.entries(filteredSections).map(([sectionName, items]) => (
+                    Object.entries(filteredSections)?.map(([sectionName, items]) => (
                         <div key={sectionName} className={styles.section}>
                             <h2 className={styles.sectionTitle}>{sectionName}</h2>
                             <div className={styles.sectionItems}>
-                                {items.map(item => (
+                                {items?.map(item => (
                                     <div
                                         key={`${sectionName}-${item.Item_id}`} // Clave única combinando sección e ID
                                         className={styles.menuItem}
