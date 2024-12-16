@@ -1,6 +1,7 @@
 import { MongoClient, ServerApiVersion } from "mongodb";
 
 const uri =  `mongodb+srv://usuario:ch8piRaA4WKxa3hi@clusterllakascript.tv2rm.mongodb.net/menuDB?retryWrites=true&w=majority`;
+console.log( process.env.MONGO_URI_ATLAS,"*************MONGO_URI_ATLAS************")
 
 if (!uri) {
   throw new Error("Please define the MONGODB_URI environment variable");

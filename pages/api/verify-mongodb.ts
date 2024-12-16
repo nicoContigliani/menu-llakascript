@@ -5,7 +5,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     const uri = process.env.MONGO_URI_ATLAS || process.env.MONGO_URI_LOCAL 
     if (
         (process.env.NODE_ENV === "development" || process.env.NODE_ENV === "test") || process.env.NODE_ENV === undefined
-    ) console.log("🚀 ~ handler ~ uri:", uri)
+    )
 
     if (!uri) {
         return res.status(500).json({ error: 'MongoDB URI is not defined' })
