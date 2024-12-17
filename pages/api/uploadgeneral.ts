@@ -59,6 +59,10 @@ async function processFoldersAndUpdateMongo(basePath: string) {
                                 companyName,
                                 folderName,
                                 hojas: allSheetData,
+                                visits: 0,
+                                // ubication:
+                                createAt: new Date(),
+                                updateAt: new Date()
                             });
                             console.log(`Inserted new company: ${companyName}`);
                         }

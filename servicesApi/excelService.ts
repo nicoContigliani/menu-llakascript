@@ -23,7 +23,16 @@ export async function readAndInsertExcelData(filePath: string, folderName: strin
         );
         console.log(`Updated existing company: ${companyName}`);
     } else {
-        await companies.insertOne({ companyName, folderName, hojas: allSheetData });
+        await companies.insertOne({
+            companyName,
+            folderName,
+            hojas: allSheetData,
+            visits: 0,
+            infoVisits:[],
+            ubication:{},
+            createAt: new Date(),
+            updateAt: new Date()
+        });
         console.log(`Inserted new company: ${companyName}`);
     }
 

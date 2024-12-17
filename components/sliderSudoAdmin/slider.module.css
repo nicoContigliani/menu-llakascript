@@ -1,0 +1,170 @@
+/* Estilos generales */
+.body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+}
+
+/* Slider */
+.slider {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 200px;
+    background-color: rgba(0, 0, 0, 0.4);
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    overflow-y: auto; /* Permite el scroll dentro del slider si el contenido excede */
+   border-radius: 5%;
+}
+
+.slider ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.slider li {
+    margin: 15px 0;
+    text-align: center;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.slider li:hover {
+    border-radius: 5px;
+    padding: 10px;
+}
+
+.button {
+    padding: 10px 15px;
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.button:hover {
+    background-color: #45a049;
+}
+
+.message {
+    margin-top: auto; /* Empuja el mensaje hacia el final del slider */
+    text-align: center;
+    padding-top: 20px;
+    font-size: 1rem;
+    color: lightgray;
+}
+
+/* Contenido principal */
+.body {
+    margin-left: 220px; /* Espacio para el slider */
+    padding: 20px;
+}
+
+.title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+}
+
+.container {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+}
+
+.buttonContainer {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.messages {
+    font-size: 1rem;
+    color: darkred;
+}
+
+/* Responsiveness */
+@media screen and (max-width: 768px) {
+    .slider {
+        width: 150px;
+    }
+
+    .body {
+        margin-left: 170px;
+    }
+
+    .button {
+        font-size: 0.9rem;
+    }
+
+    .title {
+        font-size: 1.5rem;
+    }
+
+    .container {
+        font-size: 1rem;
+    }
+
+    .messages {
+        font-size: 0.9rem;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .slider {
+        width: 100%;
+        height: auto;
+        flex-direction: row;
+        overflow-x: auto; /* Scroll horizontal si es necesario */
+    }
+
+    .body {
+        margin-left: 0;
+        margin-top: 100px;
+    }
+
+    .button {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+
+    .title {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        font-size: 0.9rem;
+    }
+
+    .messages {
+        font-size: 0.8rem;
+    }
+
+    .slider ul {
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
+    }
+
+    .slider li {
+        margin: 5px;
+        text-align: center;
+    }
+
+    .message {
+        padding-top: 10px;
+        font-size: 0.8rem;
+    }
+}
