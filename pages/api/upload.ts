@@ -152,9 +152,15 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             throw new Error(`El archivo no existe: ${filePath}`);
         }
 
+        const { latitude, longitude } = req.body; // Extraer latitud y longitud
+
+        if (!latitude || !longitude) {
+            return res.status(400).json({ message: "Latitud y longitud son obligatorias" });
+        }
+
         const fileNameWithoutExtension = path.parse(uploadedFile.originalname).name;
-        const { companyName, hojas } = await readAndInsertExcelData(filePath, folderName, fileNameWithoutExtension);
-        cache.clear(); 
+        const { companyName, hojas } = await readAndInsertExcelData(filePath, folderName, fileNameWithoutExtension, latitude, longitude);
+        // cache.clear();
 
         res.status(200).json({
             namecompaines: companyName,
@@ -163,6 +169,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             folderPath: `/foldercompanies/${folderName}`,
             files: { file: `/foldercompanies/${folderName}/${uploadedFile.originalname}`, pictures: picturePaths },
             hojas,
+            latitude,
+            longitude
         });
     } catch (error) {
         console.error(error);

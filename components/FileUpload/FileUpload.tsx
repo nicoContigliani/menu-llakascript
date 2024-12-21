@@ -1,11 +1,20 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import styles from "./FileUpload.module.css";
 import ButtonDownloadFile from "../ButtonDownloadFile/ButtonDownloadFile";
+import useGeolocation from "../../hooks/useGeolocation";
 
 const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, setNameCompaines }) => {
     const [file, setFile] = useState<File | null>(null);
     const [pictures, setPictures] = useState<File[]>([]);
     const [message, setMessage] = useState<string>("");
+
+    const { location, error, requestLocation } = useGeolocation();
+
+    useEffect(() => {
+        requestLocation()
+    }, [window])
+
+
 
     // Referencias para los inputs
     const fileInputRef = useRef<HTMLInputElement>(null);
@@ -32,7 +41,8 @@ const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, se
         const formData = new FormData();
         formData.append("file", file);
         pictures.forEach((picture) => formData.append("pictures", picture));
-
+        formData.append('latitude', location.latitude.toString()); // Convierte a string
+        formData.append('longitude', location.longitude.toString()); // Convierte a string
         try {
             const response = await fetch("/api/upload", {
                 method: "POST",
@@ -73,7 +83,7 @@ const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, se
                 </div>
             </div>
 
-<br /><br />
+            <br /><br />
             <div>
                 <div className={styles.textContainer}>
                     <h4 className={styles.titleApp}>Subir archivo y múltiples imágenes</h4>
