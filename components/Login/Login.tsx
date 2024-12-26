@@ -1,67 +1,45 @@
 import { useState } from 'react';
-import { signInWithPopup, GoogleAuthProvider, UserCredential } from 'firebase/auth';
-import { auth } from '../../lib/firebase';
-import { useDispatch } from 'react-redux';
-import { login } from '../../redux/slices/userSlice'; // Importar la acción de login
-import styles from './Login.module.css';
-import GoogleIcons from '@mui/icons-material/Google';
+import { useRouter } from 'next/router';
 
-export function Login() {
-  const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
-  const dispatch = useDispatch(); // Hook para despachar acciones
+const Login = () => {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+  const router = useRouter();
 
-  const handleGoogleLogin = async () => {
-    setIsLoading(true);
-    setError(null);
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username, password }),
+    });
 
-    try {
-      const provider = new GoogleAuthProvider();
-      const result: UserCredential = await signInWithPopup(auth, provider);
-      const user = result.user;
-
-      // Despachamos la acción de login con los datos del usuario
-      dispatch(login({
-        name: user.displayName || '',  // Nombre del usuario de Google
-        email: user.email || '',  // Correo del usuario
-        role: 'user',  // Aquí puedes definir un rol predeterminado, puedes modificar esto según sea necesario
-        additionalInfo: null,  // Puedes agregar información adicional si la tienes
-      }));
-
-      console.log("Google login successful");
-    } catch (error) {
-      console.error("Google login error:", error);
-      setError('Failed to log in with Google. Please try again.');
-    } finally {
-      setIsLoading(false);
+    if (res.ok) {
+      const { token } = await res.json();
+      localStorage.setItem('token', token);
+      router.push('/profile');
+    } else {
+      alert('Credenciales inválidas');
     }
   };
 
   return (
-    <div className={`${styles.container}`}>
-      <div className={styles.card}>
-        <h1 className={styles.title}>Login</h1>
-        <button
-          onClick={handleGoogleLogin}
-          disabled={isLoading}
-          className={`${styles.googleButton} ${isLoading ? styles.disabledButton : ''}`}
-        >
-          {isLoading ? (
-            <span>Logging in...</span>
-          ) : (
-            <span className={styles.googleContent}>
-              <GoogleIcons />
-              <hr />
-              Sign in with Google
-            </span>
-          )}
-        </button>
-        {error && (
-          <div className={styles.error} role="alert">
-            {error}
-          </div>
-        )}
-      </div>
-    </div>
+    <form onSubmit={handleSubmit}>
+      <input
+        type="text"
+        placeholder="Usuario"
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
+      />
+      <input
+        type="password"
+        placeholder="Contraseña"
+        value={password}
+        onChange={(e) => setPassword(e.target.value)}
+      />
+      <button type="submit">Iniciar Sesión</button>
+    </form>
   );
-}
+};
+
+export default Login;

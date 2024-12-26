@@ -7,6 +7,7 @@ import { logout } from '../redux/slices/userSlice'; // Asegúrate de importar la
 import styles from './index.module.css';
 import { AuthForms } from '../components/AuthForms/AuthForms';
 import LogoPresentation from '../components/LogoPresentation/LogoPresentation';
+import UserHistory from '../components/UserHistory/UserHistory';
 
 
 
@@ -20,8 +21,9 @@ const QRScanner = dynamic(() => import('../components/QrScanner/QrScanner'), {
 
 const IndexPage = () => {
   const dispatch = useDispatch();
-  
+
   const user = useSelector((state: RootState) => state.user);  // Accede al estado del usuario
+  console.log("🚀 ~ IndexPage ~ user:", user)
 
   // Handler para logout
   const handleLogout = () => {
@@ -32,7 +34,9 @@ const IndexPage = () => {
     <div className={styles.body}>
       {/* Main Content */}
       <div className={styles.qrContainer}>
-        <AuthForms />
+     
+            <AuthForms />
+
       </div>
 
       <div className={styles.container}>
@@ -46,12 +50,12 @@ const IndexPage = () => {
         <div className={styles.userInfo}>
           {user.isLoggedIn ? (
             <>
-              <p>Welcome, {user.user?.name}!</p>
+              {/* <p>Welcome, {user.user?.name}!</p>
               <p>Role: {user.user?.role}</p>
-              {user.user?.additionalInfo && <p>Info: {user.user.additionalInfo}</p>}
-              <button onClick={handleLogout} className={styles.logoutButton}>
+              {user.user?.additionalInfo && <p>Info: {user.user.additionalInfo}</p>} */}
+               <button onClick={handleLogout} className={styles.logoutButton}>
                 Logout
-              </button>
+              </button> 
             </>
           ) : (
             <p>Please log in to access more features.</p>
@@ -62,11 +66,11 @@ const IndexPage = () => {
           <Link href="/companies/LlakaScript" className={styles.link}>
             LlakaScript
           </Link>
-          {user.isLoggedIn && user.user?.role === 'admin' && (
+          {/* {user.isLoggedIn && user.user?.role === 'admin' && (
             <Link href="/admin-dashboard" className={styles.link}>
               Admin Dashboard
             </Link>
-          )}
+          )} */}
           <Link href="/brandgrid" className={styles.link}>
             Empresa
           </Link>
