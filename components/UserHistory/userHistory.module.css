@@ -1,12 +1,11 @@
 .menuWrapper {
     display: flex;
-    flex-direction: column; /* Asegura que las secciones estén apiladas verticalmente */
-    gap: 50px; /* Espaciado entre las secciones */
-    padding: 20px;
+    flex-direction: column;
+    padding: 1px;
     align-items: center;
     width: 100%;
+    max-width: 500px; /* El menú nunca será más ancho que 500px, pero se expandirá hasta el 100% si el contenedor es menor */
 }
-
 .section {
     width: 100%; /* Ocupa todo el ancho disponible */
     padding: 0 20px; /* Agrega espacio horizontal al contenedor */

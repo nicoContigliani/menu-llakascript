@@ -1,16 +1,27 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { getFromLocalStorage } from '../../services/storageService'
+import { useAuth } from '../../hooks/useAuth';
+import ReactVirtualizedTable from '../Table/Table';
+import styles from './userHistory.module.css'
 
 const UserHistory = () => {
-
+    const { user } = useAuth();
+    const [getUser, setGetUser] = useState<any | any[] | undefined>()
     useEffect(() => {
-        const todo = getFromLocalStorage('user')
-    }, [])
+        setGetUser(user)
+    }, [user])
 
 
 
     return (
-        <div>UserHistory</div>
+        <div className={styles.menuWrapper}>
+            <h2>
+                UserHistory
+            </h2>
+            {
+                getUser && <ReactVirtualizedTable />
+            }
+        </div>
     )
 }
 

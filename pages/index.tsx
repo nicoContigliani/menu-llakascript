@@ -7,7 +7,6 @@ import { logout } from '../redux/slices/userSlice'; // Asegúrate de importar la
 import styles from './index.module.css';
 import { AuthForms } from '../components/AuthForms/AuthForms';
 import LogoPresentation from '../components/LogoPresentation/LogoPresentation';
-import UserHistory from '../components/UserHistory/UserHistory';
 
 
 
@@ -23,7 +22,6 @@ const IndexPage = () => {
   const dispatch = useDispatch();
 
   const user = useSelector((state: RootState) => state.user);  // Accede al estado del usuario
-  console.log("🚀 ~ IndexPage ~ user:", user)
 
   // Handler para logout
   const handleLogout = () => {
@@ -33,12 +31,6 @@ const IndexPage = () => {
   return (
     <div className={styles.body}>
       {/* Main Content */}
-      <div className={styles.qrContainer}>
-     
-            <AuthForms />
-
-      </div>
-
       <div className={styles.container}>
         <LogoPresentation />
 
@@ -53,9 +45,9 @@ const IndexPage = () => {
               {/* <p>Welcome, {user.user?.name}!</p>
               <p>Role: {user.user?.role}</p>
               {user.user?.additionalInfo && <p>Info: {user.user.additionalInfo}</p>} */}
-               <button onClick={handleLogout} className={styles.logoutButton}>
+              <button onClick={handleLogout} className={styles.logoutButton}>
                 Logout
-              </button> 
+              </button>
             </>
           ) : (
             <p>Please log in to access more features.</p>
@@ -77,9 +69,15 @@ const IndexPage = () => {
         </div>
       </div>
 
+
+
+      <div className={styles.qrContainer}>
+        <AuthForms />
+      </div>
       <div className={styles.qrContainer}>
         <QRScanner />
       </div>
+
     </div>
   );
 };
