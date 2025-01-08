@@ -37,7 +37,7 @@ const FileUploadWithMultiplePictures = ({ setDataqrs, dataqrs, nameCompaines, se
             setMessage("Por favor selecciona un archivo y al menos una imagen.");
             return;
         }
-
+        
         const formData = new FormData();
         formData.append("file", file);
         pictures.forEach((picture) => formData.append("pictures", picture));

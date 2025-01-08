@@ -40,6 +40,7 @@ const profiles = [
   { name: 'Profile11', path: 'Profile11/Menueleven' },
   { name: 'Profile12', path: 'Profile12/Menutwelve' },
   { name: 'Profile13', path: 'Profile13/Menuthirteen' },
+  { name: 'ProfileE1', path: 'ProfileE1/Ecomerceone' },
 ];
 
 // Mapea los componentes dinámicamente

@@ -24,6 +24,9 @@ interface MenuProps {
 
 const MenuItemCard: React.FC<{ item: MenuItem; namecompanies: string }> = ({ item, namecompanies }) => (
     <div className={styles.menuItem}>
+        <h1 className={styles?.companyName}>{namecompanies}</h1>
+        <hr />
+
         <div className={styles.itemImage}>
             <Image
                 src={`/foldercompanies/${namecompanies}/${item.Item_Image}`}
@@ -46,7 +49,7 @@ const MenuItemCard: React.FC<{ item: MenuItem; namecompanies: string }> = ({ ite
 const Ecomerceone: React.FC<MenuProps> = ({ groupedSections, namecompanies, backgroundImages }) => {
     const [searchQuery, setSearchQuery] = useState('');
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
+    const itemsPerPage = 8;
 
     // Flatten groupedSections and memoize the result to avoid recomputing
     const allItems = useMemo(() => Object.values(groupedSections).flat(), [groupedSections]);
@@ -85,6 +88,8 @@ const Ecomerceone: React.FC<MenuProps> = ({ groupedSections, namecompanies, back
                 backgroundImage: backgroundImages || 'none',
             }}
         >
+            <h1 className={styles.companyNameTitle}>{namecompanies}</h1>
+
             <div className={styles.searchBar}>
                 <input
                     type="text"
@@ -114,6 +119,7 @@ const Ecomerceone: React.FC<MenuProps> = ({ groupedSections, namecompanies, back
                         {index + 1}
                     </button>
                 ))}
+                si
                 <button
                     onClick={() => handlePageChange(currentPage + 1)}
                     disabled={currentPage === totalPages}

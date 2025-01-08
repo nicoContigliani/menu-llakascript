@@ -8,7 +8,8 @@ export async function readAndInsertExcelData(filePath: string, folderName: strin
     workbook.SheetNames.forEach((sheetName) => {
         allSheetData[sheetName] = xlsx.utils.sheet_to_json(workbook.Sheets[sheetName]);
     });
-
+    
+    console.log("🚀 ~ readAndInsertExcelData ~ allSheetData:", allSheetData)
     const client = await clientPromise;
     const db = client.db("menuDB");
     const companies = db.collection("companies");
