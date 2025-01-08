@@ -1,10 +1,21 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 import clientPromise from '../../../utils/mongodb';
 
+interface Visit {
+    date: string;
+    location: string;
+}
+
+interface User {
+    email: string;
+    visit: Visit[];
+    updatedAt: Date;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse) {
     if (req.method === 'PATCH') {
         try {
-            const { email, visitData } = req.body;
+            const { email, visitData }: { email: string, visitData: Visit } = req.body;
 
             // Verificar si email y visitData fueron enviados
             if (!email || !visitData) {
@@ -14,7 +25,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
             // Conectar a la base de datos
             const client = await clientPromise;
             const db = client.db("menuDB");
-            const collection = db.collection("users");
+            const collection = db.collection<User>("users");  // Usar User como tipo para la colección
 
             // Buscar si el usuario existe
             const user = await collection.findOne({ email });
